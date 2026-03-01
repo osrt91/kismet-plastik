@@ -95,66 +95,76 @@ export default function Footer() {
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#2D9CDB]/40 to-transparent" />
       <div
         className="absolute inset-0 pointer-events-none"
-        style={{ background: "radial-gradient(ellipse at 20% 50%, rgba(45,156,219,0.04), transparent 60%)" }}
+        style={{ background: "radial-gradient(ellipse at 20% 50%, rgba(45,156,219,0.04), transparent 60%), radial-gradient(ellipse at 80% 80%, rgba(242,153,74,0.02), transparent 60%)" }}
       />
-      <div className="relative mx-auto max-w-7xl px-4 pb-4 pt-12 lg:px-6">
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+
+      {/* Back to top floating button */}
+      <button
+        onClick={scrollToTop}
+        className="absolute -top-5 right-8 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-[#2D9CDB] to-[#2D9CDB]/80 text-white shadow-lg shadow-[#2D9CDB]/20 transition-all hover:shadow-xl hover:shadow-[#2D9CDB]/30 hover:scale-110 active:scale-95"
+        aria-label={dict.components.scrollUp}
+      >
+        <ArrowUp size={18} strokeWidth={2} />
+      </button>
+
+      <div className="relative mx-auto max-w-7xl px-4 pb-3 pt-10 lg:px-6">
+        <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-[1.2fr_0.8fr_0.8fr_1.2fr]">
           <div>
-            <Link href="/" className="mb-3 inline-flex items-center gap-2">
+            <Link href="/" className="mb-3 inline-flex items-center gap-2.5 group">
               <Image
                 src="/images/logo2.svg"
                 alt="Kısmet Plastik"
                 width={32}
                 height={32}
-                className="h-8 w-8 rounded-md bg-white/10 p-0.5 brightness-0 invert"
+                className="h-8 w-8 rounded-lg bg-white/10 p-0.5 brightness-0 invert transition-transform group-hover:scale-105"
               />
               <span className="text-[15px] font-bold tracking-tight text-white/90">
                 Kısmet Plastik
               </span>
             </Link>
 
-            <p className="mb-3 max-w-[220px] text-[11px] leading-relaxed text-white/60">
+            <p className="mb-3 max-w-[220px] text-[11px] leading-relaxed text-white/50">
               {f.brandDesc}
             </p>
 
-            <div className="space-y-1.5">
+            <div className="space-y-1">
               <a
                 href="tel:+902125498703"
-                className="group flex items-center gap-2 text-[12px] text-white/60 transition-colors hover:text-white"
+                className="group flex items-center gap-2 text-[12px] text-white/55 transition-colors hover:text-white"
               >
-                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded bg-white/[0.06] transition-colors group-hover:bg-accent/20">
+                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-white/[0.06] transition-all group-hover:bg-[#2D9CDB]/20 group-hover:scale-110">
                   <Phone size={10} strokeWidth={1.8} />
                 </span>
                 0212 549 87 03
               </a>
               <a
                 href="mailto:bilgi@kismetplastik.com"
-                className="group flex items-center gap-2 text-[12px] text-white/60 transition-colors hover:text-white"
+                className="group flex items-center gap-2 text-[12px] text-white/55 transition-colors hover:text-white"
               >
-                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded bg-white/[0.06] transition-colors group-hover:bg-accent/20">
+                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-white/[0.06] transition-all group-hover:bg-[#2D9CDB]/20 group-hover:scale-110">
                   <Mail size={10} strokeWidth={1.8} />
                 </span>
                 bilgi@kismetplastik.com
               </a>
-              <div className="flex items-center gap-2 text-[12px] text-white/40">
-                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded bg-white/[0.06]">
+              <div className="flex items-center gap-2 text-[12px] text-white/35">
+                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-white/[0.06]">
                   <MapPin size={10} strokeWidth={1.8} />
                 </span>
                 İkitelli OSB, Başakşehir / İstanbul
               </div>
             </div>
 
-            <div className="mt-3 flex items-center gap-1.5">
+            <div className="mt-3 flex flex-wrap items-center gap-1.5">
               {certBadges.map((cert) => (
                 <span
                   key={cert.label}
                   title={cert.title}
-                  className="inline-flex items-center gap-1 rounded border-l-2 border-[#2D9CDB]/40 border-r-0 border-t-0 border-b-0 bg-white/[0.03] px-2 py-0.5 text-[10px] font-medium text-white/50"
+                  className="inline-flex items-center gap-1 rounded-md border border-[#2D9CDB]/10 bg-white/[0.03] px-2 py-0.5 text-[9px] font-semibold text-white/45 uppercase tracking-wider transition-colors hover:border-[#2D9CDB]/25 hover:text-white/60"
                 >
                   <ShieldCheck
-                    size={10}
+                    size={9}
                     strokeWidth={1.6}
-                    className="text-accent/60"
+                    className="text-[#2D9CDB]/50"
                   />
                   {cert.label}
                 </span>
@@ -163,7 +173,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="mb-2 text-[10px] font-bold uppercase tracking-widest bg-gradient-to-r from-[#2D9CDB] to-[#F2994A] bg-clip-text text-transparent">
+            <h3 className="mb-2.5 text-[10px] font-bold uppercase tracking-[0.2em] text-[#2D9CDB]/80">
               {f.productsTitle}
             </h3>
             <ul className="space-y-1">
@@ -171,8 +181,9 @@ export default function Footer() {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-[12px] text-white/60 transition-colors hover:text-white"
+                    className="group inline-flex items-center gap-1 text-[12px] text-white/55 transition-colors hover:text-white"
                   >
+                    <span className="h-px w-0 bg-[#F2994A] transition-all duration-200 group-hover:w-2" />
                     {link.name}
                   </Link>
                 </li>
@@ -189,7 +200,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="mb-2 text-[10px] font-bold uppercase tracking-widest bg-gradient-to-r from-[#2D9CDB] to-[#F2994A] bg-clip-text text-transparent">
+            <h3 className="mb-2.5 text-[10px] font-bold uppercase tracking-[0.2em] text-[#2D9CDB]/80">
               {f.companyTitle}
             </h3>
             <ul className="space-y-1">
@@ -197,8 +208,9 @@ export default function Footer() {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-[12px] text-white/60 transition-colors hover:text-white"
+                    className="group inline-flex items-center gap-1 text-[12px] text-white/55 transition-colors hover:text-white"
                   >
+                    <span className="h-px w-0 bg-[#F2994A] transition-all duration-200 group-hover:w-2" />
                     {link.name}
                   </Link>
                 </li>
@@ -207,11 +219,11 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="mb-2 text-[10px] font-bold uppercase tracking-widest bg-gradient-to-r from-[#2D9CDB] to-[#F2994A] bg-clip-text text-transparent">
+            <h3 className="mb-2.5 text-[10px] font-bold uppercase tracking-[0.2em] text-[#2D9CDB]/80">
               {f.newsletterTitle}
             </h3>
             {subscribed ? (
-              <div className="flex items-center gap-1.5 rounded-md border border-emerald-500/20 bg-emerald-500/10 px-3 py-1.5 text-[11px] text-emerald-400">
+              <div className="flex items-center gap-1.5 rounded-lg border border-emerald-500/20 bg-emerald-500/10 px-3 py-2 text-[11px] text-emerald-400">
                 <CheckCircle2 size={13} />
                 {f.newsletterSuccess}
               </div>
@@ -222,27 +234,27 @@ export default function Footer() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder={f.newsletterPlaceholder}
-                  className="min-w-0 flex-1 rounded-md border border-white/10 bg-white/[0.04] px-2.5 py-1.5 text-[11px] text-white placeholder-white/25 outline-none transition-colors focus:border-accent/40 focus:bg-white/[0.06]"
+                  className="min-w-0 flex-1 rounded-lg border border-white/10 bg-white/[0.04] px-3 py-2 text-[11px] text-white placeholder-white/25 outline-none transition-all focus:border-[#2D9CDB]/40 focus:bg-white/[0.06] focus:ring-1 focus:ring-[#2D9CDB]/20"
                   required
                 />
                 <button
                   type="submit"
-                  className="flex items-center justify-center rounded-md bg-gradient-to-r from-[#F2994A] to-[#2D9CDB] px-3 py-1.5 text-[11px] font-bold text-white transition-all hover:brightness-110"
+                  className="flex items-center justify-center rounded-lg bg-gradient-to-r from-[#F2994A] to-[#D98A35] px-3.5 py-2 text-[11px] font-bold text-white transition-all hover:shadow-md hover:shadow-[#F2994A]/20 hover:brightness-110 active:scale-95"
                 >
-                  <Send size={11} />
+                  <Send size={12} />
                 </button>
               </form>
             )}
 
-            <h3 className="mb-2 mt-5 text-[10px] font-bold uppercase tracking-widest bg-gradient-to-r from-[#2D9CDB] to-[#F2994A] bg-clip-text text-transparent">
+            <h3 className="mb-2 mt-4 text-[10px] font-bold uppercase tracking-[0.2em] text-[#2D9CDB]/80">
               {f.socialTitle ?? "Sosyal Medya"}
             </h3>
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-2">
               {socialLinks.map((social) => (
                 <a
                   key={social.name}
                   href={social.href}
-                  className="flex h-8 w-8 items-center justify-center rounded-md bg-white/[0.05] text-white/40 transition-all hover:bg-[#2D9CDB]/15 hover:text-[#2D9CDB] hover:ring-2 hover:ring-[#2D9CDB]/25"
+                  className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/[0.05] text-white/40 transition-all duration-200 hover:bg-gradient-to-br hover:from-[#2D9CDB]/20 hover:to-[#F2994A]/10 hover:text-white hover:scale-110 hover:shadow-md hover:shadow-[#2D9CDB]/10"
                   aria-label={social.name}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -256,19 +268,19 @@ export default function Footer() {
       </div>
 
       <div className="relative">
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#2D9CDB]/20 to-transparent" />
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
         <div className="mx-auto flex h-10 max-w-7xl items-center justify-between px-4 lg:px-6">
-          <span className="text-[10px] text-white/40">
+          <span className="text-[10px] text-white/35">
             &copy; 2026 {f.copyright}
           </span>
-          <div className="flex items-center gap-2 text-[10px]">
+          <div className="flex items-center gap-3 text-[10px]">
             <Link
               href="/kvkk"
               className="text-white/30 transition-colors hover:text-white/60"
             >
               KVKK
             </Link>
-            <span className="text-white/15">|</span>
+            <span className="h-2.5 w-px bg-white/10" />
             <Link
               href="/gizlilik"
               className="text-white/30 transition-colors hover:text-white/60"
@@ -276,13 +288,6 @@ export default function Footer() {
               Gizlilik
             </Link>
           </div>
-          <button
-            onClick={scrollToTop}
-            className="flex h-6 w-6 items-center justify-center rounded text-white/25 transition-colors hover:bg-white/5 hover:text-white/50"
-            aria-label={dict.components.scrollUp}
-          >
-            <ArrowUp size={12} strokeWidth={1.8} />
-          </button>
         </div>
       </div>
     </footer>

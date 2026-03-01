@@ -97,7 +97,7 @@ export default function About() {
 
               <Link
                 href="/hakkimizda"
-                className="group inline-flex w-full sm:w-auto items-center gap-2 rounded-xl bg-[#0A1628] px-7 py-3.5 text-sm font-bold text-white transition-all duration-300 hover:bg-[#132844] hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.98]"
+                className="group inline-flex w-full sm:w-auto items-center gap-2 rounded-xl bg-primary px-7 py-3.5 text-sm font-bold text-primary-foreground transition-all duration-300 hover:bg-primary/90 hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.98] dark:bg-[#2D9CDB] dark:hover:bg-[#2D9CDB]/90"
               >
                 {h.aboutMore}
                 <ArrowRight

@@ -1,10 +1,17 @@
 "use client";
 
-import { Phone, PenTool, Factory, Truck } from "lucide-react";
+import { Phone, PenTool, Factory, Truck, ArrowRight } from "lucide-react";
+import Link from "@/components/ui/LocaleLink";
 import AnimateOnScroll from "@/components/ui/AnimateOnScroll";
 import { useLocale } from "@/contexts/LocaleContext";
 
 const stepIcons = [Phone, PenTool, Factory, Truck];
+const stepColors = [
+  { bg: "from-primary-500 to-primary-600", ring: "ring-primary-500/20" },
+  { bg: "from-accent-500 to-accent-400", ring: "ring-accent-500/20" },
+  { bg: "from-eco-500 to-eco-400", ring: "ring-eco-500/20" },
+  { bg: "from-primary-600 to-primary-500", ring: "ring-primary-500/20" },
+];
 
 export default function ProcessSteps() {
   const { dict } = useLocale();
@@ -39,35 +46,58 @@ export default function ProcessSteps() {
           </div>
         </AnimateOnScroll>
 
-        <div className="relative grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          <div className="absolute top-16 left-[12%] right-[12%] hidden h-px bg-gradient-to-r from-transparent via-primary-500/20 to-transparent lg:block" />
+        <div className="relative grid gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-0">
+          {/* Desktop connector */}
+          <div className="absolute top-[52px] left-[12%] right-[12%] hidden h-[2px] lg:block">
+            <div className="h-full w-full bg-gradient-to-r from-primary-500/10 via-primary-500/20 to-primary-500/10" />
+            <div className="absolute inset-0 h-full bg-gradient-to-r from-primary-500 via-accent-500 to-primary-500 opacity-40" style={{ maskImage: "linear-gradient(90deg, transparent, white 20%, white 80%, transparent)" }} />
+          </div>
 
           {steps.map((step, i) => {
             const Icon = stepIcons[i];
+            const colors = stepColors[i];
             return (
               <AnimateOnScroll key={i} animation="fade-up" delay={i * 120}>
-                <div className="group relative flex flex-col items-center text-center">
-                  <div className="relative z-10 mb-6 flex h-[72px] w-[72px] items-center justify-center rounded-2xl border border-neutral-100 bg-white shadow-lg shadow-primary-500/5 transition-all duration-500 group-hover:border-primary-500/30 group-hover:shadow-xl group-hover:shadow-primary-500/10 group-hover:-translate-y-1 dark:border-neutral-700 dark:bg-neutral-800 dark:group-hover:border-primary-500/40">
-                    <Icon
-                      size={28}
-                      strokeWidth={1.5}
-                      className="text-primary-500 transition-colors duration-300 group-hover:text-accent-500"
-                    />
-                    <span className="absolute -top-2 -right-2 flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br from-primary-500 to-primary-600 text-[11px] font-bold text-white shadow-md">
+                <div className="group relative flex flex-col items-center text-center lg:px-4">
+                  {/* Mobile connector */}
+                  {i > 0 && (
+                    <div className="absolute -top-3 left-1/2 h-6 w-px bg-gradient-to-b from-primary-500/20 to-primary-500/40 sm:hidden" />
+                  )}
+
+                  <div className={`relative z-10 mb-6 flex h-[76px] w-[76px] items-center justify-center rounded-2xl bg-gradient-to-br ${colors.bg} text-white shadow-lg ring-4 ${colors.ring} transition-all duration-500 group-hover:shadow-xl group-hover:-translate-y-1.5 group-hover:scale-105`}>
+                    <Icon size={30} strokeWidth={1.5} />
+                    <span className="absolute -top-2.5 -right-2.5 flex h-7 w-7 items-center justify-center rounded-full bg-white text-[11px] font-extrabold text-primary-900 shadow-md ring-2 ring-primary-100 dark:bg-neutral-0 dark:text-white dark:ring-neutral-700">
                       {i + 1}
                     </span>
                   </div>
+
                   <h3 className="mb-2 text-lg font-bold text-primary-900 dark:text-white">
                     {step.title}
                   </h3>
                   <p className="max-w-[220px] text-sm leading-relaxed text-neutral-500 dark:text-neutral-400">
                     {step.desc}
                   </p>
+
+                  {i < steps.length - 1 && (
+                    <ArrowRight size={16} className="mt-4 hidden text-primary-300 dark:text-primary-600 lg:block" />
+                  )}
                 </div>
               </AnimateOnScroll>
             );
           })}
         </div>
+
+        <AnimateOnScroll animation="fade-up" delay={600}>
+          <div className="mt-14 flex justify-center">
+            <Link
+              href="/teklif-al"
+              className="group inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-accent-500 to-accent-400 px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-accent-500/20 transition-all hover:shadow-xl hover:shadow-accent-500/30 hover:scale-[1.02] active:scale-[0.98]"
+            >
+              {h.processCtaHome ?? "Hemen Teklif Alın"}
+              <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+            </Link>
+          </div>
+        </AnimateOnScroll>
       </div>
     </section>
   );

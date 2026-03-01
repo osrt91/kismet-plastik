@@ -2,10 +2,21 @@
 
 import { useState } from "react";
 import { FaFlask, FaSprayCan, FaHandSparkles, FaPumpSoap, FaHotel, FaWandMagicSparkles } from "react-icons/fa6";
+import { ArrowRight } from "lucide-react";
+import Link from "@/components/ui/LocaleLink";
 import AnimateOnScroll from "@/components/ui/AnimateOnScroll";
 import { useLocale } from "@/contexts/LocaleContext";
 
 const sectorIcons = [FaFlask, FaSprayCan, FaHandSparkles, FaPumpSoap, FaHotel, FaWandMagicSparkles];
+
+const sectorProducts = [
+  ["PET Şişe", "HDPE Şişe", "Sprey Pompa", "Losyon Pompası"],
+  ["Trigger Sprey", "Kapak", "Temizlik Şişesi", "Dozaj Kapağı"],
+  ["Losyon Şişesi", "Krem Kavanozu", "Airless Pompa", "Serum Şişesi"],
+  ["Şurup Şişesi", "Damla Kapağı", "Ölçek Kapağı", "İlaç Kutusu"],
+  ["Amenity Seti", "Mini Şişe", "Dispenser", "Sabunluk"],
+  ["Parfüm Şişesi", "Atomizer", "Roll-on", "Kalem Sprey"],
+];
 
 export default function Sectors() {
   const { dict } = useLocale();
@@ -13,6 +24,7 @@ export default function Sectors() {
   const sectors = (dict.homeSectors as { name: string; description: string }[]).map((s, i) => ({
     ...s,
     icon: sectorIcons[i],
+    products: sectorProducts[i] ?? [],
   }));
 
   const [activeTab, setActiveTab] = useState(0);
@@ -40,8 +52,9 @@ export default function Sectors() {
           </div>
         </AnimateOnScroll>
 
-        <div className="flex flex-col gap-8 lg:flex-row lg:gap-12">
-          <div className="flex flex-row gap-2 overflow-x-auto pb-2 lg:w-64 lg:shrink-0 lg:flex-col lg:overflow-visible lg:pb-0">
+        <div className="flex flex-col gap-8 lg:flex-row lg:gap-10">
+          {/* Tab nav */}
+          <div className="flex flex-row gap-1.5 overflow-x-auto pb-2 lg:w-60 lg:shrink-0 lg:flex-col lg:overflow-visible lg:pb-0">
             {sectors.map((sector, i) => {
               const Icon = sector.icon;
               const isActive = activeTab === i;
@@ -73,6 +86,7 @@ export default function Sectors() {
             })}
           </div>
 
+          {/* Tab content */}
           <div className="flex-1">
             {sectors.map((sector, i) => {
               const Icon = sector.icon;
@@ -91,12 +105,32 @@ export default function Sectors() {
                       <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-accent-500 to-accent-400 text-white shadow-lg shadow-accent-500/20">
                         <Icon size={24} />
                       </div>
-                      <h3 className="mb-4 text-2xl font-extrabold text-primary-900 dark:text-white">
+                      <h3 className="mb-3 text-2xl font-extrabold text-primary-900 dark:text-white">
                         {sector.name}
                       </h3>
-                      <p className="max-w-xl text-base leading-relaxed text-neutral-600 dark:text-neutral-400">
+                      <p className="mb-6 max-w-xl text-base leading-relaxed text-neutral-600 dark:text-neutral-400">
                         {sector.description}
                       </p>
+
+                      {/* Product chips */}
+                      <div className="mb-6 flex flex-wrap gap-2">
+                        {sector.products.map((product) => (
+                          <span
+                            key={product}
+                            className="rounded-full border border-neutral-200 bg-neutral-50 px-3 py-1 text-xs font-medium text-neutral-600 dark:border-neutral-600 dark:bg-neutral-700 dark:text-neutral-300"
+                          >
+                            {product}
+                          </span>
+                        ))}
+                      </div>
+
+                      <Link
+                        href="/urunler"
+                        className="group/link inline-flex items-center gap-2 text-sm font-semibold text-primary-500 transition-colors hover:text-primary-600 dark:hover:text-primary-400"
+                      >
+                        {h.sectorsViewProducts ?? "Ürünleri İncele"}
+                        <ArrowRight size={14} className="transition-transform group-hover/link:translate-x-1" />
+                      </Link>
                     </div>
                   </div>
                 </div>

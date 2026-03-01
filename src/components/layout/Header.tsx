@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "@/components/ui/LocaleLink";
 import {
@@ -23,6 +23,7 @@ import {
   Eye,
   Sparkles,
   Search,
+  Clock,
 } from "lucide-react";
 import clsx from "clsx";
 import { useLocale } from "@/contexts/LocaleContext";
@@ -110,15 +111,23 @@ export default function Header() {
   ];
 
   const [scrolled, setScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+  const handleScroll = useCallback(() => {
+    setScrolled(window.scrollY > 20);
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    if (docHeight > 0) {
+      setScrollProgress(Math.min(window.scrollY / docHeight, 1));
+    }
   }, []);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [handleScroll]);
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
@@ -171,34 +180,39 @@ export default function Header() {
         style={{ backgroundColor: UTILITY_BG }}
       >
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#2D9CDB]/30 to-transparent" />
-        <div className="mx-auto flex h-8 max-w-7xl items-center justify-between px-6">
+        <div className="mx-auto flex h-9 max-w-7xl items-center justify-between px-6">
           <div className="flex items-center gap-4">
             <a
               href="tel:+902125498703"
-              className="inline-flex items-center gap-1.5 text-[13px] text-white/85 transition-colors hover:text-white"
+              className="group inline-flex items-center gap-1.5 text-[13px] text-white/85 transition-colors hover:text-white"
             >
-              <Phone size={13} strokeWidth={1.8} />
+              <Phone size={13} strokeWidth={1.8} className="transition-transform group-hover:scale-110" />
               <span>0212 549 87 03</span>
             </a>
-            <span className="h-3 w-px bg-white/20" />
+            <span className="h-3.5 w-px bg-white/15" />
             <a
               href="mailto:bilgi@kismetplastik.com"
-              className="inline-flex items-center gap-1.5 text-[13px] text-white/85 transition-colors hover:text-white"
+              className="group inline-flex items-center gap-1.5 text-[13px] text-white/85 transition-colors hover:text-white"
             >
-              <Mail size={13} strokeWidth={1.8} />
+              <Mail size={13} strokeWidth={1.8} className="transition-transform group-hover:scale-110" />
               <span>bilgi@kismetplastik.com</span>
             </a>
-            <span className="h-3 w-px bg-white/20" />
-            <span className="inline-flex items-center gap-1.5 text-[12px] text-white/60">
-              <MapPin size={13} strokeWidth={1.8} />
-              Başakşehir, İstanbul
+            <span className="h-3.5 w-px bg-white/15" />
+            <span className="inline-flex items-center gap-1.5 text-[12px] text-white/50">
+              <MapPin size={12} strokeWidth={1.8} />
+              İkitelli OSB, Başakşehir
+            </span>
+            <span className="h-3.5 w-px bg-white/15" />
+            <span className="inline-flex items-center gap-1.5 text-[12px] text-white/50">
+              <Clock size={12} strokeWidth={1.8} />
+              Pzt–Cmt 08:00–18:00
             </span>
           </div>
 
           <div className="flex items-center gap-3">
             <button
               onClick={toggleTheme}
-              className="flex h-6 w-6 items-center justify-center rounded-md text-white/60 transition-colors hover:bg-white/10 hover:text-white"
+              className="flex h-6 w-6 items-center justify-center rounded-md text-white/60 transition-all hover:bg-white/10 hover:text-white hover:rotate-12"
               aria-label={comp.themeToggle}
             >
               {theme === "dark" ? (
@@ -207,14 +221,14 @@ export default function Header() {
                 <Moon size={14} strokeWidth={1.8} />
               )}
             </button>
-            <span className="h-3 w-px bg-white/20" />
-            <div className="flex items-center gap-px rounded-md border border-white/15 p-0.5">
+            <span className="h-3.5 w-px bg-white/15" />
+            <div className="flex items-center gap-px rounded-md border border-white/15 bg-white/[0.03] p-0.5">
               <button
                 onClick={() => setLocale("tr")}
                 className={clsx(
                   "rounded px-2 py-0.5 text-xs font-semibold transition-all duration-200",
                   locale === "tr"
-                    ? "bg-white text-[#0A1628]"
+                    ? "bg-white text-[#0A1628] shadow-sm"
                     : "text-white/60 hover:text-white"
                 )}
               >
@@ -225,7 +239,7 @@ export default function Header() {
                 className={clsx(
                   "rounded px-2 py-0.5 text-xs font-semibold transition-all duration-200",
                   locale === "en"
-                    ? "bg-white text-[#0A1628]"
+                    ? "bg-white text-[#0A1628] shadow-sm"
                     : "text-white/60 hover:text-white"
                 )}
               >
@@ -241,10 +255,15 @@ export default function Header() {
         className={clsx(
           "sticky top-0 z-50 w-full transition-all duration-300",
           scrolled
-            ? "border-b border-border/50 bg-background/95 shadow-[0_2px_24px_rgba(45,156,219,0.06)] backdrop-blur-xl dark:bg-card/95 dark:shadow-[0_2px_24px_rgba(45,156,219,0.1)]"
+            ? "border-b border-border/40 bg-background/90 shadow-[0_4px_32px_rgba(0,0,0,0.04)] backdrop-blur-2xl dark:bg-card/90 dark:border-border/20 dark:shadow-[0_4px_32px_rgba(45,156,219,0.08)]"
             : "border-b border-transparent bg-background dark:bg-background"
         )}
       >
+        {/* Scroll progress */}
+        <div
+          className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-[#2D9CDB] via-[#F2994A] to-[#2D9CDB] transition-[width] duration-150 z-10"
+          style={{ width: `${scrollProgress * 100}%` }}
+        />
         <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-4 lg:px-6">
           <Link href="/" className="flex shrink-0 items-center">
             <Image
@@ -273,23 +292,30 @@ export default function Header() {
               <NavigationMenuItem>
                 <NavigationMenuTrigger>{nav.products}</NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <div className="w-[720px] border-t-2" style={{ borderImage: "linear-gradient(to right, #2D9CDB, #F2994A) 1" }}>
-                    <div className="grid grid-cols-[1fr_200px]">
-                      <ul className="grid grid-cols-2 gap-0.5 p-3">
-                        {productChildren.map((child) => {
+                  <div className="w-[760px] border-t-2" style={{ borderImage: "linear-gradient(to right, #2D9CDB, #F2994A) 1" }}>
+                    <div className="grid grid-cols-[1fr_210px]">
+                      <ul className="grid grid-cols-2 gap-1 p-3">
+                        {productChildren.map((child, idx) => {
                           const Icon = child.icon;
+                          const gradients = [
+                            "from-blue-500/10 to-cyan-500/5",
+                            "from-indigo-500/10 to-purple-500/5",
+                            "from-amber-500/10 to-orange-500/5",
+                            "from-emerald-500/10 to-teal-500/5",
+                            "from-rose-500/10 to-pink-500/5",
+                          ];
                           return (
                             <li key={child.href}>
                               <NavigationMenuLink asChild>
                                 <Link
                                   href={child.href}
-                                  className="group flex items-start gap-3 rounded-lg px-3 py-3 transition-all hover:bg-accent/10 dark:hover:bg-accent/20"
+                                  className="group flex items-start gap-3 rounded-xl px-3 py-3 transition-all hover:bg-accent/10 dark:hover:bg-accent/20"
                                 >
-                                  <div className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary/10 to-accent/5 text-primary transition-all group-hover:from-primary/15 group-hover:to-accent/10 group-hover:shadow-md group-hover:shadow-primary/5 dark:from-primary/20 dark:to-accent/10">
-                                    <Icon size={18} strokeWidth={1.8} />
+                                  <div className={`mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${gradients[idx % gradients.length]} text-primary ring-1 ring-primary/5 transition-all group-hover:ring-primary/15 group-hover:shadow-md group-hover:shadow-primary/5 group-hover:scale-110 dark:ring-primary/10`}>
+                                    <Icon size={20} strokeWidth={1.8} />
                                   </div>
                                   <div className="min-w-0">
-                                    <div className="text-sm font-bold text-foreground group-hover:text-primary">
+                                    <div className="text-sm font-bold text-foreground group-hover:text-primary transition-colors">
                                       {child.name}
                                     </div>
                                     <div className="mt-0.5 line-clamp-2 text-[11px] leading-relaxed text-muted-foreground">
@@ -321,16 +347,16 @@ export default function Header() {
                         <div className="space-y-2">
                           <Link
                             href="/urun-olustur"
-                            className="flex items-center gap-2 rounded-lg bg-accent/10 px-3 py-2 text-xs font-semibold text-accent-700 transition-colors hover:bg-accent/20 dark:text-accent-400"
+                            className="flex items-center gap-2 rounded-xl bg-gradient-to-r from-accent/15 to-accent/5 px-3 py-2.5 text-xs font-semibold text-accent-700 transition-all hover:from-accent/25 hover:to-accent/10 hover:shadow-sm dark:text-accent-400"
                           >
-                            <Package size={13} />
+                            <Package size={14} />
                             {nav.customMolding}
                           </Link>
                           <Link
                             href="/katalog"
-                            className="flex items-center gap-2 rounded-lg bg-primary/10 px-3 py-2 text-xs font-semibold text-primary transition-colors hover:bg-primary/15 dark:bg-primary/20 dark:hover:bg-primary/30"
+                            className="flex items-center gap-2 rounded-xl bg-gradient-to-r from-primary/15 to-primary/5 px-3 py-2.5 text-xs font-semibold text-primary transition-all hover:from-primary/25 hover:to-primary/10 hover:shadow-sm dark:from-primary/20 dark:to-primary/10"
                           >
-                            <Download size={13} />
+                            <Download size={14} />
                             {comp.megaCatalogCta}
                           </Link>
                         </div>

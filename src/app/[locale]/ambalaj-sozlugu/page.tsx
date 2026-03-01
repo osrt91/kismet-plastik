@@ -42,6 +42,14 @@ const terms: GlossaryTerm[] = [
   { term: "Karbon Ayak İzi", definition: "Bir ürünün üretiminden bertarafına kadar tüm yaşam döngüsünde oluşturduğu toplam sera gazı emisyonu.", category: "cevre" },
   { term: "Hafifletme (Lightweighting)", definition: "Aynı performansı koruyarak ambalaj ağırlığını azaltma yaklaşımı. Malzeme tasarrufu ve karbon ayak izi azaltımı sağlar.", category: "cevre" },
   { term: "PCR", definition: "Post-Consumer Recycled. Tüketici tarafından kullanılmış ve geri dönüştürülmüş malzeme. rPET üretiminde kullanılır.", category: "cevre" },
+  { term: "Airless Pompa", definition: "Hava almadan ürünü dağıtan vakumlu pompa sistemi. Hassas kozmetik formüllerin oksidasyona karşı korunmasını sağlar.", category: "tasarim" },
+  { term: "Masterbatch", definition: "Renklendirme pigmentlerinin taşıyıcı polimer ile konsantre edilmiş hali. Üretimde şişeye renk kazandırmak için kullanılır.", category: "uretim" },
+  { term: "IV Değeri", definition: "İntrinsik Viskozite. PET hammaddenin kalitesini ölçen temel parametre. Şişe dayanımını doğrudan etkiler.", category: "malzeme" },
+  { term: "OTR", definition: "Oksijen Geçirgenlik Oranı. Ambalajın oksijene karşı bariyer performansını ölçen değer. Düşük OTR, daha iyi koruma anlamına gelir.", category: "malzeme" },
+  { term: "UV Koruma", definition: "Ultraviyole ışınlara karşı koruma özelliği. Amber renk PET şişeler doğal UV bariyer sağlar.", category: "malzeme" },
+  { term: "Sıcak Dolum", definition: "Ürünün yüksek sıcaklıkta (85-95°C) şişeye doldurulması işlemi. Özel ısıya dayanıklı PET şişe tasarımı gerektirir.", category: "uretim" },
+  { term: "Dekorasyon", definition: "Şişe üzerine etiket, serigrafi, tampon baskı veya sleeving yöntemiyle görsel uygulama. Marka kimliğini yansıtır.", category: "tasarim" },
+  { term: "EPR", definition: "Genişletilmiş Üretici Sorumluluğu. Üreticinin, ürün ambalajının yaşam döngüsü boyunca çevresel sorumluluğunu düzenleyen yasal çerçeve.", category: "cevre" },
 ];
 
 const categoryLabels: Record<string, Record<string, string>> = {
@@ -107,7 +115,7 @@ export default function AmbalajSozluguPage() {
   }, [filtered]);
 
   return (
-    <section className="bg-white">
+    <section className="bg-white dark:bg-neutral-0">
       <div className="relative overflow-hidden bg-gradient-to-br from-primary-900 via-primary-700 to-primary-900 py-20 lg:py-28">
         <div className="absolute inset-0 opacity-[0.03]">
           <div className="h-full w-full" style={{ backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`, backgroundSize: "40px 40px" }} />
@@ -139,7 +147,7 @@ export default function AmbalajSozluguPage() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder={t.searchPlaceholder}
-              className="w-full rounded-xl border border-neutral-200 py-3 pl-10 pr-4 text-sm outline-none transition-colors focus:border-primary-500 focus:ring-2 focus:ring-primary-100"
+              className="w-full rounded-xl border border-neutral-200 py-3 pl-10 pr-4 text-sm outline-none transition-colors focus:border-primary-500 focus:ring-2 focus:ring-primary-100 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:placeholder-neutral-500 dark:focus:border-primary-500 dark:focus:ring-primary-500/20"
             />
           </div>
           <div className="flex flex-wrap gap-1.5">
@@ -148,7 +156,7 @@ export default function AmbalajSozluguPage() {
                 key={c}
                 onClick={() => setCategory(c)}
                 className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-all ${
-                  category === c ? "bg-primary-900 text-white" : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"
+                  category === c ? "bg-primary text-primary-foreground" : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:bg-neutral-700"
                 }`}
               >
                 {t[c]}
@@ -165,7 +173,7 @@ export default function AmbalajSozluguPage() {
                 key={letter}
                 href={hasTerms ? `#letter-${letter}` : undefined}
                 className={`flex h-8 w-8 items-center justify-center rounded-lg text-xs font-bold transition-colors ${
-                  hasTerms ? "bg-primary-50 text-primary-700 hover:bg-primary-100" : "text-neutral-300"
+                  hasTerms ? "bg-primary-50 text-primary-700 hover:bg-primary-100 dark:bg-neutral-800 dark:text-primary-300 dark:hover:bg-neutral-700" : "text-neutral-300 dark:text-neutral-600"
                 }`}
               >
                 {letter}
@@ -177,17 +185,17 @@ export default function AmbalajSozluguPage() {
         <div className="space-y-8">
           {Object.entries(grouped).map(([letter, letterTerms]) => (
             <div key={letter} id={`letter-${letter}`}>
-              <h2 className="mb-4 flex items-center gap-3 text-2xl font-black text-primary-900">
-                <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-900 text-lg text-white">{letter}</span>
+              <h2 className="mb-4 flex items-center gap-3 text-2xl font-black text-primary-900 dark:text-white">
+                <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-lg text-primary-foreground">{letter}</span>
               </h2>
               <div className="grid gap-4 sm:grid-cols-2">
                 {letterTerms.map((term) => (
-                  <div key={term.term} className="group rounded-xl border border-neutral-100 bg-white p-5 transition-all hover:border-primary-200 hover:shadow-md">
+                  <div key={term.term} className="group rounded-xl border border-neutral-100 bg-white p-5 transition-all hover:border-primary-200 hover:shadow-md dark:border-neutral-700 dark:bg-neutral-800 dark:hover:border-primary-500/30">
                     <div className="mb-2 flex items-center gap-2">
-                      <h3 className="text-base font-bold text-primary-900">{term.term}</h3>
-                      <span className="rounded-full bg-neutral-100 px-2 py-0.5 text-[10px] font-semibold text-neutral-500">{t[term.category]}</span>
+                      <h3 className="text-base font-bold text-primary-900 dark:text-white">{term.term}</h3>
+                      <span className="rounded-full bg-neutral-100 px-2 py-0.5 text-[10px] font-semibold text-neutral-500 dark:bg-neutral-700 dark:text-neutral-400">{t[term.category]}</span>
                     </div>
-                    <p className="text-sm leading-relaxed text-neutral-600">{term.definition}</p>
+                    <p className="text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">{term.definition}</p>
                   </div>
                 ))}
               </div>

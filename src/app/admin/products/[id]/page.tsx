@@ -3,7 +3,7 @@
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, Save, Trash2, Plus, X } from "lucide-react";
+import { ArrowLeft, Save, Trash2, Plus, X, Settings2 } from "lucide-react";
 import { products, categories } from "@/data/products";
 import type { CategorySlug } from "@/types/product";
 
@@ -147,13 +147,23 @@ export default function EditProductPage() {
             </p>
           </div>
         </div>
-        <button
-          onClick={handleDelete}
-          className="rounded-lg p-2.5 text-destructive transition-colors hover:bg-destructive/10 hover:text-destructive"
-          title="Ürünü Sil"
-        >
-          <Trash2 size={18} />
-        </button>
+        <div className="flex items-center gap-2">
+          <Link
+            href={`/admin/products/${id}/accessories`}
+            className="inline-flex items-center gap-1.5 rounded-lg border border-border px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+            title="Aksesuar & Renk Yönetimi"
+          >
+            <Settings2 size={16} />
+            Aksesuarlar
+          </Link>
+          <button
+            onClick={handleDelete}
+            className="rounded-lg p-2.5 text-destructive transition-colors hover:bg-destructive/10 hover:text-destructive"
+            title="Ürünü Sil"
+          >
+            <Trash2 size={18} />
+          </button>
+        </div>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">

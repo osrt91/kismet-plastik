@@ -533,5 +533,37 @@
     "subtitle": "This page might be on vacation!",
     "description": "The page you're looking for may have been moved, deleted, or never existed. You can continue from the links below.",
     "searchPlaceholder": "What were you looking for?"
+  },
+  "configurator": {
+    "title": "Product Configurator",
+    "selectProduct": "Select Product",
+    "bodyColor": "Bottle Color",
+    "selectAccessory": "Select Cap / Pump",
+    "accessoryColor": "Cap Color",
+    "compatibleCaps": "Compatible Caps",
+    "compatiblePumps": "Compatible Pumps",
+    "compatibleSprays": "Compatible Sprays",
+    "preview": "Preview",
+    "addToQuote": "Add to Quote List",
+    "downloadPng": "Download PNG",
+    "noAccessories": "No accessories defined for this product",
+    "comingSoon3d": "3D view coming soon"
+  },
+  "filters": {
+    "title": "Filter",
+    "volume": "Volume",
+    "material": "Material",
+    "model": "Model",
+    "color": "Color",
+    "shape": "Shape",
+    "surfaceType": "Surface Type",
+    "weight": "Weight",
+    "neckFinish": "Neck Finish",
+    "height": "Height",
+    "diameter": "Diameter",
+    "width": "Width",
+    "clearAll": "Clear Filters",
+    "resultsFound": "{count} products found",
+    "noResults": "No products found matching your search"
   }
 }

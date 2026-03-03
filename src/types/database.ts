@@ -73,3 +73,24 @@ export interface DbBlogPost {
   created_at: string;
   updated_at: string;
 }
+
+export type UserRole = "admin" | "dealer" | "customer";
+
+export interface DbProfile {
+  id: string;
+  email: string;
+  full_name: string;
+  phone: string | null;
+  company_name: string | null;
+  tax_number: string | null;
+  tax_office: string | null;
+  company_address: string | null;
+  city: string | null;
+  district: string | null;
+  role: UserRole;
+  is_approved: boolean;
+  avatar_url: string | null;
+  notes: string | null;
+  created_at: string;
+  updated_at: string;
+}

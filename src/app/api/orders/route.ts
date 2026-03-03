@@ -3,6 +3,12 @@ import { getSupabase } from "@/lib/supabase";
 import { checkAuth } from "@/lib/auth";
 import { rateLimit } from "@/lib/rate-limit";
 
+/**
+ * GET /api/orders — Lists orders with pagination and optional status/profile filtering.
+ * Requires admin authentication (admin-token cookie).
+ * Includes related order_items and profile data.
+ * @returns { success, data, pagination } on success
+ */
 export async function GET(request: NextRequest) {
   const authError = checkAuth(request);
   if (authError) return authError;
@@ -50,6 +56,13 @@ export async function GET(request: NextRequest) {
   }
 }
 
+/**
+ * POST /api/orders — Creates a new order with line items.
+ * Auto-generates order_number (format: KP-YYMM-NNNN) via database trigger.
+ * Calculates 20% KDV tax on subtotal. Creates initial status history entry.
+ * Rate limited: 5 requests per minute per IP.
+ * @returns { success, data: { id, order_number }, message } on success
+ */
 export async function POST(request: NextRequest) {
   try {
     const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";

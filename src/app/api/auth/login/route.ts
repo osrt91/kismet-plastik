@@ -2,6 +2,13 @@ import { NextRequest, NextResponse } from "next/server";
 import { createServerClient } from "@supabase/ssr";
 import { rateLimit } from "@/lib/rate-limit";
 
+/**
+ * POST /api/auth/login — Dealer/customer login endpoint.
+ * Authenticates via Supabase Auth and checks dealer approval status.
+ * Unapproved dealers (is_approved=false) receive a 403 response.
+ * Rate limited: 5 attempts per 5 minutes per IP.
+ * @returns { success, data: { user } } on success, { success: false, error } on failure
+ */
 export async function POST(request: NextRequest) {
   const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
   const { ok: allowed } = rateLimit(`auth:${ip}`, { limit: 5, windowMs: 300_000 });

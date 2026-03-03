@@ -4,6 +4,14 @@ import { timingSafeCompare } from "@/lib/auth";
 export const locales = ["tr", "en"] as const;
 export const defaultLocale = "tr";
 
+/**
+ * Next.js middleware handling locale routing and route protection.
+ * - Redirects bare URLs to /tr/... (default locale)
+ * - Protects /admin/* routes with admin-token cookie check
+ * - Protects /[locale]/bayi-panel/* routes with Supabase auth cookie check
+ * @param request - Incoming Next.js request
+ * @returns Redirect response, or undefined to continue
+ */
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 

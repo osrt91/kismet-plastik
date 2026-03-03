@@ -33,6 +33,12 @@ function validate(data: QuoteInput): string | null {
   return null;
 }
 
+/**
+ * POST /api/quotes — Creates a new quote request with line items.
+ * Validates all required fields and inserts into quote_requests + quote_items.
+ * Rate limited: 3 requests per minute per IP.
+ * @returns { success, data: { id }, message } on success
+ */
 export async function POST(request: NextRequest) {
   try {
     const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
@@ -100,6 +106,11 @@ export async function POST(request: NextRequest) {
   }
 }
 
+/**
+ * GET /api/quotes — Lists quote requests with pagination and optional status filtering.
+ * Requires admin authentication. Includes related quote_items.
+ * @returns { success, data, pagination } on success
+ */
 export async function GET(request: NextRequest) {
   const authError = checkAuth(request);
   if (authError) return authError;

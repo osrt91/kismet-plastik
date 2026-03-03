@@ -29,6 +29,13 @@ export interface QuotePayload {
   message?: string;
 }
 
+/**
+ * Sends a contact form email via Resend.
+ * If RESEND_API_KEY is not configured, logs the data to console and returns success.
+ * All user input is HTML-escaped before inclusion in the email body.
+ * @param data - Contact form submission data
+ * @returns Object with `ok` status and optional `error` message
+ */
 export async function sendContactEmail(data: ContactPayload): Promise<{ ok: boolean; error?: string }> {
   if (!resend) {
     console.log("[Contact Form - no RESEND_API_KEY]", data);
@@ -59,6 +66,13 @@ export async function sendContactEmail(data: ContactPayload): Promise<{ ok: bool
   }
 }
 
+/**
+ * Sends a quote request email via Resend.
+ * If RESEND_API_KEY is not configured, logs the data to console and returns success.
+ * All user input is HTML-escaped before inclusion in the email body.
+ * @param data - Quote request form submission data
+ * @returns Object with `ok` status and optional `error` message
+ */
 export async function sendQuoteEmail(data: QuotePayload): Promise<{ ok: boolean; error?: string }> {
   if (!resend) {
     console.log("[Quote Request - no RESEND_API_KEY]", data);
@@ -92,6 +106,12 @@ export async function sendQuoteEmail(data: QuotePayload): Promise<{ ok: boolean;
   }
 }
 
+/**
+ * Escapes HTML special characters to prevent XSS in email content.
+ * Replaces: & < > " '
+ * @param s - Raw string to escape
+ * @returns HTML-safe string
+ */
 function escapeHtml(s: string): string {
   return s
     .replace(/&/g, "&amp;")

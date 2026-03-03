@@ -3,10 +3,11 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocale } from "@/contexts/LocaleContext";
 import { Trophy, Package, Users, Factory } from "@phosphor-icons/react";
+import { getCompanyAge } from "@/lib/company";
 
 const statKeys = ["statsExperience", "statsProducts", "statsCustomers", "statsCapacity"] as const;
 const statValues = [
-  { value: 55, suffix: "+" },
+  { value: getCompanyAge(), suffix: "+" },
   { value: 500, suffix: "+" },
   { value: 1000, suffix: "+" },
   { value: 50, suffix: "M+" },

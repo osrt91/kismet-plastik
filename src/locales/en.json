@@ -33,12 +33,12 @@
     "ctaQuote": "Request Quote",
     "highlight1": "ISO 9001 Certified",
     "highlight2": "Nationwide Delivery",
-    "highlight3": "55+ Years of Experience",
+    "highlight3": "57+ Years of Experience",
     "cardProducts": "500+",
     "cardProductsLabel": "Product Varieties",
     "cardCustomers": "1000+",
     "cardCustomersLabel": "Happy Customers",
-    "cardExperience": "55+",
+    "cardExperience": "57+",
     "cardExperienceLabel": "Years of Experience",
     "categoriesOverline": "Product Categories",
     "categoriesTitle": "Wide Product Range",
@@ -90,7 +90,7 @@
   "homeStrengths": [
     "Turkey's leading cosmetic packaging producer",
     "ISO 9001, ISO 22000, FSSC 22000 certifications",
-    "55+ years of expertise in cosmetic sector since 1969",
+    "57+ years of expertise in cosmetic sector since 1969",
     "Mold design and custom production capability",
     "Eco-friendly and sustainable production approach",
     "Competitive pricing and flexible payment options"
@@ -165,11 +165,11 @@
   },
   "about": {
     "heroTitle": "About Us",
-    "heroSubtitle": "The address of quality and trust with over 55 years of experience in the cosmetic packaging sector.",
+    "heroSubtitle": "The address of quality and trust with over 57 years of experience in the cosmetic packaging sector.",
     "storyOverline": "Our Story",
     "storyTitle": "The Name You Trust in Cosmetic Packaging",
     "storyP1": "Kısmet Plastik was founded in 1969 in the Vefa district of Fatih, İstanbul, focusing on cosmetic packaging production. Today, we are proud to be one of Turkey's leading cosmetic packaging manufacturers.",
-    "storyP2": "With over 55 years of experience, we focus on providing our customers with the highest quality cosmetic packaging products at the most affordable cost, always using the latest technology. We continue to make a difference in the sector with our honest and dynamic work approach, keeping customer satisfaction above all.",
+    "storyP2": "With over 57 years of experience, we focus on providing our customers with the highest quality cosmetic packaging products at the most affordable cost, always using the latest technology. We continue to make a difference in the sector with our honest and dynamic work approach, keeping customer satisfaction above all.",
     "missionTitle": "Our Mission",
     "missionText": "To best meet the needs and expectations of cosmetic brands, to offer the highest quality cosmetic packaging products at the most affordable cost using the latest technology, and to embrace continuous development and innovation.",
     "visionTitle": "Our Vision",
@@ -470,6 +470,24 @@
       "company": "Orient Parfüm",
       "role": "Production Manager",
       "text": "ISO certified production processes and cosmetic compliance tests were our most important criteria. Kısmet Plastik excels in this area."
+    },
+    {
+      "name": "Elif Kaya",
+      "company": "Royal Beauty",
+      "role": "Product Development Director",
+      "text": "We brought our custom bottle designs to life for new product lines with Kısmet Plastik. Their rapid prototyping and mold production processes are truly impressive."
+    },
+    {
+      "name": "Hasan Çelik",
+      "company": "Marmara Kimya",
+      "role": "Supply Chain Manager",
+      "text": "They stay true to delivery schedules even with our high-volume orders. We have never experienced any deviation in product quality, which strengthens our confidence with our own customers."
+    },
+    {
+      "name": "Zeynep Arslan",
+      "company": "Natura Kozmetik",
+      "role": "Founder & CEO",
+      "text": "Kısmet Plastik's recyclable PET solutions perfectly addressed our search for sustainable packaging. Finding an environmentally conscious business partner is invaluable."
     }
   ],
   "gallery": {

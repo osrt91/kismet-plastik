@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
 import { rateLimit } from "@/lib/rate-limit";
+import { FOUNDING_YEAR, getCompanyAge } from "@/lib/company";
 
-const SYSTEM_PROMPT = `Sen Kısmet Plastik'in AI asistanısın. Kısmet Plastik, 1969'dan beri kozmetik ambalaj sektöründe faaliyet gösteren, Türkiye'nin önde gelen üreticilerinden biridir.
+const SYSTEM_PROMPT = `Sen Kısmet Plastik'in AI asistanısın. Kısmet Plastik, ${FOUNDING_YEAR}'dan beri kozmetik ambalaj sektöründe faaliyet gösteren (${getCompanyAge()}+ yıl), Türkiye'nin önde gelen üreticilerinden biridir.
 
 **Şirket Bilgileri:**
-- Kuruluş: 1969
+- Kuruluş: ${FOUNDING_YEAR}
 - Konum: İkitelli OSB Mah. İPKAS 4A Blok Sok. No:5, Başakşehir/İstanbul
 - Telefon: 0212 549 87 03
 - E-posta: bilgi@kismetplastik.com

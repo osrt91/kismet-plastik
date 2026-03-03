@@ -33,12 +33,12 @@
     "ctaQuote": "Teklif Al",
     "highlight1": "ISO 9001 Sertifikalı",
     "highlight2": "Türkiye Geneli Teslimat",
-    "highlight3": "55+ Yıllık Tecrübe",
+    "highlight3": "57+ Yıllık Tecrübe",
     "cardProducts": "500+",
     "cardProductsLabel": "Ürün Çeşidi",
     "cardCustomers": "1000+",
     "cardCustomersLabel": "Mutlu Müşteri",
-    "cardExperience": "55+",
+    "cardExperience": "57+",
     "cardExperienceLabel": "Yıllık Tecrübe",
     "categoriesOverline": "Ürün Kategorileri",
     "categoriesTitle": "Geniş Ürün Yelpazemiz",
@@ -90,7 +90,7 @@
   "homeStrengths": [
     "Türkiye'nin önde gelen kozmetik ambalaj üreticisi",
     "ISO 9001, ISO 22000, FSSC 22000 sertifikaları",
-    "1969'dan bu yana kozmetik sektöründe 55+ yıllık uzmanlık",
+    "1969'dan bu yana kozmetik sektöründe 57+ yıllık uzmanlık",
     "Kalıp tasarımı ve özel üretim imkânı",
     "Çevreci ve sürdürülebilir üretim anlayışı",
     "Rekabetçi fiyat ve esnek ödeme seçenekleri"
@@ -165,11 +165,11 @@
   },
   "about": {
     "heroTitle": "Hakkımızda",
-    "heroSubtitle": "Kozmetik ambalaj sektöründe 55 yılı aşkın tecrübemizle kalite ve güvenin adresi.",
+    "heroSubtitle": "Kozmetik ambalaj sektöründe 57 yılı aşkın tecrübemizle kalite ve güvenin adresi.",
     "storyOverline": "Hikayemiz",
     "storyTitle": "Kozmetik Ambalajda Güvenin Adı",
     "storyP1": "Kısmet Plastik, 1969 yılında İstanbul'un Fatih İlçesi'nin Vefa semtinde kozmetik ambalaj üretimine odaklanarak kuruldu. Bugün Türkiye'nin önde gelen kozmetik ambalaj üreticilerinden biri olmanın gururunu yaşamaktadır.",
-    "storyP2": "55 yılı aşkın tecrübemizle, en son teknolojiyi kullanarak, en kaliteli kozmetik ambalaj ürünlerini en uygun maliyetle müşterilerimize sunmaya odaklanıyoruz. Müşteri memnuniyetini her şeyin üzerinde tutarak, dürüst ve dinamik bir çalışma anlayışıyla sektörde fark yaratmaya devam ediyoruz.",
+    "storyP2": "57 yılı aşkın tecrübemizle, en son teknolojiyi kullanarak, en kaliteli kozmetik ambalaj ürünlerini en uygun maliyetle müşterilerimize sunmaya odaklanıyoruz. Müşteri memnuniyetini her şeyin üzerinde tutarak, dürüst ve dinamik bir çalışma anlayışıyla sektörde fark yaratmaya devam ediyoruz.",
     "missionTitle": "Misyonumuz",
     "missionText": "Kozmetik markalarının ihtiyaç ve beklentilerini en iyi şekilde karşılamak, en son teknolojiyi kullanarak en kaliteli kozmetik ambalaj ürünlerini en uygun maliyetle sunmak, sürekli gelişmeyi ve yenilikçiliği ilke edinmek.",
     "visionTitle": "Vizyonumuz",
@@ -470,6 +470,24 @@
       "company": "Orient Parfüm",
       "role": "Üretim Müdürü",
       "text": "ISO sertifikalı üretim süreçleri ve kozmetik uygunluk testleri bizim için en önemli kriterdi. Kısmet Plastik bu konuda çok başarılı."
+    },
+    {
+      "name": "Elif Kaya",
+      "company": "Royal Beauty",
+      "role": "Ürün Geliştirme Direktörü",
+      "text": "Yeni ürün serilerimiz için ihtiyaç duyduğumuz özel şişe tasarımlarını Kısmet Plastik ile hayata geçirdik. Hızlı prototipleme ve kalıp üretim süreçleri gerçekten etkileyici."
+    },
+    {
+      "name": "Hasan Çelik",
+      "company": "Marmara Kimya",
+      "role": "Tedarik Zinciri Müdürü",
+      "text": "Büyük hacimli siparişlerimizde bile teslimat sürelerine sadık kalıyorlar. Ayrıca ürün kalitesinde hiçbir sapma yaşamadık, bu da müşterilerimize olan güvenimizi artırıyor."
+    },
+    {
+      "name": "Zeynep Arslan",
+      "company": "Natura Kozmetik",
+      "role": "Kurucu & CEO",
+      "text": "Sürdürülebilir ambalaj arayışımızda Kısmet Plastik'in geri dönüştürülebilir PET çözümleri tam olarak ihtiyacımıza yanıt verdi. Çevre bilinçli bir iş ortağı bulmak çok değerli."
     }
   ],
   "gallery": {

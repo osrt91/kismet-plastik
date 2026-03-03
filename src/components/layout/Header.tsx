@@ -332,6 +332,14 @@ export default function Header() {
 
           {/* Desktop CTA */}
           <div className="hidden items-center gap-2 lg:flex">
+            <a
+              href="tel:+902125498703"
+              className="inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-semibold text-primary-700 transition-colors hover:bg-primary-50 hover:text-primary-900"
+            >
+              <Phone size={14} strokeWidth={2} />
+              <span>0212 549 87 03</span>
+            </a>
+            <span className="h-5 w-px bg-border" />
             <Button variant="ghost" size="icon" onClick={() => setSearchOpen(true)} aria-label={comp.searchLabel}>
               <Search size={18} strokeWidth={1.8} />
             </Button>
@@ -343,10 +351,19 @@ export default function Header() {
             </Button>
           </div>
 
-          {/* Mobile Toggle */}
-          <Button variant="ghost" size="icon" className="lg:hidden" onClick={() => setMobileOpen(true)} aria-label={comp.menuLabel}>
-            <Menu size={22} />
-          </Button>
+          {/* Mobile CTA */}
+          <div className="flex items-center gap-1 lg:hidden">
+            <a
+              href="tel:+902125498703"
+              className="flex h-9 w-9 items-center justify-center rounded-md text-accent-600 transition-colors hover:bg-accent-50"
+              aria-label={dict.common.phone}
+            >
+              <Phone size={18} strokeWidth={2} />
+            </a>
+            <Button variant="ghost" size="icon" onClick={() => setMobileOpen(true)} aria-label={comp.menuLabel}>
+              <Menu size={22} />
+            </Button>
+          </div>
         </div>
       </header>
 

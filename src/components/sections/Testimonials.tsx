@@ -40,7 +40,7 @@ export default function Testimonials() {
         </AnimateOnScroll>
 
         {/* Testimonial Cards */}
-        <div className="mb-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mb-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {testimonials.map((t, i) => (
             <AnimateOnScroll key={t.company} animation="fade-up" delay={i * 100}>
               <article className="group relative h-full overflow-hidden rounded-2xl border border-neutral-100 bg-white p-8 transition-all duration-300 hover:-translate-y-2 hover:border-primary-100 hover:shadow-xl hover:shadow-primary-900/10 dark:border-neutral-700 dark:bg-neutral-800 dark:hover:border-primary-500/30">
@@ -92,7 +92,7 @@ export default function Testimonials() {
                 {[...referenceCompanies, ...referenceCompanies].map((name, idx) => (
                   <span
                     key={`${name}-${idx}`}
-                    className="shrink-0 rounded-full border border-neutral-200 bg-neutral-50 px-5 py-2.5 text-sm font-medium text-neutral-700 transition-colors hover:border-primary-200 hover:bg-primary-50 hover:text-primary-700 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:border-primary-500/30 dark:hover:bg-primary-900/30"
+                    className="shrink-0 rounded-full border border-neutral-200 bg-neutral-50 px-5 py-2.5 text-sm font-medium text-neutral-400 transition-all duration-300 hover:border-primary-200 hover:bg-primary-50 hover:text-primary-700 hover:opacity-100 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-500 dark:hover:border-primary-500/30 dark:hover:bg-primary-900/30 dark:hover:text-primary-300"
                   >
                     {name}
                   </span>

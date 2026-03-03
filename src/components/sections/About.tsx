@@ -4,6 +4,7 @@ import Link from "@/components/ui/LocaleLink";
 import { ArrowRight, Check } from "lucide-react";
 import AnimateOnScroll from "@/components/ui/AnimateOnScroll";
 import { useLocale } from "@/contexts/LocaleContext";
+import { getCompanyAge } from "@/lib/company";
 
 export default function About() {
   const { dict } = useLocale();
@@ -50,7 +51,7 @@ export default function About() {
                 style={{ animation: "pulse-glow 2.5s ease-in-out infinite" }}
               >
                 <div className="text-3xl font-extrabold text-primary-900">
-                  55+
+                  {getCompanyAge()}+
                 </div>
                 <div className="text-sm font-semibold text-primary-900/70">
                   {h.cardExperienceLabel}

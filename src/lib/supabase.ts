@@ -2,6 +2,12 @@ import { createClient, SupabaseClient } from "@supabase/supabase-js";
 
 let _supabase: SupabaseClient | null = null;
 
+/**
+ * Returns a singleton Supabase client for general/API use.
+ * Session persistence is disabled — suitable for server-side API route handlers.
+ * @returns Supabase client instance
+ * @throws Error if NEXT_PUBLIC_SUPABASE_URL or NEXT_PUBLIC_SUPABASE_ANON_KEY is missing/invalid
+ */
 export function getSupabase(): SupabaseClient {
   if (_supabase) return _supabase;
 
@@ -24,6 +30,10 @@ export function getSupabase(): SupabaseClient {
   return _supabase;
 }
 
+/**
+ * Checks whether Supabase environment variables are configured.
+ * @returns true if both NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY are set
+ */
 export function isSupabaseConfigured(): boolean {
   return Boolean(
     process.env.NEXT_PUBLIC_SUPABASE_URL &&

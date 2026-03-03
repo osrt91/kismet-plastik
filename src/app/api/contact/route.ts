@@ -21,6 +21,12 @@ function validate(data: ContactFormData): string | null {
   return null;
 }
 
+/**
+ * POST /api/contact — Public contact form submission endpoint.
+ * Validates input, then sends email via Resend (or logs to console in dev).
+ * Rate limited: 5 requests per minute per IP.
+ * @returns { success, message } on success, { success: false, error } on failure
+ */
 export async function POST(request: NextRequest) {
   try {
     const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";

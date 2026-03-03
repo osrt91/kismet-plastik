@@ -15,10 +15,18 @@ import type { Product, CategorySlug } from "@/types/product";
 import { useLocale } from "@/contexts/LocaleContext";
 
 interface Props {
+  /** Product data including category (determines 3D model type) and available colors */
   product: Product;
+  /** Currently selected color name (Turkish). Maps to hex via colorMap. */
   selectedColor?: string;
 }
 
+/**
+ * Converts a Turkish color name to a Three.js hex color string.
+ * Falls back to transparent blue (#e8f4fd) for unknown colors.
+ * @param colorName - Turkish color name (e.g., "Mavi", "Şeffaf")
+ * @returns Hex color string
+ */
 function getThreeColor(colorName: string): string {
   return colorMap[colorName] || "#e8f4fd";
 }
@@ -197,6 +205,12 @@ function LoadingFallback() {
   );
 }
 
+/**
+ * Interactive 3D product viewer using React Three Fiber.
+ * Renders a procedurally generated 3D model based on product category.
+ * Supports fullscreen mode, auto-rotation, orbit controls, and real-time color changes.
+ * Lazy loaded via dynamic import to minimize initial bundle size (~500KB Three.js).
+ */
 export default function Product3DViewer({ product, selectedColor }: Props) {
   const { dict } = useLocale();
   const [isFullscreen, setIsFullscreen] = useState(false);

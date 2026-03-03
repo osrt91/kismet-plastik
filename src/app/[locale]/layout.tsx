@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Fraunces, Instrument_Sans } from "next/font/google";
+import { Fraunces, Instrument_Sans, Noto_Sans_Arabic } from "next/font/google";
 import { LocaleProvider } from "@/contexts/LocaleContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import Header from "@/components/layout/Header";
@@ -17,6 +17,13 @@ const fraunces = Fraunces({
 const instrumentSans = Instrument_Sans({
   subsets: ["latin"],
   variable: "--font-instrument-sans",
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
+});
+
+const notoSansArabic = Noto_Sans_Arabic({
+  subsets: ["arabic"],
+  variable: "--font-arabic",
   display: "swap",
   weight: ["400", "500", "600", "700"],
 });
@@ -44,52 +51,74 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const isTr = locale === "tr";
+  const isAr = locale === "ar";
+
+  const titles: Record<string, string> = {
+    tr: "Kısmet Plastik | B2B Kozmetik Ambalaj Çözümleri",
+    en: "Kısmet Plastik | B2B Cosmetic Packaging Solutions",
+    ar: "كسمت بلاستيك | حلول تعبئة مستحضرات التجميل B2B",
+  };
+
+  const descriptions: Record<string, string> = {
+    tr: "Kısmet Plastik - Türkiye'nin lider kozmetik ambalaj üreticisi. PET şişe, sprey, kapak ve özel üretim kozmetik ambalaj çözümleri. Toptan satış ve B2B hizmetler.",
+    en: "Kısmet Plastik - Turkey's leading cosmetic packaging manufacturer. PET bottles, sprays, caps and custom cosmetic packaging solutions. Wholesale and B2B services.",
+    ar: "كسمت بلاستيك - الشركة الرائدة في تركيا لتصنيع تعبئة مستحضرات التجميل. عبوات PET وبخاخات وأغطية وحلول تعبئة مخصصة. خدمات البيع بالجملة وB2B.",
+  };
+
+  const keywordsMap: Record<string, string[]> = {
+    tr: [
+      "kozmetik ambalaj",
+      "PET şişe",
+      "plastik şişe",
+      "ambalaj üreticisi",
+      "toptan plastik",
+      "B2B plastik",
+      "kismet plastik",
+      "sprey ambalaj",
+      "plastik kapak",
+      "özel üretim ambalaj",
+    ],
+    en: [
+      "cosmetic packaging",
+      "PET bottle",
+      "plastic bottle",
+      "packaging manufacturer",
+      "wholesale plastic",
+      "B2B plastic",
+      "kismet plastik",
+      "spray packaging",
+      "plastic cap",
+      "custom packaging",
+    ],
+    ar: [
+      "تعبئة مستحضرات التجميل",
+      "عبوات PET",
+      "عبوات بلاستيكية",
+      "مصنع تعبئة",
+      "بلاستيك بالجملة",
+      "B2B بلاستيك",
+      "كسمت بلاستيك",
+      "عبوات رش",
+      "أغطية بلاستيكية",
+      "تعبئة مخصصة",
+    ],
+  };
+
+  const ogLocale = isTr ? "tr_TR" : isAr ? "ar_SA" : "en_US";
 
   return {
     metadataBase: new URL("https://www.kismetplastik.com"),
     title: {
-      default: isTr
-        ? "Kısmet Plastik | B2B Kozmetik Ambalaj Çözümleri"
-        : "Kısmet Plastik | B2B Cosmetic Packaging Solutions",
+      default: titles[locale] ?? titles.tr,
       template: "%s | Kısmet Plastik",
     },
-    description: isTr
-      ? "Kısmet Plastik - Türkiye'nin lider kozmetik ambalaj üreticisi. PET şişe, sprey, kapak ve özel üretim kozmetik ambalaj çözümleri. Toptan satış ve B2B hizmetler."
-      : "Kısmet Plastik - Turkey's leading cosmetic packaging manufacturer. PET bottles, sprays, caps and custom cosmetic packaging solutions. Wholesale and B2B services.",
-    keywords: isTr
-      ? [
-          "kozmetik ambalaj",
-          "PET şişe",
-          "plastik şişe",
-          "ambalaj üreticisi",
-          "toptan plastik",
-          "B2B plastik",
-          "kismet plastik",
-          "sprey ambalaj",
-          "plastik kapak",
-          "özel üretim ambalaj",
-        ]
-      : [
-          "cosmetic packaging",
-          "PET bottle",
-          "plastic bottle",
-          "packaging manufacturer",
-          "wholesale plastic",
-          "B2B plastic",
-          "kismet plastik",
-          "spray packaging",
-          "plastic cap",
-          "custom packaging",
-        ],
+    description: descriptions[locale] ?? descriptions.tr,
+    keywords: keywordsMap[locale] ?? keywordsMap.tr,
     openGraph: {
-      title: isTr
-        ? "Kısmet Plastik | B2B Kozmetik Ambalaj Çözümleri"
-        : "Kısmet Plastik | B2B Cosmetic Packaging Solutions",
-      description: isTr
-        ? "Türkiye'nin lider kozmetik ambalaj üreticisi. Toptan satış ve B2B hizmetler."
-        : "Turkey's leading cosmetic packaging manufacturer. Wholesale and B2B services.",
+      title: titles[locale] ?? titles.tr,
+      description: descriptions[locale] ?? descriptions.tr,
       type: "website",
-      locale: isTr ? "tr_TR" : "en_US",
+      locale: ogLocale,
       siteName: "Kısmet Plastik",
       images: [
         {
@@ -102,9 +131,7 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: isTr
-        ? "Kısmet Plastik | B2B Kozmetik Ambalaj"
-        : "Kısmet Plastik | B2B Cosmetic Packaging",
+      title: titles[locale] ?? titles.tr,
       images: ["/images/og-image.png"],
     },
     robots: { index: true, follow: true },
@@ -113,6 +140,7 @@ export async function generateMetadata({
       languages: {
         tr: "https://www.kismetplastik.com/tr",
         en: "https://www.kismetplastik.com/en",
+        ar: "https://www.kismetplastik.com/ar",
       },
     },
   };
@@ -121,12 +149,17 @@ export async function generateMetadata({
 export default async function LocaleLayout({ children, params }: Props) {
   const { locale } = await params;
 
-  if (!locales.includes(locale as "tr" | "en")) {
+  if (!locales.includes(locale as "tr" | "en" | "ar")) {
     notFound();
   }
 
+  const dir = locale === "ar" ? "rtl" : "ltr";
+  const fontClasses = locale === "ar"
+    ? `${fraunces.variable} ${instrumentSans.variable} ${notoSansArabic.variable}`
+    : `${fraunces.variable} ${instrumentSans.variable}`;
+
   return (
-    <html lang={locale} className={`${fraunces.variable} ${instrumentSans.variable}`}>
+    <html lang={locale} dir={dir} className={fontClasses}>
       <head>
         <LocalBusinessJsonLd />
         <OrganizationJsonLd />
@@ -170,7 +203,7 @@ export default async function LocaleLayout({ children, params }: Props) {
           href="#main-content"
           className="fixed left-4 top-4 z-[100] -translate-y-20 rounded-lg bg-primary-900 px-4 py-2 text-sm font-bold text-white shadow-lg transition-transform focus:translate-y-0"
         >
-          {locale === "tr" ? "İçeriğe atla" : "Skip to content"}
+          {locale === "tr" ? "İçeriğe atla" : locale === "ar" ? "انتقل إلى المحتوى" : "Skip to content"}
         </a>
         <div className="scroll-progress-bar" />
         <ThemeProvider>

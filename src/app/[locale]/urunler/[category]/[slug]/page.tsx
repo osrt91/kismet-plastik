@@ -36,6 +36,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       languages: {
         tr: `https://www.kismetplastik.com/tr/urunler/${category}/${slug}`,
         en: `https://www.kismetplastik.com/en/urunler/${category}/${slug}`,
+        ar: `https://www.kismetplastik.com/ar/urunler/${category}/${slug}`,
       },
     },
   };

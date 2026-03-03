@@ -24,12 +24,12 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
   const locale: Locale =
-    params?.locale === "en" ? "en" : "tr";
+    params?.locale === "en" ? "en" : params?.locale === "ar" ? "ar" : "tr";
 
   const dict = useMemo(() => getDictionary(locale), [locale]);
 
   const setLocale = (next: Locale) => {
-    const pathWithoutLocale = pathname.replace(/^\/(tr|en)/, "") || "/";
+    const pathWithoutLocale = pathname.replace(/^\/(tr|en|ar)/, "") || "/";
     router.push(`/${next}${pathWithoutLocale}`);
   };
 

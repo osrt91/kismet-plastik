@@ -188,6 +188,7 @@
   --font-sans: "Myriad Pro", "Source Sans 3", system-ui, -apple-system, sans-serif;
   --font-display: "Fraunces", "Myriad Pro", Georgia, serif;
   --font-body: "Instrument Sans", "Myriad Pro", system-ui, sans-serif;
+  --font-arabic: "Noto Sans Arabic", "Myriad Pro", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
   /* Shadow tokens */
@@ -552,6 +553,23 @@ button:hover .bounce-on-hover {
     from { transform: scaleX(0); }
     to { transform: scaleX(1); }
   }
+}
+
+/* RTL (Right-to-Left) Support for Arabic */
+[dir="rtl"] {
+  text-align: right;
+}
+
+[dir="rtl"] body {
+  font-family: var(--font-arabic, "Noto Sans Arabic"), var(--font-sans);
+}
+
+[dir="rtl"] .scroll-progress-bar {
+  transform-origin: right;
+}
+
+[dir="rtl"] .animate-marquee {
+  animation-direction: reverse;
 }
 
 @media (prefers-reduced-motion: reduce) {

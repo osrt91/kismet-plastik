@@ -38,7 +38,7 @@ const SYSTEM_PROMPT = `Sen Kısmet Plastik'in AI asistanısın. Kısmet Plastik,
 - Bilmediğin konularda "Bu konuda detaylı bilgi için müşteri temsilcimizle iletişime geçmenizi öneririm" de`;
 
 const VALID_ROLES = new Set(["user", "assistant"]);
-const VALID_LOCALES = new Set(["tr", "en"]);
+const VALID_LOCALES = new Set(["tr", "en", "ar"]);
 
 export async function POST(request: NextRequest) {
   const apiKey = process.env.OPENAI_API_KEY;

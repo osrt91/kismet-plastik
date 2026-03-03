@@ -166,6 +166,12 @@ export default function Header() {
               >
                 EN
               </button>
+              <button
+                onClick={() => setLocale("ar")}
+                className={clsx("rounded px-2 py-0.5 text-xs font-semibold transition-all duration-200", locale === "ar" ? "bg-primary-foreground text-primary" : "text-primary-foreground/60 hover:text-primary-foreground")}
+              >
+                AR
+              </button>
             </div>
           </div>
         </div>
@@ -355,7 +361,7 @@ export default function Header() {
 
       {/* Mobile Menu */}
       <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
-        <SheetContent side="right" className="w-[85%] max-w-sm overflow-y-auto p-0">
+        <SheetContent side={locale === "ar" ? "left" : "right"} className="w-[85%] max-w-sm overflow-y-auto p-0">
           <SheetHeader className="border-b border-border px-5 py-4">
             <SheetTitle className="flex items-center justify-between">
               <div className="flex items-center gap-2">
@@ -378,6 +384,12 @@ export default function Header() {
                     className={clsx("rounded px-2 py-0.5 text-[11px] font-semibold transition-all", locale === "en" ? "bg-primary text-primary-foreground" : "text-muted-foreground")}
                   >
                     EN
+                  </button>
+                  <button
+                    onClick={() => setLocale("ar")}
+                    className={clsx("rounded px-2 py-0.5 text-[11px] font-semibold transition-all", locale === "ar" ? "bg-primary text-primary-foreground" : "text-muted-foreground")}
+                  >
+                    AR
                   </button>
                 </div>
               </div>

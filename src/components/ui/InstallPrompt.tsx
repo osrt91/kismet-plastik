@@ -23,6 +23,12 @@ const t = {
     install: "Install",
     dismiss: "Not Now",
   },
+  ar: {
+    title: "تثبيت التطبيق",
+    description: "أضيفوا كسمت بلاستيك إلى شاشتكم الرئيسية للوصول السريع والدعم بدون إنترنت.",
+    install: "تثبيت",
+    dismiss: "ليس الآن",
+  },
 };
 
 export default function InstallPrompt() {

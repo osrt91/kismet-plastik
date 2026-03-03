@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { categories, products } from "@/data/products";
 
 const BASE_URL = "https://www.kismetplastik.com";
-const locales = ["tr", "en"] as const;
+const locales = ["tr", "en", "ar"] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPaths = [

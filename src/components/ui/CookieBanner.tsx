@@ -39,7 +39,17 @@ export default function CookieBanner() {
 
   if (!visible) return null;
 
+  const isAr = locale === "ar";
   const isTr = locale === "tr";
+
+  const cookieTitle = isTr ? "Çerez Kullanımı" : isAr ? "استخدام ملفات تعريف الارتباط" : "Cookie Usage";
+  const cookieDesc = isTr
+    ? "Bu web sitesi, deneyiminizi geliştirmek için çerezler kullanmaktadır. 6698 sayılı KVKK kapsamında kişisel verileriniz işlenmektedir."
+    : isAr
+    ? "يستخدم هذا الموقع ملفات تعريف الارتباط لتحسين تجربتكم. تتم معالجة بياناتكم الشخصية وفقًا للوائح حماية البيانات."
+    : "This website uses cookies to improve your experience. Your personal data is processed in accordance with data protection regulations.";
+  const declineText = isTr ? "Reddet" : isAr ? "رفض" : "Decline";
+  const acceptText = isTr ? "Kabul Et" : isAr ? "قبول" : "Accept";
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 p-4 animate-[fade-in-up_500ms_ease-out_forwards]">
@@ -49,12 +59,10 @@ export default function CookieBanner() {
             <Cookie size={24} className="mt-0.5 shrink-0 text-accent-500" />
             <div>
               <p className="text-sm font-semibold text-primary-900">
-                {isTr ? "Çerez Kullanımı" : "Cookie Usage"}
+                {cookieTitle}
               </p>
               <p className="mt-1 text-sm text-neutral-500">
-                {isTr
-                  ? "Bu web sitesi, deneyiminizi geliştirmek için çerezler kullanmaktadır. 6698 sayılı KVKK kapsamında kişisel verileriniz işlenmektedir."
-                  : "This website uses cookies to improve your experience. Your personal data is processed in accordance with data protection regulations."}
+                {cookieDesc}
               </p>
             </div>
           </div>
@@ -63,13 +71,13 @@ export default function CookieBanner() {
               onClick={decline}
               className="rounded-lg border border-neutral-200 px-4 py-2 text-sm font-medium text-neutral-600 transition-colors hover:bg-neutral-50"
             >
-              {isTr ? "Reddet" : "Decline"}
+              {declineText}
             </button>
             <button
               onClick={accept}
               className="rounded-lg bg-primary-900 px-4 py-2 text-sm font-bold text-white transition-all hover:bg-primary-700"
             >
-              {isTr ? "Kabul Et" : "Accept"}
+              {acceptText}
             </button>
           </div>
         </div>

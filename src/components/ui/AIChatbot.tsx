@@ -46,6 +46,20 @@ const t = {
     clearChat: "Clear Chat",
     kvkk: "No personal data stored",
   },
+  ar: {
+    title: "المساعد الذكي",
+    subtitle: "أجيب عن أسئلتكم حول تعبئة مستحضرات التجميل",
+    placeholder: "اكتبوا رسالتكم...",
+    greeting:
+      "مرحبًا! أنا المساعد الذكي لكسمت بلاستيك. يمكنني الإجابة عن أسئلتكم حول تعبئة مستحضرات التجميل ومنتجاتنا وخدماتنا. كيف يمكنني مساعدتكم؟",
+    suggestions: [
+      "ما هي المنتجات التي تصنعونها؟",
+      "ما هو الحد الأدنى لكمية الطلب؟",
+      "ما هي أحجام عبوات PET المتاحة؟",
+    ],
+    clearChat: "مسح المحادثة",
+    kvkk: "لا يتم تخزين بيانات شخصية",
+  },
 };
 
 export default function AIChatbot() {
@@ -111,6 +125,8 @@ export default function AIChatbot() {
             content:
               locale === "tr"
                 ? "Bir hata oluştu. Lütfen tekrar deneyin."
+                : locale === "ar"
+                ? "حدث خطأ. يرجى المحاولة مرة أخرى."
                 : "An error occurred. Please try again.",
           },
         ]);
@@ -207,7 +223,7 @@ export default function AIChatbot() {
                       className="animate-spin text-primary"
                     />
                     <span className="text-xs text-neutral-400">
-                      {locale === "tr" ? "Yazıyor..." : "Typing..."}
+                      {locale === "tr" ? "Yazıyor..." : locale === "ar" ? "يكتب..." : "Typing..."}
                     </span>
                   </div>
                 </div>

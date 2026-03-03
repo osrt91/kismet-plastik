@@ -102,6 +102,35 @@ const t = {
     startChat: "Start Chat",
     poweredBy: "Powered by WhatsApp Business",
   },
+  ar: {
+    headerTitle: "كسمت بلاستيك",
+    headerSubOnline: "متصل",
+    headerSubOffline: "غير متصل - سنعود إليكم قريبًا",
+    responseTime: "عادةً يرد خلال ساعة واحدة",
+    agentsTitle: "قنوات الاتصال",
+    templateTitle: "قوالب الرسائل السريعة",
+    templates: [
+      "أرغب في الحصول على معلومات عن المنتج",
+      "أرغب في إرسال طلب عرض سعر",
+      "أرغب في معرفة حالة طلبي",
+    ],
+    inputPlaceholder: "اكتبوا رسالتكم...",
+    send: "إرسال",
+    agentNames: {
+      sales: "فريق المبيعات",
+      company: "واتساب الشركة",
+      owner: "المسؤول",
+    } as Record<string, string>,
+    agentDesc: {
+      sales: "هاتف ثابت",
+      company: "واتساب",
+      owner: "واتساب",
+    } as Record<string, string>,
+    call: "اتصال",
+    chat: "رسالة",
+    startChat: "بدء المحادثة",
+    poweredBy: "مدعوم بواسطة واتساب للأعمال",
+  },
 };
 
 function isBusinessHours(): boolean {

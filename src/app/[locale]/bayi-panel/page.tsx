@@ -148,7 +148,7 @@ export default function BayiPanelDashboard() {
         <h2 className="text-2xl font-bold">{t.welcome}, {userName}</h2>
         <p className="mt-1 text-white/60">
           <Clock size={14} className="mr-1 inline" />
-          {new Date().toLocaleDateString(locale === "tr" ? "tr-TR" : "en-US", {
+          {new Date().toLocaleDateString(locale === "tr" ? "tr-TR" : locale === "ar" ? "ar-SA" : "en-US", {
             weekday: "long",
             year: "numeric",
             month: "long",

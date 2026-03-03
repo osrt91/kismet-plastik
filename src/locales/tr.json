@@ -533,5 +533,37 @@
     "subtitle": "Bu sayfa tatile çıkmış olabilir!",
     "description": "Aradığınız sayfa taşınmış, silinmiş veya hiç var olmamış olabilir. Aşağıdaki bağlantılardan devam edebilirsiniz.",
     "searchPlaceholder": "Ne aramıştınız?"
+  },
+  "configurator": {
+    "title": "Ürün Konfiguratör",
+    "selectProduct": "Ürün Seçin",
+    "bodyColor": "Şişe Rengi",
+    "selectAccessory": "Kapak / Pompa Seçin",
+    "accessoryColor": "Kapak Rengi",
+    "compatibleCaps": "Uyumlu Kapaklar",
+    "compatiblePumps": "Uyumlu Pompalar",
+    "compatibleSprays": "Uyumlu Spreyler",
+    "preview": "Önizleme",
+    "addToQuote": "Teklif Listesine Ekle",
+    "downloadPng": "PNG İndir",
+    "noAccessories": "Bu ürün için aksesuar tanımlanmamış",
+    "comingSoon3d": "3D görünüm yakın zamanda aktif olacak"
+  },
+  "filters": {
+    "title": "Filtrele",
+    "volume": "Hacim",
+    "material": "Hammadde",
+    "model": "Model",
+    "color": "Renk",
+    "shape": "Şekil",
+    "surfaceType": "Yüzey Tipi",
+    "weight": "Ağırlık",
+    "neckFinish": "Ağız",
+    "height": "Boy",
+    "diameter": "Çap",
+    "width": "En",
+    "clearAll": "Filtreleri Temizle",
+    "resultsFound": "{count} ürün bulundu",
+    "noResults": "Aramanıza uygun ürün bulunamadı"
   }
 }

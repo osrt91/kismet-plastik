@@ -17,6 +17,7 @@ import {
   Zap,
   Shield,
   Thermometer,
+  type LucideIcon,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import AnimateOnScroll from "@/components/ui/AnimateOnScroll";
@@ -30,7 +31,7 @@ interface GalleryPhoto {
   title: string;
   titleEn: string;
   gradient: string;
-  icon: React.ElementType;
+  icon: LucideIcon;
 }
 
 const galleryPhotos: GalleryPhoto[] = [
@@ -96,7 +97,7 @@ interface FactoryStat {
   value: string;
   label: string;
   labelEn: string;
-  icon: React.ElementType;
+  icon: LucideIcon;
 }
 
 const factoryStats: FactoryStat[] = [

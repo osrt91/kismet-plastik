@@ -27,7 +27,7 @@ const t = {
 
 export default function InstallPrompt() {
   const { locale } = useLocale();
-  const strings = t[locale] || t.tr;
+  const strings = t[locale as keyof typeof t] || t.tr;
   const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
   const [show, setShow] = useState(false);
 

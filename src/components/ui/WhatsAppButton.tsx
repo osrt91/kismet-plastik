@@ -159,7 +159,7 @@ const childFade = {
 
 export default function WhatsAppButton() {
   const { locale } = useLocale();
-  const strings = t[locale] || t.tr;
+  const strings = t[locale as keyof typeof t] || t.tr;
   const [visible, setVisible] = useState(false);
   const [open, setOpen] = useState(false);
   const [online, setOnline] = useState(false);

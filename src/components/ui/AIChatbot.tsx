@@ -161,7 +161,7 @@ function TypingIndicator({ label }: { label: string }) {
 
 export default function AIChatbot() {
   const { locale } = useLocale();
-  const strings = t[locale] || t.tr;
+  const strings = t[locale as keyof typeof t] || t.tr;
   const whatsappUrl = locale === "en" ? WHATSAPP_URL_EN : WHATSAPP_URL_TR;
 
   const [open, setOpen] = useState(false);
@@ -217,7 +217,7 @@ export default function AIChatbot() {
   useEffect(() => {
     if (prevLocaleRef.current !== locale) {
       prevLocaleRef.current = locale;
-      const newStrings = t[locale] || t.tr;
+      const newStrings = t[locale as keyof typeof t] || t.tr;
       setMessages([
         {
           role: "assistant",

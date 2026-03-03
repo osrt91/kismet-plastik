@@ -1,10 +1,25 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { Fraunces, Instrument_Sans } from "next/font/google";
 import { LocaleProvider } from "@/contexts/LocaleContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import dynamic from "next/dynamic";
+
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-fraunces",
+  display: "swap",
+  weight: ["400", "500", "600", "700", "800", "900"],
+});
+
+const instrumentSans = Instrument_Sans({
+  subsets: ["latin"],
+  variable: "--font-instrument-sans",
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
+});
 
 const WhatsAppButton = dynamic(() => import("@/components/ui/WhatsAppButton"));
 const ScrollToTop = dynamic(() => import("@/components/ui/ScrollToTop"));
@@ -111,7 +126,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   }
 
   return (
-    <html lang={locale}>
+    <html lang={locale} className={`${fraunces.variable} ${instrumentSans.variable}`}>
       <head>
         <LocalBusinessJsonLd />
         <OrganizationJsonLd />

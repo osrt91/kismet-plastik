@@ -3,32 +3,56 @@
 -- All tables needed for complete admin management
 -- =====================================================
 
--- 1. Add new columns to existing tables
-ALTER TABLE blog_posts ADD COLUMN IF NOT EXISTS image_url TEXT;
-ALTER TABLE blog_posts ADD COLUMN IF NOT EXISTS tags TEXT[] DEFAULT '{}';
-ALTER TABLE blog_posts ADD COLUMN IF NOT EXISTS status TEXT DEFAULT 'published' CHECK (status IN ('draft', 'published'));
+-- 1. Add new columns to existing tables (safe: skip if table doesn't exist)
+DO $$ BEGIN
+  ALTER TABLE blog_posts ADD COLUMN IF NOT EXISTS image_url TEXT;
+  EXCEPTION WHEN undefined_table THEN NULL;
+END $$;
+DO $$ BEGIN
+  ALTER TABLE blog_posts ADD COLUMN IF NOT EXISTS tags TEXT[] DEFAULT '{}';
+  EXCEPTION WHEN undefined_table THEN NULL;
+END $$;
+DO $$ BEGIN
+  ALTER TABLE blog_posts ADD COLUMN IF NOT EXISTS status TEXT DEFAULT 'published' CHECK (status IN ('draft', 'published'));
+  EXCEPTION WHEN undefined_table OR duplicate_object THEN NULL;
+END $$;
+DO $$ BEGIN
+  ALTER TABLE products ADD COLUMN IF NOT EXISTS image_url TEXT;
+  EXCEPTION WHEN undefined_table THEN NULL;
+END $$;
+DO $$ BEGIN
+  ALTER TABLE profiles ADD COLUMN IF NOT EXISTS is_active BOOLEAN DEFAULT true;
+  EXCEPTION WHEN undefined_table THEN NULL;
+END $$;
+DO $$ BEGIN
+  ALTER TABLE quote_requests ADD COLUMN IF NOT EXISTS response_message TEXT;
+  EXCEPTION WHEN undefined_table THEN NULL;
+END $$;
+DO $$ BEGIN
+  ALTER TABLE pre_orders ADD COLUMN IF NOT EXISTS admin_notes TEXT;
+  EXCEPTION WHEN undefined_table THEN NULL;
+END $$;
+DO $$ BEGIN
+  ALTER TABLE webhook_events ADD COLUMN IF NOT EXISTS retry_count INTEGER DEFAULT 0;
+  EXCEPTION WHEN undefined_table THEN NULL;
+END $$;
+DO $$ BEGIN
+  ALTER TABLE sample_requests ADD COLUMN IF NOT EXISTS admin_notes TEXT;
+  EXCEPTION WHEN undefined_table THEN NULL;
+END $$;
 
-ALTER TABLE products ADD COLUMN IF NOT EXISTS image_url TEXT;
-
-ALTER TABLE profiles ADD COLUMN IF NOT EXISTS is_active BOOLEAN DEFAULT true;
-
-ALTER TABLE quote_requests ADD COLUMN IF NOT EXISTS response_message TEXT;
-
-ALTER TABLE pre_orders ADD COLUMN IF NOT EXISTS admin_notes TEXT;
-
-ALTER TABLE webhook_events ADD COLUMN IF NOT EXISTS retry_count INTEGER DEFAULT 0;
-
-ALTER TABLE sample_requests ADD COLUMN IF NOT EXISTS admin_notes TEXT;
-
--- 2. Order status history
-CREATE TABLE IF NOT EXISTS order_status_history (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  order_id UUID NOT NULL REFERENCES orders(id) ON DELETE CASCADE,
-  old_status TEXT,
-  new_status TEXT NOT NULL,
-  note TEXT,
-  created_at TIMESTAMPTZ DEFAULT now()
-);
+-- 2. Order status history (only if orders table exists)
+DO $$ BEGIN
+  CREATE TABLE IF NOT EXISTS order_status_history (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    order_id UUID NOT NULL REFERENCES orders(id) ON DELETE CASCADE,
+    old_status TEXT,
+    new_status TEXT NOT NULL,
+    note TEXT,
+    created_at TIMESTAMPTZ DEFAULT now()
+  );
+  EXCEPTION WHEN undefined_table THEN NULL;
+END $$;
 
 -- 3. Contact messages
 CREATE TABLE IF NOT EXISTS contact_messages (
@@ -279,7 +303,10 @@ ALTER TABLE content_sections ENABLE ROW LEVEL SECURITY;
 ALTER TABLE faq_items ENABLE ROW LEVEL SECURITY;
 ALTER TABLE career_listings ENABLE ROW LEVEL SECURITY;
 ALTER TABLE notification_settings ENABLE ROW LEVEL SECURITY;
-ALTER TABLE order_status_history ENABLE ROW LEVEL SECURITY;
+DO $$ BEGIN
+  ALTER TABLE order_status_history ENABLE ROW LEVEL SECURITY;
+  EXCEPTION WHEN undefined_table THEN NULL;
+END $$;
 
 -- Public read for certain tables (drop first to avoid conflicts)
 DROP POLICY IF EXISTS "Public read certificates" ON certificates;
@@ -307,7 +334,10 @@ CREATE POLICY "Public read seo_settings" ON seo_settings FOR SELECT USING (true)
 -- Indexes
 -- =====================================================
 
-CREATE INDEX IF NOT EXISTS idx_order_status_history_order_id ON order_status_history(order_id);
+DO $$ BEGIN
+  CREATE INDEX IF NOT EXISTS idx_order_status_history_order_id ON order_status_history(order_id);
+  EXCEPTION WHEN undefined_table THEN NULL;
+END $$;
 CREATE INDEX IF NOT EXISTS idx_contact_messages_status ON contact_messages(status);
 CREATE INDEX IF NOT EXISTS idx_contact_messages_created_at ON contact_messages(created_at DESC);
 CREATE INDEX IF NOT EXISTS idx_resources_display_order ON resources(display_order);
@@ -320,4 +350,7 @@ CREATE INDEX IF NOT EXISTS idx_site_settings_key ON site_settings(key);
 CREATE INDEX IF NOT EXISTS idx_content_sections_section_key ON content_sections(section_key);
 CREATE INDEX IF NOT EXISTS idx_faq_items_display_order ON faq_items(display_order);
 CREATE INDEX IF NOT EXISTS idx_catalog_downloads_resource_id ON catalog_downloads(resource_id);
-CREATE INDEX IF NOT EXISTS idx_webhook_events_status ON webhook_events(status);
+DO $$ BEGIN
+  CREATE INDEX IF NOT EXISTS idx_webhook_events_status ON webhook_events(status);
+  EXCEPTION WHEN undefined_table THEN NULL;
+END $$;

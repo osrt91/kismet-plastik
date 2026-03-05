@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Fraunces, Instrument_Sans } from "next/font/google";
+import { Fraunces, Instrument_Sans, JetBrains_Mono } from "next/font/google";
 import { LocaleProvider } from "@/contexts/LocaleContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import Header from "@/components/layout/Header";
@@ -17,6 +17,13 @@ const fraunces = Fraunces({
 const instrumentSans = Instrument_Sans({
   subsets: ["latin"],
   variable: "--font-instrument-sans",
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains-mono",
   display: "swap",
   weight: ["400", "500", "600", "700"],
 });
@@ -136,7 +143,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   }
 
   return (
-    <html lang={locale} className={`${fraunces.variable} ${instrumentSans.variable}`} suppressHydrationWarning>
+    <html lang={locale} className={`${fraunces.variable} ${instrumentSans.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
       <head>
         <LocalBusinessJsonLd />
         <OrganizationJsonLd />

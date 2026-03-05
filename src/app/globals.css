@@ -188,7 +188,7 @@
   --font-sans: "Myriad Pro", "Source Sans 3", system-ui, -apple-system, sans-serif;
   --font-display: var(--font-fraunces, "Myriad Pro"), Georgia, serif;
   --font-body: var(--font-instrument-sans, "Myriad Pro"), system-ui, sans-serif;
-  --font-mono: ui-monospace, "SFMono-Regular", "Cascadia Code", monospace;
+  --font-mono: var(--font-jetbrains-mono, ui-monospace, "SFMono-Regular", monospace);
 
   /* Shadow tokens */
   --shadow-card: 0 1px 3px 0 rgba(10, 22, 40, 0.06), 0 1px 2px -1px rgba(10, 22, 40, 0.06);
@@ -241,10 +241,26 @@ html {
 }
 
 body {
-  font-family: var(--font-sans);
+  font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
 }
 
 ::selection {

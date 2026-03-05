@@ -94,7 +94,16 @@
     "highCapacity": "طاقة إنتاجية عالية",
     "highCapacityDesc": "نلبي الطلبات الكبيرة بطاقة إنتاجية شهرية بالملايين.",
     "support": "دعم العملاء على مدار الساعة",
-    "supportDesc": "فريقنا المتخصص معكم في كل مرحلة، قبل وبعد البيع."
+    "supportDesc": "فريقنا المتخصص معكم في كل مرحلة، قبل وبعد البيع.",
+    "processStep1Title": "Raw Material Selection",
+    "processStep1Desc": "We carefully select the highest quality PET, HDPE, and PP raw materials.",
+    "processStep2Title": "Production",
+    "processStep2Desc": "High-capacity precision manufacturing with state-of-the-art machines.",
+    "processStep3Title": "Quality Control",
+    "processStep3Desc": "Quality guaranteed through ISO 9001, ISO 22000 and FSSC 22000 standards.",
+    "processStep4Title": "Delivery",
+    "processStep4Desc": "On-time delivery with our fast and secure logistics network.",
+    "processPhotoPlaceholder": "Photo Coming Soon"
   },
   "homeStrengths": [
     "المنتج الرائد لتغليف مستحضرات التجميل في تركيا",

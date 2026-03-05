@@ -94,7 +94,16 @@
     "highCapacity": "대량 생산",
     "highCapacityDesc": "월 수백만 개의 생산 능력으로 대규모 주문에 대응합니다.",
     "support": "연중무휴 고객 지원",
-    "supportDesc": "전문 팀이 판매 전후 모든 단계에서 지원합니다."
+    "supportDesc": "전문 팀이 판매 전후 모든 단계에서 지원합니다.",
+    "processStep1Title": "Raw Material Selection",
+    "processStep1Desc": "We carefully select the highest quality PET, HDPE, and PP raw materials.",
+    "processStep2Title": "Production",
+    "processStep2Desc": "High-capacity precision manufacturing with state-of-the-art machines.",
+    "processStep3Title": "Quality Control",
+    "processStep3Desc": "Quality guaranteed through ISO 9001, ISO 22000 and FSSC 22000 standards.",
+    "processStep4Title": "Delivery",
+    "processStep4Desc": "On-time delivery with our fast and secure logistics network.",
+    "processPhotoPlaceholder": "Photo Coming Soon"
   },
   "homeStrengths": [
     "터키를 대표하는 화장품 포장 제조업체",

@@ -94,7 +94,16 @@
     "highCapacity": "Alta capacidad",
     "highCapacityDesc": "Atendemos pedidos a gran escala con una capacidad de producción mensual de millones de unidades.",
     "support": "Atención al cliente 24/7",
-    "supportDesc": "Nuestro equipo de expertos le acompaña en cada etapa, antes y después de la venta."
+    "supportDesc": "Nuestro equipo de expertos le acompaña en cada etapa, antes y después de la venta.",
+    "processStep1Title": "Raw Material Selection",
+    "processStep1Desc": "We carefully select the highest quality PET, HDPE, and PP raw materials.",
+    "processStep2Title": "Production",
+    "processStep2Desc": "High-capacity precision manufacturing with state-of-the-art machines.",
+    "processStep3Title": "Quality Control",
+    "processStep3Desc": "Quality guaranteed through ISO 9001, ISO 22000 and FSSC 22000 standards.",
+    "processStep4Title": "Delivery",
+    "processStep4Desc": "On-time delivery with our fast and secure logistics network.",
+    "processPhotoPlaceholder": "Photo Coming Soon"
   },
   "homeStrengths": [
     "Principal productor de envases cosméticos de Turquía",

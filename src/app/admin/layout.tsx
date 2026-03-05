@@ -111,11 +111,11 @@ export default function AdminLayout({
 
   if (isLoginPage) {
     return (
-      <html lang="tr">
+      <html lang="tr" suppressHydrationWarning>
         <head>
           <meta name="robots" content="noindex, nofollow" />
         </head>
-        <body className="antialiased">{children}</body>
+        <body className="antialiased" suppressHydrationWarning>{children}</body>
       </html>
     );
   }
@@ -140,11 +140,11 @@ export default function AdminLayout({
   const currentPage = allNavItems.find((n) => isActive(n.href))?.name ?? "Sayfa";
 
   return (
-    <html lang="tr">
+    <html lang="tr" suppressHydrationWarning>
       <head>
         <meta name="robots" content="noindex, nofollow" />
       </head>
-      <body className="antialiased bg-muted">
+      <body className="antialiased bg-muted" suppressHydrationWarning>
         <div className="flex h-screen">
           {/* Mobile overlay */}
           {sidebarOpen && (

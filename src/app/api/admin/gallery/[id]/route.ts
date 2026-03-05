@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getSupabaseAdmin, isSupabaseAdminConfigured } from "@/lib/supabase-admin";
+import { getSupabaseAdmin, isSupabaseAdminConfigured, requireSupabase } from "@/lib/supabase-admin";
 import { checkAuth } from "@/lib/auth";
 
 export async function GET(
@@ -8,6 +8,9 @@ export async function GET(
 ) {
   const authError = checkAuth(request);
   if (authError) return authError;
+
+  const sbError = requireSupabase();
+  if (sbError) return sbError;
 
   if (!isSupabaseAdminConfigured()) {
     return NextResponse.json(
@@ -38,6 +41,9 @@ export async function PUT(
 ) {
   const authError = checkAuth(request);
   if (authError) return authError;
+
+  const sbError = requireSupabase();
+  if (sbError) return sbError;
 
   if (!isSupabaseAdminConfigured()) {
     return NextResponse.json(
@@ -88,6 +94,9 @@ export async function DELETE(
 ) {
   const authError = checkAuth(request);
   if (authError) return authError;
+
+  const sbError = requireSupabase();
+  if (sbError) return sbError;
 
   if (!isSupabaseAdminConfigured()) {
     return NextResponse.json(

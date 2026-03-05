@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getSupabaseAdmin } from "@/lib/supabase-admin";
+import { getSupabaseAdmin, requireSupabase } from "@/lib/supabase-admin";
 import { checkAuth, sanitizeSearchInput } from "@/lib/auth";
 import type { QuoteStatus } from "@/types/database";
 
@@ -14,6 +14,9 @@ const VALID_STATUSES: QuoteStatus[] = [
 export async function GET(request: NextRequest) {
   const authError = checkAuth(request);
   if (authError) return authError;
+
+  const sbError = requireSupabase();
+  if (sbError) return sbError;
 
   const { searchParams } = new URL(request.url);
   const page = Math.max(1, parseInt(searchParams.get("page") ?? "1", 10));

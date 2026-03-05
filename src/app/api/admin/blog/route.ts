@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getSupabaseAdmin } from "@/lib/supabase-admin";
+import { getSupabaseAdmin, requireSupabase } from "@/lib/supabase-admin";
 import { checkAuth } from "@/lib/auth";
 import { sanitizeSearchInput } from "@/lib/auth";
 
@@ -8,6 +8,9 @@ const PAGE_SIZE = 12;
 export async function GET(request: NextRequest) {
   const authError = checkAuth(request);
   if (authError) return authError;
+
+  const sbError = requireSupabase();
+  if (sbError) return sbError;
 
   const { searchParams } = new URL(request.url);
   const page = Math.max(1, parseInt(searchParams.get("page") ?? "1", 10));
@@ -63,6 +66,9 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   const authError = checkAuth(request);
   if (authError) return authError;
+
+  const sbError = requireSupabase();
+  if (sbError) return sbError;
 
   let body: Record<string, unknown>;
   try {

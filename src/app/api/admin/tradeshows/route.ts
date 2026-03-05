@@ -1,11 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getSupabaseAdmin } from "@/lib/supabase-admin";
+import { getSupabaseAdmin, requireSupabase } from "@/lib/supabase-admin";
 import { checkAuth } from "@/lib/auth";
 import type { TradeShowStatus } from "@/types/database";
 
 export async function GET(request: NextRequest) {
   const authError = checkAuth(request);
   if (authError) return authError;
+
+  const sbError = requireSupabase();
+  if (sbError) return sbError;
 
   const { searchParams } = new URL(request.url);
   const status = searchParams.get("status") ?? "";
@@ -40,6 +43,9 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   const authError = checkAuth(request);
   if (authError) return authError;
+
+  const sbError = requireSupabase();
+  if (sbError) return sbError;
 
   let body: Record<string, unknown>;
   try {

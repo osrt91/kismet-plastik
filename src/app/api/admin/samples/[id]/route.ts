@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getSupabaseAdmin } from "@/lib/supabase-admin";
+import { getSupabaseAdmin, requireSupabase } from "@/lib/supabase-admin";
 import { checkAuth } from "@/lib/auth";
 import type { SampleRequestStatus } from "@/types/database";
 
@@ -17,6 +17,9 @@ export async function GET(
 ) {
   const authError = checkAuth(request);
   if (authError) return authError;
+
+  const sbError = requireSupabase();
+  if (sbError) return sbError;
 
   const { id } = await params;
 
@@ -48,6 +51,9 @@ export async function PUT(
 ) {
   const authError = checkAuth(request);
   if (authError) return authError;
+
+  const sbError = requireSupabase();
+  if (sbError) return sbError;
 
   const { id } = await params;
 
@@ -108,6 +114,9 @@ export async function DELETE(
 ) {
   const authError = checkAuth(request);
   if (authError) return authError;
+
+  const sbError = requireSupabase();
+  if (sbError) return sbError;
 
   const { id } = await params;
 

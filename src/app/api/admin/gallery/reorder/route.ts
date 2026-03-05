@@ -1,10 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getSupabaseAdmin, isSupabaseAdminConfigured } from "@/lib/supabase-admin";
+import { getSupabaseAdmin, isSupabaseAdminConfigured, requireSupabase } from "@/lib/supabase-admin";
 import { checkAuth } from "@/lib/auth";
 
 export async function PUT(request: NextRequest) {
   const authError = checkAuth(request);
   if (authError) return authError;
+
+  const sbError = requireSupabase();
+  if (sbError) return sbError;
 
   if (!isSupabaseAdminConfigured()) {
     return NextResponse.json(

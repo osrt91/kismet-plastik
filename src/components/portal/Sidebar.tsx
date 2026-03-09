@@ -17,6 +17,7 @@ import {
   X,
   ChevronsLeft,
   ChevronsRight,
+  CreditCard,
 } from "lucide-react";
 import { useLocale } from "@/contexts/LocaleContext";
 import { supabaseBrowser } from "@/lib/supabase/client";
@@ -29,6 +30,7 @@ const menuItems = [
   { key: "orders", icon: ClipboardList, href: "/bayi-panel/siparislerim" },
   { key: "quotes", icon: FileText, href: "/bayi-panel/tekliflerim" },
   { key: "invoices", icon: Receipt, href: "/bayi-panel/faturalarim" },
+  { key: "payment", icon: CreditCard, href: "/bayi-panel/odeme" },
   { key: "profile", icon: User, href: "/bayi-panel/profilim" },
   { key: "support", icon: HelpCircle, href: "/iletisim" },
 ];
@@ -42,6 +44,7 @@ const labels: Record<string, Record<string, string>> = {
     orders: "Siparislerim",
     quotes: "Tekliflerim",
     invoices: "Faturalarim",
+    payment: "Odeme",
     profile: "Profilim",
     support: "Destek",
     logout: "Cikis Yap",
@@ -58,6 +61,7 @@ const labels: Record<string, Record<string, string>> = {
     orders: "My Orders",
     quotes: "My Quotes",
     invoices: "My Invoices",
+    payment: "Payment",
     profile: "My Profile",
     support: "Support",
     logout: "Sign Out",

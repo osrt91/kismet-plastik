@@ -153,6 +153,11 @@ export interface Database {
         Insert: Omit<DbWebhookEvent, "id" | "created_at">;
         Update: Partial<Omit<DbWebhookEvent, "id">>;
       };
+      product_compatibility: {
+        Row: DbProductCompatibility;
+        Insert: Omit<DbProductCompatibility, "id" | "created_at">;
+        Update: Partial<Omit<DbProductCompatibility, "id">>;
+      };
       dia_stock_mappings: {
         Row: DbDiaStockMapping;
         Insert: Omit<DbDiaStockMapping, "id" | "created_at" | "updated_at">;
@@ -605,6 +610,22 @@ export interface DealerCariMapping {
   can_direct_order: boolean;
   created_at: string;
   updated_at: string;
+}
+
+// ==================== PRODUCT COMPATIBILITY ====================
+
+export type CompatibilityType = 'fits' | 'recommended' | 'alternative';
+
+export interface DbProductCompatibility {
+  id: string;
+  source_stock_kodu: string;
+  source_category: string;
+  compatible_stock_kodu: string;
+  compatible_category: string;
+  compatibility_type: CompatibilityType;
+  notes: string | null;
+  is_active: boolean;
+  created_at: string;
 }
 
 // ==================== DIA ERP INTEGRATION ====================

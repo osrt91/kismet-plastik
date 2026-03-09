@@ -293,6 +293,7 @@ export interface ProductPrice {
 /** Get product price for a specific dealer */
 export async function getProductPriceForCari(
   stokKodu: string,
+  // TODO: Use cariKodu for cari-specific pricing when DIA fiyat kartı is configured
   _cariKodu: string,
 ): Promise<ProductPrice> {
   const stock = await getStockDetail(stokKodu);

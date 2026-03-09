@@ -8,6 +8,8 @@ import {
   ChevronDown,
   X,
   AlertTriangle,
+  MessageCircle,
+  CreditCard,
 } from "lucide-react";
 import { useLocale } from "@/contexts/LocaleContext";
 import { supabaseBrowser } from "@/lib/supabase/client";
@@ -320,6 +322,33 @@ export default function FaturalarimPage() {
           </p>
         </div>
       </div>
+
+      {/* Payment Actions */}
+      {summary.totalDebt > 0 && (
+        <div className="flex flex-col gap-3 sm:flex-row">
+          {/* ERS Online Payment */}
+          <a
+            href={`/${locale}/bayi-panel/odeme`}
+            className="inline-flex items-center gap-2 rounded-xl border border-primary-200 bg-primary-50 px-5 py-3 text-sm font-semibold text-primary-900 transition-colors hover:bg-primary-100 dark:border-primary-800 dark:bg-primary-900/20 dark:text-primary-300 dark:hover:bg-primary-900/30"
+          >
+            <CreditCard size={18} />
+            {locale === "tr" ? "Online Odeme Yap (ERS)" : "Pay Online (ERS)"}
+          </a>
+
+          {/* EGR WhatsApp Payment Request */}
+          <a
+            href={`https://wa.me/905322117475?text=${encodeURIComponent(
+              `EGR Odeme Talebi\nBorc Tutari: ${formatAmount(summary.totalDebt)}\n\nOdeme yapmak istiyorum.`
+            )}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-xl border border-emerald-200 bg-emerald-50 px-5 py-3 text-sm font-semibold text-emerald-800 transition-colors hover:bg-emerald-100 dark:border-emerald-800 dark:bg-emerald-900/20 dark:text-emerald-300 dark:hover:bg-emerald-900/30"
+          >
+            <MessageCircle size={18} />
+            {locale === "tr" ? "EGR Odeme Talebi (WhatsApp)" : "EGR Payment Request (WhatsApp)"}
+          </a>
+        </div>
+      )}
 
       {/* Filters */}
       {showFilters && (

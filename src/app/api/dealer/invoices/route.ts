@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabaseServer } from "@/lib/supabase/server";
 import { getInvoiceListByCari, separateInvoicesByType } from "@/lib/dia-services";
+import { cached, cacheKey, TTL } from "@/lib/dia-cache";
 
 export async function GET(request: NextRequest) {
   try {
@@ -24,7 +25,11 @@ export async function GET(request: NextRequest) {
     const page = parseInt(searchParams.get("page") ?? "1", 10);
     const limit = Math.min(parseInt(searchParams.get("limit") ?? "50", 10), 100);
 
-    const invoices = await getInvoiceListByCari(mapping.dia_cari_kodu, { page, limit });
+    const invoices = await cached(
+      cacheKey.invoiceList(mapping.dia_cari_kodu, page),
+      TTL.INVOICE_LIST,
+      () => getInvoiceListByCari(mapping.dia_cari_kodu, { page, limit })
+    );
     const { egr, ers } = separateInvoicesByType(invoices.records);
 
     const egrTotal = egr.reduce((sum, inv) => sum + (parseFloat(inv.kalantutar_taksit) || 0), 0);

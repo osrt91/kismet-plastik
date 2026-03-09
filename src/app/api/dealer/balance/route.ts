@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { supabaseServer } from "@/lib/supabase/server";
 import { getCariBalance } from "@/lib/dia-services";
+import { cached, cacheKey, TTL } from "@/lib/dia-cache";
 
 export async function GET() {
   try {
@@ -23,7 +24,11 @@ export async function GET() {
       }, { status: 404 });
     }
 
-    const balance = await getCariBalance(mapping.dia_cari_kodu);
+    const balance = await cached(
+      cacheKey.cariBalance(mapping.dia_cari_kodu),
+      TTL.CARI_BALANCE,
+      () => getCariBalance(mapping.dia_cari_kodu)
+    );
 
     return NextResponse.json({ success: true, data: balance });
   } catch (err) {

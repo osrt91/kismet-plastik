@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { supabaseServer } from "@/lib/supabase/server";
 import { getOrderListByCari, createDiaOrder } from "@/lib/dia-services";
 import { rateLimit } from "@/lib/rate-limit";
+import { cached, cacheKey, TTL, invalidateCache } from "@/lib/dia-cache";
 
 export async function GET(request: NextRequest) {
   try {
@@ -32,7 +33,11 @@ export async function GET(request: NextRequest) {
     const page = parseInt(searchParams.get("page") ?? "1", 10);
     const limit = Math.min(parseInt(searchParams.get("limit") ?? "20", 10), 50);
 
-    const diaOrders = await getOrderListByCari(mapping.dia_cari_kodu, { page, limit });
+    const diaOrders = await cached(
+      cacheKey.orderList(mapping.dia_cari_kodu, page),
+      TTL.ORDER_LIST,
+      () => getOrderListByCari(mapping.dia_cari_kodu, { page, limit })
+    );
 
     return NextResponse.json({
       success: true,
@@ -80,6 +85,7 @@ export async function POST(request: NextRequest) {
         kalemler: items,
       });
 
+      invalidateCache(`order:list:${mapping.dia_cari_kodu}:*`);
       return NextResponse.json({ success: true, data: result, target: "dia" });
     }
 

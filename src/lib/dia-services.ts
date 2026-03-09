@@ -74,29 +74,32 @@ export interface DiaCari {
   _key: string;
 }
 
-export interface DiaOrderItem {
-  StokKodu: string;
-  StokAdi: string;
-  Miktar: number;
-  BirimFiyat: number;
-  Tutar: number;
-  KDVOrani: number;
-  KDVTutar: number;
-  IskontoOrani: number | null;
-  IskontoTutar: number | null;
-}
-
+/** DIA v3 sipariş — gerçek API alan isimleri */
 export interface DiaOrder {
-  BelgeNo: string;
-  Tarih: string;
-  CariKodu: string;
-  CariUnvan: string;
-  ToplamTutar: number;
-  KDVTutar: number;
-  GenelToplam: number;
-  Aciklama: string | null;
-  Durum: string;
-  Kalemler: DiaOrderItem[];
+  fisno: string;
+  belgeno: string;
+  tarih: string;
+  saat: string;
+  __carikodu: string;
+  __cariunvan: string;
+  toplam: string;
+  toplamkdv: string;
+  net: string;
+  onay: string;
+  onay_txt: string;
+  siparisdurum: string;
+  turu: string;
+  turuack: string;
+  turu_ack: string;
+  ustislemturuack: string;
+  aciklama: string;
+  odemeplani: string;
+  odemeplaniack: string;
+  faturanumaralari: string;
+  irsaliyenumaralari: string;
+  toplammiktar: string;
+  teslimatkalanmiktar: string;
+  _key: string;
 }
 
 /** DIA v3 fatura — gerçek API alan isimleri */
@@ -127,18 +130,22 @@ export interface DiaInvoice {
   _key: string;
 }
 
+/** DIA v3 teklif — gerçek API alan isimleri */
 export interface DiaQuote {
-  BelgeNo: string;
-  Tarih: string;
-  GecerlilikTarihi: string | null;
-  CariKodu: string;
-  CariUnvan: string;
-  ToplamTutar: number;
-  KDVTutar: number;
-  GenelToplam: number;
-  Aciklama: string | null;
-  Durum: string;
-  Kalemler: DiaOrderItem[];
+  fisno: string;
+  belgeno: string;
+  tarih: string;
+  saat: string;
+  __carikodu: string;
+  __cariunvan: string;
+  toplam: string;
+  toplamkdv: string;
+  net: string;
+  onay: string;
+  onay_txt: string;
+  aciklama: string;
+  ustislemturuack: string;
+  _key: string;
 }
 
 // ---------------------------------------------------------------------------
@@ -471,6 +478,17 @@ export async function getOrderList(params?: ListParams): Promise<DiaListResponse
   return client.listService<DiaOrder>("scf", "scf_siparis_listele", toDiaListParams(params));
 }
 
+/** Fetch orders filtered by cari code */
+export async function getOrderListByCari(
+  cariKodu: string,
+  params?: ListParams,
+): Promise<DiaListResponse<DiaOrder>> {
+  const client = getDiaClient();
+  return client.listService<DiaOrder>("scf", "scf_siparis_listele", toDiaListParams(params), {
+    filters: `__carikodu='${cariKodu}'`,
+  });
+}
+
 /**
  * Creates a new order in DIA ERP from site order data.
  */
@@ -507,6 +525,49 @@ export async function createDiaOrder(orderData: CreateDiaOrderData): Promise<unk
     genel_toplam: toplamTutar + kdvTutar,
     aciklama: orderData.aciklama ?? "",
     kalemler,
+  });
+}
+
+// ---------------------------------------------------------------------------
+// Irsaliye (Delivery Note) Services — scf module
+// ---------------------------------------------------------------------------
+
+/** DIA v3 irsaliye — gerçek API alan isimleri */
+export interface DiaIrsaliye {
+  fisno: string;
+  belgeno: string;
+  belgeno2: string;
+  tarih: string;
+  saat: string;
+  __carikartkodu: string;
+  __cariunvan: string;
+  toplam: string;
+  toplamkdv: string;
+  toplamara: string;
+  net: string;
+  ustislemturuack: string;
+  turuack: string;
+  toplammiktar: string;
+  kalemsayisi: string;
+  kargofirma: string;
+  sevkadresi: string;
+  __faturabelgeno2: string;
+  _key: string;
+}
+
+export async function getIrsaliyeList(params?: ListParams): Promise<DiaListResponse<DiaIrsaliye>> {
+  const client = getDiaClient();
+  return client.listService<DiaIrsaliye>("scf", "scf_irsaliye_listele", toDiaListParams(params));
+}
+
+/** Fetch irsaliyes filtered by cari code */
+export async function getIrsaliyeListByCari(
+  cariKodu: string,
+  params?: ListParams,
+): Promise<DiaListResponse<DiaIrsaliye>> {
+  const client = getDiaClient();
+  return client.listService<DiaIrsaliye>("scf", "scf_irsaliye_listele", toDiaListParams(params), {
+    filters: `__carikartkodu='${cariKodu}'`,
   });
 }
 

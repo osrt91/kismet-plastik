@@ -424,7 +424,8 @@ export default function FaturalarimPage() {
         <>
           {/* Desktop Table */}
           <div className="hidden overflow-hidden rounded-xl border border-neutral-200 bg-white md:block dark:border-neutral-700 dark:bg-neutral-800">
-            <table className="w-full text-sm">
+            <div className="overflow-x-auto">
+            <table className="min-w-full text-sm">
               <thead>
                 <tr className="border-b border-neutral-100 bg-neutral-50 text-left text-xs font-medium uppercase tracking-wider text-neutral-400 dark:border-neutral-700 dark:bg-neutral-800/80 dark:text-neutral-500">
                   <th className="px-5 py-3">{t.invoiceNo}</th>
@@ -475,7 +476,7 @@ export default function FaturalarimPage() {
                       <td className="px-5 py-4 text-right">
                         <button
                           onClick={() => handleDownloadPdf(invoice.id)}
-                          className="inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium text-[#0A1628] transition-colors hover:bg-primary-50 dark:text-neutral-300 dark:hover:bg-neutral-700"
+                          className="inline-flex h-10 items-center gap-1.5 rounded-lg px-3 text-xs font-medium text-[#0A1628] transition-colors hover:bg-primary-50 dark:text-neutral-300 dark:hover:bg-neutral-700"
                           title={t.download}
                         >
                           <Download size={14} />
@@ -487,6 +488,7 @@ export default function FaturalarimPage() {
                 })}
               </tbody>
             </table>
+            </div>
           </div>
 
           {/* Mobile Cards */}
@@ -561,7 +563,7 @@ export default function FaturalarimPage() {
                     </div>
                     <button
                       onClick={() => handleDownloadPdf(invoice.id)}
-                      className="inline-flex items-center gap-1.5 rounded-lg border border-neutral-200 px-3 py-2 text-xs font-medium text-[#0A1628] transition-colors hover:bg-neutral-50 dark:border-neutral-600 dark:text-neutral-300 dark:hover:bg-neutral-700"
+                      className="inline-flex h-10 items-center gap-1.5 rounded-lg border border-neutral-200 px-3 text-xs font-medium text-[#0A1628] transition-colors hover:bg-neutral-50 dark:border-neutral-600 dark:text-neutral-300 dark:hover:bg-neutral-700"
                     >
                       <Download size={14} />
                       {t.download}

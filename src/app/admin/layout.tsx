@@ -185,7 +185,7 @@ export default function AdminLayout({
                   <div key={group.label} className="mb-1">
                     <button
                       onClick={() => toggleGroup(group.label)}
-                      className="flex w-full items-center justify-between px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-white/30 hover:text-white/50"
+                      className="flex w-full items-center justify-between px-3 py-2 text-[10px] font-semibold uppercase tracking-wider text-white/30 hover:text-white/50"
                     >
                       {group.label}
                       <ChevronDown
@@ -202,7 +202,7 @@ export default function AdminLayout({
                               key={item.href}
                               href={item.href}
                               onClick={() => setSidebarOpen(false)}
-                              className={`flex items-center gap-2.5 rounded-lg px-3 py-2 text-[13px] font-medium transition-all ${
+                              className={`flex items-center gap-2.5 rounded-lg px-3 py-2.5 text-[13px] font-medium transition-all ${
                                 active
                                   ? "bg-white/10 text-white"
                                   : "text-white/50 hover:bg-white/5 hover:text-white/80"
@@ -226,7 +226,7 @@ export default function AdminLayout({
             <div className="border-t border-white/10 p-2">
               <button
                 onClick={handleLogout}
-                className="flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-[13px] font-medium text-destructive/70 transition-colors hover:bg-destructive/10 hover:text-destructive"
+                className="flex w-full items-center gap-2.5 rounded-lg px-3 py-2.5 text-[13px] font-medium text-destructive/70 transition-colors hover:bg-destructive/10 hover:text-destructive"
               >
                 <LogOut size={16} />
                 Çıkış Yap
@@ -250,7 +250,7 @@ export default function AdminLayout({
               </div>
             </header>
 
-            <main className="flex-1 overflow-y-auto p-4 lg:p-6">
+            <main className="flex-1 overflow-y-auto overflow-x-hidden p-4 lg:p-6">
               {children}
             </main>
           </div>

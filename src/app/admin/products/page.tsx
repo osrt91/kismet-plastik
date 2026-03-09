@@ -564,32 +564,32 @@ export default function AdminProductsPage() {
                         <button
                           onClick={() => openUpload(product.id)}
                           disabled={uploadingId === product.id}
-                          className="rounded-lg p-2 text-muted-foreground transition-colors hover:bg-blue-50 hover:text-blue-600 disabled:opacity-50"
+                          className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-blue-50 hover:text-blue-600 disabled:opacity-50"
                           title="Görsel Yükle"
                         >
-                          <Upload size={13} />
+                          <Upload size={15} />
                         </button>
 
                         {/* Edit */}
                         <Link
                           href={`/admin/products/${product.id}`}
-                          className="rounded-lg p-2 text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary"
+                          className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary"
                           title="Düzenle"
                         >
-                          <Edit3 size={13} />
+                          <Edit3 size={15} />
                         </Link>
 
                         {/* Delete */}
                         <button
                           onClick={() => deleteProduct(product.id)}
                           disabled={deletingId === product.id}
-                          className="rounded-lg p-2 text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive disabled:opacity-50"
+                          className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive disabled:opacity-50"
                           title="Sil"
                         >
                           {deletingId === product.id ? (
-                            <Loader2 size={13} className="animate-spin" />
+                            <Loader2 size={15} className="animate-spin" />
                           ) : (
-                            <Trash2 size={13} />
+                            <Trash2 size={15} />
                           )}
                         </button>
                       </div>
@@ -604,34 +604,34 @@ export default function AdminProductsPage() {
 
       {/* Pagination */}
       {totalPages > 1 && (
-        <div className="flex items-center justify-center gap-2">
+        <div className="flex flex-wrap items-center justify-center gap-2">
           <button
             onClick={() => setPage((p) => Math.max(1, p - 1))}
             disabled={page === 1 || loading}
-            className="flex items-center gap-1 rounded-lg border border-border px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted disabled:opacity-40"
+            className="flex h-10 items-center gap-1 rounded-lg border border-border px-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted disabled:opacity-40"
           >
             <ChevronLeft size={14} />
-            Önceki
+            <span className="hidden sm:inline">Önceki</span>
           </button>
 
           <div className="flex items-center gap-1">
-            {Array.from({ length: Math.min(7, totalPages) }, (_, i) => {
+            {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
               let p: number;
-              if (totalPages <= 7) {
+              if (totalPages <= 5) {
                 p = i + 1;
-              } else if (page <= 4) {
+              } else if (page <= 3) {
                 p = i + 1;
-              } else if (page >= totalPages - 3) {
-                p = totalPages - 6 + i;
+              } else if (page >= totalPages - 2) {
+                p = totalPages - 4 + i;
               } else {
-                p = page - 3 + i;
+                p = page - 2 + i;
               }
               return (
                 <button
                   key={p}
                   onClick={() => setPage(p)}
                   disabled={loading}
-                  className={`h-9 w-9 rounded-lg text-sm font-medium transition-colors ${
+                  className={`h-10 w-10 rounded-lg text-sm font-medium transition-colors ${
                     p === page
                       ? "bg-primary text-primary-foreground"
                       : "border border-border text-muted-foreground hover:bg-muted"
@@ -646,9 +646,9 @@ export default function AdminProductsPage() {
           <button
             onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
             disabled={page === totalPages || loading}
-            className="flex items-center gap-1 rounded-lg border border-border px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted disabled:opacity-40"
+            className="flex h-10 items-center gap-1 rounded-lg border border-border px-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted disabled:opacity-40"
           >
-            Sonraki
+            <span className="hidden sm:inline">Sonraki</span>
             <ChevronRight size={14} />
           </button>
         </div>

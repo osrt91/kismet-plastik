@@ -133,7 +133,7 @@ export default function Footer() {
           </div>
 
           {/* Navigation Columns */}
-          <div className="grid gap-8 sm:grid-cols-3 lg:col-span-5 lg:col-start-6">
+          <div className="grid gap-4 sm:gap-8 sm:grid-cols-3 lg:col-span-5 lg:col-start-6">
             {/* Products */}
             <div>
               <h3 className="mb-4 text-[11px] font-bold uppercase tracking-[0.15em] text-accent">

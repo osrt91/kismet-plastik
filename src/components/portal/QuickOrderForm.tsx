@@ -313,7 +313,7 @@ export default function QuickOrderForm() {
         <button
           type="button"
           onClick={() => setShowExcelModal(true)}
-          className="inline-flex items-center gap-2 rounded-xl border border-[#0A1628] bg-transparent px-4 py-2.5 text-sm font-semibold text-[#0A1628] transition-colors hover:bg-[#0A1628] hover:text-white dark:border-neutral-500 dark:text-neutral-300 dark:hover:bg-neutral-700"
+          className="inline-flex h-11 items-center gap-2 rounded-xl border border-[#0A1628] bg-transparent px-4 text-sm font-semibold text-[#0A1628] transition-colors hover:bg-[#0A1628] hover:text-white dark:border-neutral-500 dark:text-neutral-300 dark:hover:bg-neutral-700"
         >
           <FileSpreadsheet size={16} />
           {t.excelPaste}
@@ -323,8 +323,8 @@ export default function QuickOrderForm() {
       {/* Order table card */}
       <div className="rounded-xl border border-neutral-200 bg-white shadow-sm dark:border-neutral-700 dark:bg-neutral-800">
         {/* Desktop table */}
-        <div className="hidden lg:block">
-          <table className="w-full">
+        <div className="hidden overflow-x-auto lg:block">
+          <table className="w-full min-w-[700px]">
             <thead>
               <tr className="border-b border-neutral-100 text-left text-xs font-bold uppercase tracking-wider text-neutral-400">
                 <th className="px-4 py-3 w-[200px]">{t.productCode}</th>
@@ -440,10 +440,10 @@ export default function QuickOrderForm() {
                   <button
                     type="button"
                     onClick={() => removeRow(row.id)}
-                    className="rounded-lg p-1 text-neutral-400 hover:text-red-500"
+                    className="flex h-10 w-10 items-center justify-center rounded-lg text-neutral-400 hover:bg-red-50 hover:text-red-500"
                     title={t.removeRow}
                   >
-                    <X size={14} />
+                    <X size={16} />
                   </button>
                 )}
               </div>
@@ -461,7 +461,7 @@ export default function QuickOrderForm() {
                     }
                   }}
                   placeholder="pet-001"
-                  className="mt-1 w-full rounded-lg border border-neutral-200 px-3 py-2 text-sm text-[#0A1628] placeholder:text-neutral-300 focus:border-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400"
+                  className="mt-1 h-11 w-full rounded-lg border border-neutral-200 px-3 text-sm text-[#0A1628] placeholder:text-neutral-300 focus:border-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400"
                 />
                 {activeDropdown === row.id && filteredProducts.length > 0 && (
                   <div
@@ -473,7 +473,7 @@ export default function QuickOrderForm() {
                         key={product.id}
                         type="button"
                         onClick={() => selectProduct(row.id, product)}
-                        className="flex w-full items-center gap-3 px-3 py-2.5 text-left text-sm transition-colors hover:bg-amber-50"
+                        className="flex min-h-[44px] w-full items-center gap-3 px-3 py-2.5 text-left text-sm transition-colors hover:bg-amber-50"
                       >
                         <span className="font-mono text-xs text-neutral-400">{product.id}</span>
                         <span className="text-[#0A1628]">{product.name}</span>
@@ -501,7 +501,7 @@ export default function QuickOrderForm() {
                       updateRow(row.id, { quantity: parseInt(e.target.value, 10) || 0 })
                     }
                     placeholder="0"
-                    className="mt-1 w-full rounded-lg border border-neutral-200 px-3 py-2 font-mono text-sm text-[#0A1628] placeholder:text-neutral-300 focus:border-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400"
+                    className="mt-1 h-11 w-full rounded-lg border border-neutral-200 px-3 font-mono text-sm text-[#0A1628] placeholder:text-neutral-300 focus:border-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400"
                   />
                 </div>
                 <div>
@@ -526,7 +526,7 @@ export default function QuickOrderForm() {
           <button
             type="button"
             onClick={addRow}
-            className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-amber-600 transition-colors hover:bg-amber-50"
+            className="inline-flex h-11 items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium text-amber-600 transition-colors hover:bg-amber-50"
           >
             <Plus size={16} />
             {t.addRow}
@@ -535,7 +535,7 @@ export default function QuickOrderForm() {
       </div>
 
       {/* Summary */}
-      <div className="flex flex-col items-end">
+      <div className="flex flex-col sm:items-end">
         <div className="w-full rounded-xl border border-neutral-200 bg-white p-6 shadow-sm sm:w-[360px] dark:border-neutral-700 dark:bg-neutral-800">
           <div className="space-y-3">
             <div className="flex items-center justify-between text-sm">
@@ -564,7 +564,7 @@ export default function QuickOrderForm() {
             <button
               type="button"
               onClick={handleCreateOrder}
-              className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-amber-500 px-5 py-3 text-sm font-semibold text-[#0A1628] shadow-sm transition-all hover:bg-amber-400"
+              className="inline-flex h-11 flex-1 items-center justify-center gap-2 rounded-xl bg-amber-500 px-5 text-sm font-semibold text-[#0A1628] shadow-sm transition-all hover:bg-amber-400"
             >
               <ShoppingCart size={16} />
               {t.createOrder}
@@ -572,7 +572,7 @@ export default function QuickOrderForm() {
             <button
               type="button"
               onClick={handleRequestQuote}
-              className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl border border-[#0A1628] bg-transparent px-5 py-3 text-sm font-semibold text-[#0A1628] transition-all hover:bg-[#0A1628] hover:text-white"
+              className="inline-flex h-11 flex-1 items-center justify-center gap-2 rounded-xl border border-[#0A1628] bg-transparent px-5 text-sm font-semibold text-[#0A1628] transition-all hover:bg-[#0A1628] hover:text-white"
             >
               <FileText size={16} />
               {t.requestQuote}
@@ -583,8 +583,8 @@ export default function QuickOrderForm() {
 
       {/* Excel paste modal */}
       {showExcelModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
-          <div className="w-full max-w-lg rounded-2xl bg-white p-6 shadow-2xl">
+        <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 p-0 sm:items-center sm:p-4">
+          <div className="w-full max-h-[90dvh] overflow-y-auto rounded-t-2xl bg-white p-5 shadow-2xl sm:max-w-lg sm:rounded-2xl sm:p-6">
             <div className="mb-4 flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-100">
                 <ClipboardPaste size={20} className="text-amber-600" />
@@ -606,14 +606,14 @@ export default function QuickOrderForm() {
               autoFocus
             />
 
-            <div className="mt-4 flex justify-end gap-3">
+            <div className="mt-4 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
               <button
                 type="button"
                 onClick={() => {
                   setShowExcelModal(false);
                   setExcelText("");
                 }}
-                className="rounded-xl border border-neutral-200 px-5 py-2.5 text-sm font-medium text-neutral-600 transition-colors hover:bg-neutral-50"
+                className="h-11 rounded-xl border border-neutral-200 px-5 text-sm font-medium text-neutral-600 transition-colors hover:bg-neutral-50"
               >
                 {t.excelCancel}
               </button>
@@ -621,7 +621,7 @@ export default function QuickOrderForm() {
                 type="button"
                 onClick={handleExcelApply}
                 disabled={!excelText.trim()}
-                className="rounded-xl bg-amber-500 px-5 py-2.5 text-sm font-semibold text-[#0A1628] transition-colors hover:bg-amber-400 disabled:cursor-not-allowed disabled:opacity-50"
+                className="h-11 rounded-xl bg-amber-500 px-5 text-sm font-semibold text-[#0A1628] transition-colors hover:bg-amber-400 disabled:cursor-not-allowed disabled:opacity-50"
               >
                 {t.excelApply}
               </button>

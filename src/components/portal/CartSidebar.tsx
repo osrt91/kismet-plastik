@@ -164,7 +164,7 @@ export default function CartSidebar({
               return (
                 <div
                   key={item.stokKodu}
-                  className="group rounded-xl border border-neutral-200 bg-white p-4 transition-colors dark:border-neutral-700 dark:bg-neutral-800"
+                  className="group rounded-xl border border-neutral-200 bg-white p-3 transition-colors sm:p-4 dark:border-neutral-700 dark:bg-neutral-800"
                 >
                   {/* Product info */}
                   <div className="flex items-start justify-between gap-3">
@@ -195,11 +195,11 @@ export default function CartSidebar({
                           onUpdateQuantity(item.stokKodu, Math.max(1, item.miktar - 1))
                         }
                         disabled={item.miktar <= 1}
-                        className="flex h-8 w-8 items-center justify-center rounded-lg border border-neutral-200 text-neutral-500 transition-colors hover:bg-neutral-50 disabled:cursor-not-allowed disabled:opacity-40 dark:border-neutral-600 dark:text-neutral-400 dark:hover:bg-neutral-700"
+                        className="flex h-9 w-9 items-center justify-center rounded-lg border border-neutral-200 text-neutral-500 transition-colors hover:bg-neutral-50 disabled:cursor-not-allowed disabled:opacity-40 dark:border-neutral-600 dark:text-neutral-400 dark:hover:bg-neutral-700"
                       >
                         <Minus size={14} />
                       </button>
-                      <span className="flex h-8 min-w-[3rem] items-center justify-center font-mono text-sm font-medium text-[#0A1628] dark:text-white">
+                      <span className="flex h-9 min-w-[2.5rem] items-center justify-center font-mono text-sm font-medium text-[#0A1628] dark:text-white">
                         {item.miktar}
                       </span>
                       <button
@@ -207,7 +207,7 @@ export default function CartSidebar({
                         onClick={() =>
                           onUpdateQuantity(item.stokKodu, item.miktar + 1)
                         }
-                        className="flex h-8 w-8 items-center justify-center rounded-lg border border-neutral-200 text-neutral-500 transition-colors hover:bg-neutral-50 dark:border-neutral-600 dark:text-neutral-400 dark:hover:bg-neutral-700"
+                        className="flex h-9 w-9 items-center justify-center rounded-lg border border-neutral-200 text-neutral-500 transition-colors hover:bg-neutral-50 dark:border-neutral-600 dark:text-neutral-400 dark:hover:bg-neutral-700"
                       >
                         <Plus size={14} />
                       </button>
@@ -260,11 +260,11 @@ export default function CartSidebar({
           </div>
 
           {/* CTA buttons */}
-          <div className="mt-4 flex w-full flex-col gap-2 sm:flex-row">
+          <div className="mt-4 flex w-full flex-col gap-3 sm:flex-row sm:gap-2">
             <button
               type="button"
               onClick={onCheckout}
-              className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-amber-500 px-5 py-3 text-sm font-semibold text-[#0A1628] shadow-sm transition-all hover:bg-amber-400 active:scale-[0.98]"
+              className="inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-xl bg-amber-500 px-4 py-3 text-sm font-semibold text-[#0A1628] shadow-sm transition-all hover:bg-amber-400 active:scale-[0.98]"
             >
               <ShoppingCart size={16} />
               {t.checkout}
@@ -272,7 +272,7 @@ export default function CartSidebar({
             <button
               type="button"
               onClick={onRequestQuote}
-              className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl border border-[#0A1628] bg-transparent px-5 py-3 text-sm font-semibold text-[#0A1628] transition-all hover:bg-[#0A1628] hover:text-white dark:border-neutral-500 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:hover:text-white"
+              className="inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-xl border border-[#0A1628] bg-transparent px-4 py-3 text-sm font-semibold text-[#0A1628] transition-all hover:bg-[#0A1628] hover:text-white dark:border-neutral-500 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:hover:text-white"
             >
               {t.requestQuote}
             </button>

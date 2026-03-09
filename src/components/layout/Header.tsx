@@ -406,7 +406,7 @@ export default function Header() {
 
       {/* Mobile Menu */}
       <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
-        <SheetContent side="right" className="w-[85%] max-w-sm overflow-y-auto p-0 [&>div]:duration-500 [&>div]:ease-out">
+        <SheetContent side="right" className="w-[90%] max-w-sm overflow-y-auto p-0 [&>div]:duration-500 [&>div]:ease-out">
           <SheetHeader className="border-b border-border px-5 py-4">
             <SheetTitle className="flex items-center justify-between">
               <div className="flex items-center gap-2">
@@ -440,7 +440,7 @@ export default function Header() {
                   <>
                     <button
                       onClick={() => toggleMobileSection(item.name)}
-                      className="flex w-full items-center justify-between py-4 text-[15px] font-medium text-foreground transition-colors duration-200 hover:text-amber-600"
+                      className="flex w-full items-center justify-between py-4 text-[15px] font-medium text-foreground transition-colors duration-200 hover:text-amber-600 min-h-10"
                     >
                       {item.name}
                       <ChevronRight
@@ -457,7 +457,7 @@ export default function Header() {
                       <div className="ml-2 space-y-0.5 border-l-2 border-amber-400/50 pl-4">
                         {item.children.map((child) => (
                           <SheetClose key={child.href + child.name} asChild>
-                            <Link href={child.href} className={clsx("block rounded-md px-2 py-2.5 text-sm transition-colors duration-200 hover:bg-amber-500/[0.06] hover:text-foreground", isActive(child.href) ? "font-medium text-amber-600" : "text-muted-foreground")}>
+                            <Link href={child.href} className={clsx("block rounded-md px-2 py-2.5 text-sm transition-colors duration-200 hover:bg-amber-500/[0.06] hover:text-foreground min-h-10 flex items-center", isActive(child.href) ? "font-medium text-amber-600" : "text-muted-foreground")}>
                               {child.name}
                             </Link>
                           </SheetClose>
@@ -467,7 +467,7 @@ export default function Header() {
                   </>
                 ) : (
                   <SheetClose asChild>
-                    <Link href={item.href} className={clsx("block py-4 text-[15px] font-medium transition-colors duration-200 hover:text-amber-600", isActive(item.href) ? "text-amber-600" : "text-foreground")}>
+                    <Link href={item.href} className={clsx("block py-4 text-[15px] font-medium transition-colors duration-200 hover:text-amber-600 min-h-10", isActive(item.href) ? "text-amber-600" : "text-foreground")}>
                       {item.name}
                       {isActive(item.href) && <span className="ml-2 inline-block h-1.5 w-1.5 rounded-full bg-amber-500" />}
                     </Link>

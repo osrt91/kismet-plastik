@@ -104,14 +104,14 @@ export default function Sidebar({ mobileOpen, onMobileClose }: SidebarProps) {
       {/* Mobile overlay */}
       {mobileOpen && (
         <div
-          className="fixed inset-0 z-40 bg-black/50 lg:hidden"
+          className="fixed inset-0 z-[45] bg-black/50 lg:hidden"
           onClick={onMobileClose}
         />
       )}
 
       {/* Sidebar */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 flex flex-col bg-[#0A1628] transition-all duration-300 lg:static lg:translate-x-0 ${
+        className={`fixed inset-y-0 left-0 z-[55] flex flex-col bg-[#0A1628] transition-all duration-300 lg:static lg:translate-x-0 ${
           mobileOpen ? "translate-x-0" : "-translate-x-full"
         } ${collapsed ? "w-16" : "w-60"}`}
       >
@@ -152,7 +152,7 @@ export default function Sidebar({ mobileOpen, onMobileClose }: SidebarProps) {
                 return (
                   <div
                     key={item.key}
-                    className={`group relative flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-neutral-600 cursor-not-allowed ${
+                    className={`group relative flex min-h-10 items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-neutral-600 cursor-not-allowed ${
                       collapsed ? "justify-center" : ""
                     }`}
                     title={collapsed ? `${t[item.key]} (${t.comingSoon})` : undefined}
@@ -174,7 +174,7 @@ export default function Sidebar({ mobileOpen, onMobileClose }: SidebarProps) {
                 <Link
                   key={item.key}
                   href={item.href}
-                  className={`group relative flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all ${
+                  className={`group relative flex min-h-10 items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all ${
                     collapsed ? "justify-center" : ""
                   } ${
                     active
@@ -212,7 +212,7 @@ export default function Sidebar({ mobileOpen, onMobileClose }: SidebarProps) {
           {/* Logout */}
           <button
             onClick={handleLogout}
-            className={`flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-red-400 transition-colors hover:bg-red-500/10 hover:text-red-300 ${
+            className={`flex min-h-10 w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-red-400 transition-colors hover:bg-red-500/10 hover:text-red-300 ${
               collapsed ? "justify-center" : ""
             }`}
             title={collapsed ? t.logout : undefined}

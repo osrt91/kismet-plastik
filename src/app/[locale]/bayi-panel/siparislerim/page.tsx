@@ -236,7 +236,8 @@ export default function SiparislerimPage() {
       {!loading && !error && orders.length > 0 && (
         <>
           <div className="hidden overflow-hidden rounded-lg border border-neutral-200 bg-white shadow-sm md:block dark:border-neutral-700 dark:bg-neutral-800">
-            <table className="w-full">
+            <div className="overflow-x-auto">
+            <table className="min-w-full">
               <thead>
                 <tr className="border-b border-neutral-100 bg-neutral-50">
                   <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-neutral-500">
@@ -287,7 +288,7 @@ export default function SiparislerimPage() {
                       <div className="flex items-center justify-center gap-2">
                         <LocaleLink
                           href={`/bayi-panel/siparislerim/${order.id}`}
-                          className="inline-flex items-center gap-1.5 rounded-lg border border-neutral-200 bg-white px-3 py-1.5 text-xs font-medium text-neutral-700 transition-colors hover:bg-neutral-50"
+                          className="inline-flex h-10 items-center gap-1.5 rounded-lg border border-neutral-200 bg-white px-3 text-xs font-medium text-neutral-700 transition-colors hover:bg-neutral-50"
                         >
                           <Eye size={14} />
                           {t.detail}
@@ -295,7 +296,7 @@ export default function SiparislerimPage() {
                         {order.status === "delivered" && (
                           <LocaleLink
                             href="/bayi-panel/urunler"
-                            className="inline-flex items-center gap-1.5 rounded-lg bg-amber-500 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-amber-600"
+                            className="inline-flex h-10 items-center gap-1.5 rounded-lg bg-amber-500 px-3 text-xs font-medium text-white transition-colors hover:bg-amber-600"
                           >
                             <RotateCcw size={14} />
                             {t.reorder}
@@ -307,6 +308,7 @@ export default function SiparislerimPage() {
                 ))}
               </tbody>
             </table>
+            </div>
           </div>
 
           {/* Mobile cards */}
@@ -336,14 +338,14 @@ export default function SiparislerimPage() {
                     {order.status === "delivered" && (
                       <LocaleLink
                         href="/bayi-panel/urunler"
-                        className="inline-flex items-center gap-1 rounded-lg bg-amber-500 px-2.5 py-1.5 text-xs font-medium text-white hover:bg-amber-600"
+                        className="inline-flex h-10 items-center gap-1 rounded-lg bg-amber-500 px-2.5 text-xs font-medium text-white hover:bg-amber-600"
                       >
                         <RotateCcw size={12} />
                       </LocaleLink>
                     )}
                     <LocaleLink
                       href={`/bayi-panel/siparislerim/${order.id}`}
-                      className="flex items-center gap-1 text-xs font-medium text-[#0A1628]"
+                      className="flex h-10 items-center gap-1 text-xs font-medium text-[#0A1628]"
                     >
                       {t.detail}
                       <ChevronRight size={14} />

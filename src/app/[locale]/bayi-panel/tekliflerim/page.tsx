@@ -348,7 +348,8 @@ export default function TekliflerimPage() {
       {!loading && !error && quotes.length > 0 && (
         <>
           <div className="hidden overflow-hidden rounded-lg border border-neutral-200 bg-white shadow-sm md:block dark:border-neutral-700 dark:bg-neutral-800">
-            <table className="w-full">
+            <div className="overflow-x-auto">
+            <table className="min-w-full">
               <thead>
                 <tr className="border-b border-neutral-100 bg-neutral-50 dark:border-neutral-700 dark:bg-neutral-900">
                   <th className="w-8 px-4 py-3" />
@@ -420,7 +421,8 @@ export default function TekliflerimPage() {
                                   {t.requestedProducts}
                                 </h4>
                                 <div className="mt-2 overflow-hidden rounded-md border border-neutral-200 bg-white dark:border-neutral-700 dark:bg-neutral-800">
-                                  <table className="w-full text-sm">
+                                  <div className="overflow-x-auto">
+                                  <table className="min-w-full text-sm">
                                     <thead>
                                       <tr className="border-b border-neutral-100 bg-neutral-50 dark:border-neutral-700 dark:bg-neutral-900">
                                         <th className="px-3 py-2 text-left text-xs font-medium text-neutral-500">
@@ -462,6 +464,7 @@ export default function TekliflerimPage() {
                                       ))}
                                     </tbody>
                                   </table>
+                                  </div>
                                 </div>
                               </div>
                             )}
@@ -520,6 +523,7 @@ export default function TekliflerimPage() {
                 ))}
               </tbody>
             </table>
+            </div>
           </div>
 
           {/* Mobile cards */}

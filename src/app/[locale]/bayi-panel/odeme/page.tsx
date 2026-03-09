@@ -12,6 +12,7 @@ import {
   Lock,
   AlertTriangle,
 } from "lucide-react";
+import { useLocale } from "@/contexts/LocaleContext";
 
 interface ErsInvoice {
   belgeno: string;
@@ -22,10 +23,80 @@ interface ErsInvoice {
   _key: string;
 }
 
+const labels: Record<string, Record<string, string>> = {
+  tr: {
+    title: "ERS Fatura Odeme",
+    subtitle: "Resmi faturalarinizi kredi karti ile online odeyebilirsiniz.",
+    paymentSuccess: "Odeme Basarili",
+    paymentSuccessDesc: "Odemeniz basariyla alindi.",
+    transactionNo: "Islem no",
+    backToPanel: "Panele Don",
+    paymentFailed: "Odeme Basarisiz",
+    paymentFailedDefault: "Odeme islenirken bir hata olustu.",
+    retry: "Tekrar Dene",
+    configWarningTitle: "Online odeme sistemi yapilandirma asamasindadir.",
+    configWarningDesc:
+      "Halkbank sanal POS entegrasyonu tamamlandiktan sonra bu sayfa aktif olacaktir.",
+    invoiceSelection: "Fatura Secimi",
+    noInvoices: "Odenmemis ERS faturaniz bulunmuyor.",
+    invoicesSelected: "fatura secili",
+    cardInfo: "Kart Bilgileri",
+    cardHolderName: "Kart Uzerindeki Isim",
+    cardHolderPlaceholder: "AD SOYAD",
+    cardNumber: "Kart Numarasi",
+    cardNumberPlaceholder: "0000 0000 0000 0000",
+    month: "Ay",
+    year: "Yil",
+    cvv: "CVV",
+    payAmount: "Ode",
+    selectInvoice: "Fatura Secin",
+    securePayment: "3D Secure ile guvenli odeme. Kart bilgileriniz sunucularimizda saklanmaz.",
+    errorSelectInvoice: "Lutfen en az bir fatura secin.",
+    errorInvalidCard: "Gecersiz kart numarasi.",
+    errorPaymentInit: "Odeme baslatilamadi.",
+    errorConnection: "Sunucuya baglanilamadi.",
+  },
+  en: {
+    title: "ERS Invoice Payment",
+    subtitle: "Pay your official invoices online by credit card.",
+    paymentSuccess: "Payment Successful",
+    paymentSuccessDesc: "Your payment has been received successfully.",
+    transactionNo: "Transaction no",
+    backToPanel: "Back to Panel",
+    paymentFailed: "Payment Failed",
+    paymentFailedDefault: "An error occurred while processing the payment.",
+    retry: "Try Again",
+    configWarningTitle: "Online payment system is being configured.",
+    configWarningDesc:
+      "This page will be active after Halkbank virtual POS integration is completed.",
+    invoiceSelection: "Invoice Selection",
+    noInvoices: "You have no unpaid ERS invoices.",
+    invoicesSelected: "invoices selected",
+    cardInfo: "Card Information",
+    cardHolderName: "Cardholder Name",
+    cardHolderPlaceholder: "FULL NAME",
+    cardNumber: "Card Number",
+    cardNumberPlaceholder: "0000 0000 0000 0000",
+    month: "Month",
+    year: "Year",
+    cvv: "CVV",
+    payAmount: "Pay",
+    selectInvoice: "Select Invoice",
+    securePayment: "Secure payment with 3D Secure. Your card information is not stored on our servers.",
+    errorSelectInvoice: "Please select at least one invoice.",
+    errorInvalidCard: "Invalid card number.",
+    errorPaymentInit: "Could not initiate payment.",
+    errorConnection: "Could not connect to server.",
+  },
+};
+
 export default function PaymentPage() {
+  const { locale } = useLocale();
+  const t = labels[locale] || labels.tr;
+
   const searchParams = useSearchParams();
   const status = searchParams.get("status");
-  const errorMsg = searchParams.get("message");
+  const errorParam = searchParams.get("message");
   const orderId = searchParams.get("order");
 
   const [invoices, setInvoices] = useState<ErsInvoice[]>([]);
@@ -66,15 +137,16 @@ export default function PaymentPage() {
         <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500/10">
           <CheckCircle2 size={32} className="text-emerald-500" />
         </div>
-        <h1 className="text-xl font-bold text-foreground">Odeme Basarili</h1>
+        <h1 className="text-xl font-bold text-foreground">{t.paymentSuccess}</h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          Odemeniz basariyla alindi.{orderId && ` Islem no: ${orderId}`}
+          {t.paymentSuccessDesc}
+          {orderId && ` ${t.transactionNo}: ${orderId}`}
         </p>
         <Link
           href="/bayi-panel"
           className="mt-6 inline-block rounded-lg bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground hover:bg-primary/90"
         >
-          Panele Don
+          {t.backToPanel}
         </Link>
       </div>
     );
@@ -86,15 +158,15 @@ export default function PaymentPage() {
         <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-destructive/10">
           <XCircle size={32} className="text-destructive" />
         </div>
-        <h1 className="text-xl font-bold text-foreground">Odeme Basarisiz</h1>
+        <h1 className="text-xl font-bold text-foreground">{t.paymentFailed}</h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          {errorMsg ?? "Odeme islenirken bir hata olustu."}
+          {errorParam ?? t.paymentFailedDefault}
         </p>
         <Link
           href="/bayi-panel/odeme"
           className="mt-6 inline-block rounded-lg bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground hover:bg-primary/90"
         >
-          Tekrar Dene
+          {t.retry}
         </Link>
       </div>
     );
@@ -123,13 +195,13 @@ export default function PaymentPage() {
     setFormError(null);
 
     if (selectedIds.size === 0) {
-      setFormError("Lutfen en az bir fatura secin.");
+      setFormError(t.errorSelectInvoice);
       return;
     }
 
     const cleanCard = cardNumber.replace(/\s/g, "");
     if (cleanCard.length < 15 || cleanCard.length > 16) {
-      setFormError("Gecersiz kart numarasi.");
+      setFormError(t.errorInvalidCard);
       return;
     }
 
@@ -160,22 +232,22 @@ export default function PaymentPage() {
         document.close();
       } else {
         const json = await res.json();
-        setFormError(json.error ?? "Odeme baslatilamadi.");
+        setFormError(json.error ?? t.errorPaymentInit);
       }
     } catch {
-      setFormError("Sunucuya baglanılamadı.");
+      setFormError(t.errorConnection);
     } finally {
       setSubmitting(false);
     }
   };
 
+  const currencyLocale = locale === "en" ? "en-US" : "tr-TR";
+
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-foreground">ERS Fatura Odeme</h1>
-        <p className="mt-1 text-sm text-muted-foreground">
-          Resmi faturalarinizi kredi karti ile online odeyebilirsiniz.
-        </p>
+        <h1 className="text-2xl font-bold text-foreground">{t.title}</h1>
+        <p className="mt-1 text-sm text-muted-foreground">{t.subtitle}</p>
       </div>
 
       {/* Not configured warning */}
@@ -183,11 +255,9 @@ export default function PaymentPage() {
         <AlertTriangle size={18} className="mt-0.5 shrink-0 text-amber-500" />
         <div className="text-sm">
           <p className="font-medium text-amber-700 dark:text-amber-400">
-            Online odeme sistemi yapilandirma asamasindadir.
+            {t.configWarningTitle}
           </p>
-          <p className="mt-1 text-muted-foreground">
-            Halkbank sanal POS entegrasyonu tamamlandiktan sonra bu sayfa aktif olacaktir.
-          </p>
+          <p className="mt-1 text-muted-foreground">{t.configWarningDesc}</p>
         </div>
       </div>
 
@@ -200,13 +270,13 @@ export default function PaymentPage() {
           {/* Invoice selection */}
           <div className="lg:col-span-3 space-y-4">
             <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
-              Fatura Secimi
+              {t.invoiceSelection}
             </h2>
 
             {invoices.length === 0 ? (
               <div className="flex flex-col items-center py-12 text-muted-foreground">
                 <FileText size={36} className="mb-3 opacity-20" />
-                <p className="text-sm">Odenmemis ERS faturaniz bulunmuyor.</p>
+                <p className="text-sm">{t.noInvoices}</p>
               </div>
             ) : (
               <div className="space-y-2">
@@ -237,7 +307,7 @@ export default function PaymentPage() {
                         </div>
                       </div>
                       <span className="font-mono text-sm font-bold tabular-nums">
-                        {kalan.toLocaleString("tr-TR", { minimumFractionDigits: 2 })} TL
+                        {kalan.toLocaleString(currencyLocale, { minimumFractionDigits: 2 })} TL
                       </span>
                     </label>
                   );
@@ -248,10 +318,10 @@ export default function PaymentPage() {
             {selectedIds.size > 0 && (
               <div className="flex items-center justify-between rounded-xl border border-primary/30 bg-primary/5 p-4">
                 <span className="text-sm font-medium text-foreground">
-                  {selectedIds.size} fatura secili
+                  {selectedIds.size} {t.invoicesSelected}
                 </span>
                 <span className="font-mono text-lg font-bold text-primary tabular-nums">
-                  {selectedTotal.toLocaleString("tr-TR", { minimumFractionDigits: 2 })} TL
+                  {selectedTotal.toLocaleString(currencyLocale, { minimumFractionDigits: 2 })} TL
                 </span>
               </div>
             )}
@@ -262,7 +332,7 @@ export default function PaymentPage() {
             <div className="sticky top-6 rounded-xl border border-border bg-card p-6 shadow-sm">
               <div className="mb-4 flex items-center gap-2">
                 <CreditCard size={18} className="text-primary" />
-                <h2 className="text-sm font-semibold text-foreground">Kart Bilgileri</h2>
+                <h2 className="text-sm font-semibold text-foreground">{t.cardInfo}</h2>
                 <Lock size={12} className="ml-auto text-muted-foreground" />
               </div>
 
@@ -275,12 +345,12 @@ export default function PaymentPage() {
 
                 <div>
                   <label className="mb-1.5 block text-xs font-medium text-muted-foreground">
-                    Kart Uzerindeki Isim
+                    {t.cardHolderName}
                   </label>
                   <input
                     value={cardHolder}
                     onChange={(e) => setCardHolder(e.target.value.toUpperCase())}
-                    placeholder="AD SOYAD"
+                    placeholder={t.cardHolderPlaceholder}
                     required
                     className="w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm uppercase outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
                   />
@@ -288,12 +358,12 @@ export default function PaymentPage() {
 
                 <div>
                   <label className="mb-1.5 block text-xs font-medium text-muted-foreground">
-                    Kart Numarasi
+                    {t.cardNumber}
                   </label>
                   <input
                     value={cardNumber}
                     onChange={(e) => setCardNumber(formatCard(e.target.value))}
-                    placeholder="0000 0000 0000 0000"
+                    placeholder={t.cardNumberPlaceholder}
                     required
                     maxLength={19}
                     className="w-full rounded-lg border border-border bg-background px-3 py-2.5 font-mono text-sm tracking-wider outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
@@ -302,7 +372,9 @@ export default function PaymentPage() {
 
                 <div className="grid grid-cols-3 gap-3">
                   <div>
-                    <label className="mb-1.5 block text-xs font-medium text-muted-foreground">Ay</label>
+                    <label className="mb-1.5 block text-xs font-medium text-muted-foreground">
+                      {t.month}
+                    </label>
                     <select
                       value={expMonth}
                       onChange={(e) => setExpMonth(e.target.value)}
@@ -321,7 +393,9 @@ export default function PaymentPage() {
                     </select>
                   </div>
                   <div>
-                    <label className="mb-1.5 block text-xs font-medium text-muted-foreground">Yil</label>
+                    <label className="mb-1.5 block text-xs font-medium text-muted-foreground">
+                      {t.year}
+                    </label>
                     <select
                       value={expYear}
                       onChange={(e) => setExpYear(e.target.value)}
@@ -340,7 +414,9 @@ export default function PaymentPage() {
                     </select>
                   </div>
                   <div>
-                    <label className="mb-1.5 block text-xs font-medium text-muted-foreground">CVV</label>
+                    <label className="mb-1.5 block text-xs font-medium text-muted-foreground">
+                      {t.cvv}
+                    </label>
                     <input
                       value={cvv}
                       onChange={(e) => setCvv(e.target.value.replace(/\D/g, "").slice(0, 4))}
@@ -363,12 +439,12 @@ export default function PaymentPage() {
                     <Lock size={14} />
                   )}
                   {selectedIds.size > 0
-                    ? `${selectedTotal.toLocaleString("tr-TR", { minimumFractionDigits: 2 })} TL Ode`
-                    : "Fatura Secin"}
+                    ? `${selectedTotal.toLocaleString(currencyLocale, { minimumFractionDigits: 2 })} TL ${t.payAmount}`
+                    : t.selectInvoice}
                 </button>
 
                 <p className="text-center text-[11px] text-muted-foreground">
-                  3D Secure ile guvenli odeme. Kart bilgileriniz sunucularimizda saklanmaz.
+                  {t.securePayment}
                 </p>
               </form>
             </div>

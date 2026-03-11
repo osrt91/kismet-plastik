@@ -51,32 +51,32 @@ function getUnitPrice(p: Product): number {
 
 const labels: Record<string, Record<string, string>> = {
   tr: {
-    title: "Urun Katalogu",
-    search: "Urun adi veya kodu ara...",
-    allCategories: "Tum Kategoriler",
-    sortLabel: "Siralama",
+    title: "Ürün Kataloğu",
+    search: "Ürün adı veya kodu ara...",
+    allCategories: "Tüm Kategoriler",
+    sortLabel: "Sıralama",
     sortAZ: "A-Z",
     sortZA: "Z-A",
     addToCart: "Sepete Ekle",
-    minOrder: "Min. Siparis",
+    minOrder: "Min. Sipariş",
     pcs: "adet",
     cart: "Sepet",
-    cartItems: "urun",
+    cartItems: "ürün",
     total: "Toplam",
-    viewCart: "Sepeti Gor",
+    viewCart: "Sepeti Gör",
     clearCart: "Temizle",
     added: "Sepete eklendi",
-    removed: "Urun sepetten cikarildi",
-    emptyState: "Aradiginiz kriterlere uygun urun bulunamadi.",
+    removed: "Ürün sepetten çıkarıldı",
+    emptyState: "Aradığınız kriterlere uygun ürün bulunamadı.",
     unitPrice: "Birim Fiyat",
     quantity: "Adet",
     material: "Hammadde",
     volume: "Hacim",
-    cartEmpty: "Sepetiniz bos",
-    cartSummary: "Sepet Ozeti",
-    productName: "Urun",
+    cartEmpty: "Sepetiniz boş",
+    cartSummary: "Sepet Özeti",
+    productName: "Ürün",
     subtotal: "Ara Toplam",
-    goToQuote: "Teklif Iste",
+    goToQuote: "Teklif İste",
     close: "Kapat",
   },
   en: {
@@ -114,7 +114,7 @@ type SortMode = "az" | "za";
 
 export default function UrunlerPage() {
   const { locale } = useLocale();
-  const t = labels[locale] || labels.tr;
+  const t = labels[locale] || labels.en || labels.tr;
 
   const [search, setSearch] = useState("");
   const [selectedCategories, setSelectedCategories] = useState<Set<CategorySlug>>(new Set());

@@ -32,35 +32,35 @@ interface ProfileForm {
 const labels: Record<string, Record<string, string>> = {
   tr: {
     title: "Profilim",
-    subtitle: "Hesap bilgilerinizi goruntuleyin ve duzenleyin.",
-    personalInfo: "Kisisel Bilgiler",
+    subtitle: "Hesap bilgilerinizi görüntüleyin ve düzenleyin.",
+    personalInfo: "Kişisel Bilgiler",
     companyInfo: "Firma Bilgileri",
     addressInfo: "Adres Bilgileri",
     fullName: "Ad Soyad",
     email: "E-posta",
     phone: "Telefon",
-    companyName: "Firma Adi",
-    taxNumber: "Vergi Numarasi",
+    companyName: "Firma Adı",
+    taxNumber: "Vergi Numarası",
     taxOffice: "Vergi Dairesi",
     companyAddress: "Firma Adresi",
-    city: "Il",
-    district: "Ilce",
-    save: "Degisiklikleri Kaydet",
+    city: "İl",
+    district: "İlçe",
+    save: "Değişiklikleri Kaydet",
     saving: "Kaydediliyor...",
-    saveSuccess: "Bilgileriniz basariyla guncellendi.",
-    saveError: "Bilgiler guncellenirken bir hata olustu.",
-    loading: "Yukleniyor...",
-    emailHint: "E-posta adresi degistirilemez.",
+    saveSuccess: "Bilgileriniz başarıyla güncellendi.",
+    saveError: "Bilgiler güncellenirken bir hata oluştu.",
+    loading: "Yükleniyor...",
+    emailHint: "E-posta adresi değiştirilemez.",
     phonePlaceholder: "05XX XXX XX XX",
-    cityPlaceholder: "Ornegin: Istanbul",
-    districtPlaceholder: "Ornegin: Beylikduzu",
+    cityPlaceholder: "Örneğin: İstanbul",
+    districtPlaceholder: "Örneğin: Beylikdüzü",
     role: "Hesap Tipi",
     dealer: "Bayi",
-    customer: "Musteri",
-    admin: "Yonetici",
-    memberSince: "Uyelik Tarihi",
+    customer: "Müşteri",
+    admin: "Yönetici",
+    memberSince: "Üyelik Tarihi",
     approvalStatus: "Onay Durumu",
-    approved: "Onaylanmis",
+    approved: "Onaylanmış",
     pendingApproval: "Onay Bekliyor",
   },
   en: {
@@ -100,7 +100,7 @@ const labels: Record<string, Record<string, string>> = {
 
 export default function ProfilimPage() {
   const { locale } = useLocale();
-  const t = labels[locale] || labels.tr;
+  const t = labels[locale] || labels.en || labels.tr;
 
   const [form, setForm] = useState<ProfileForm>({
     full_name: "",

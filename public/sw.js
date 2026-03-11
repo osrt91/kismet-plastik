@@ -19,7 +19,9 @@ const CACHE_STRATEGIES = {
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) =>
-      cache.addAll(STATIC_ASSETS).catch(() => {})
+      cache.addAll(STATIC_ASSETS).catch((err) => {
+        console.warn("[SW] Failed to cache static assets:", err);
+      })
     )
   );
   self.skipWaiting();

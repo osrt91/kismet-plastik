@@ -30,29 +30,29 @@ interface Invoice {
 
 const labels: Record<string, Record<string, string>> = {
   tr: {
-    title: "Faturalarim",
+    title: "Faturalarım",
     invoiceNo: "Fatura No",
     date: "Tarih",
     dueDate: "Vade Tarihi",
-    orderNo: "Siparis No",
+    orderNo: "Sipariş No",
     amount: "Tutar",
     status: "Durum",
-    actions: "Islemler",
-    download: "PDF Indir",
-    empty: "Henuz faturaniz bulunmuyor.",
-    loading: "Yukleniyor...",
+    actions: "İşlemler",
+    download: "PDF İndir",
+    empty: "Henüz faturanız bulunmuyor.",
+    loading: "Yükleniyor...",
     filter: "Filtrele",
-    allStatuses: "Tum Durumlar",
-    from: "Baslangic",
-    to: "Bitis",
+    allStatuses: "Tüm Durumlar",
+    from: "Başlangıç",
+    to: "Bitiş",
     clearFilters: "Filtreleri Temizle",
     draft: "Taslak",
     issued: "Kesildi",
-    paid: "Odendi",
-    cancelled: "Iptal",
-    totalDebt: "Toplam Borc",
-    overdueAmount: "Gecikmis Tutar",
-    paidAmount: "Odenen Tutar",
+    paid: "Ödendi",
+    cancelled: "İptal",
+    totalDebt: "Toplam Borç",
+    overdueAmount: "Gecikmiş Tutar",
+    paidAmount: "Ödenen Tutar",
     totalInvoices: "Toplam Fatura",
   },
   en: {
@@ -113,7 +113,7 @@ function isOverdue(invoice: Invoice): boolean {
 
 export default function FaturalarimPage() {
   const { locale } = useLocale();
-  const t = labels[locale] || labels.tr;
+  const t = labels[locale] || labels.en || labels.tr;
 
   const [invoices, setInvoices] = useState<Invoice[]>([]);
   const [loading, setLoading] = useState(true);
@@ -332,20 +332,20 @@ export default function FaturalarimPage() {
             className="inline-flex items-center gap-2 rounded-xl border border-primary-200 bg-primary-50 px-5 py-3 text-sm font-semibold text-primary-900 transition-colors hover:bg-primary-100 dark:border-primary-800 dark:bg-primary-900/20 dark:text-primary-300 dark:hover:bg-primary-900/30"
           >
             <CreditCard size={18} />
-            {locale === "tr" ? "Online Odeme Yap (ERS)" : "Pay Online (ERS)"}
+            {locale === "tr" ? "Online Ödeme Yap (ERS)" : "Pay Online (ERS)"}
           </a>
 
           {/* EGR WhatsApp Payment Request */}
           <a
             href={`https://wa.me/905322117475?text=${encodeURIComponent(
-              `EGR Odeme Talebi\nBorc Tutari: ${formatAmount(summary.totalDebt)}\n\nOdeme yapmak istiyorum.`
+              `EGR Ödeme Talebi\nBorç Tutarı: ${formatAmount(summary.totalDebt)}\n\nÖdeme yapmak istiyorum.`
             )}`}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-xl border border-emerald-200 bg-emerald-50 px-5 py-3 text-sm font-semibold text-emerald-800 transition-colors hover:bg-emerald-100 dark:border-emerald-800 dark:bg-emerald-900/20 dark:text-emerald-300 dark:hover:bg-emerald-900/30"
           >
             <MessageCircle size={18} />
-            {locale === "tr" ? "EGR Odeme Talebi (WhatsApp)" : "EGR Payment Request (WhatsApp)"}
+            {locale === "tr" ? "EGR Ödeme Talebi (WhatsApp)" : "EGR Payment Request (WhatsApp)"}
           </a>
         </div>
       )}

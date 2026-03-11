@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "@/components/ui/LocaleLink";
 import {
   Phone,
@@ -88,10 +89,11 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-4">
             <Link href="/" className="mb-5 inline-flex items-center gap-2.5">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src="/images/logo2.svg"
                 alt="Kısmet Plastik"
+                width={40}
+                height={40}
                 className="h-10 w-10 rounded-lg bg-white/10 p-1 brightness-0 invert"
               />
               <span className="text-lg font-bold tracking-tight">

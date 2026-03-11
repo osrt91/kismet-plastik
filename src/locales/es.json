@@ -21,7 +21,8 @@
     "sampleRequest": "Solicitar muestras",
     "allProducts": "Ver todos los productos",
     "glossary": "Glosario de envases",
-    "customMolding": "Moldeo personalizado"
+    "customMolding": "Moldeo personalizado",
+    "dealerPayment": "Pago distribuidor"
   },
   "home": {
     "badge": "Soluciones B2B de envases cosméticos",
@@ -95,15 +96,15 @@
     "highCapacityDesc": "Atendemos pedidos a gran escala con una capacidad de producción mensual de millones de unidades.",
     "support": "Atención al cliente 24/7",
     "supportDesc": "Nuestro equipo de expertos le acompaña en cada etapa, antes y después de la venta.",
-    "processStep1Title": "Raw Material Selection",
-    "processStep1Desc": "We carefully select the highest quality PET, HDPE, and PP raw materials.",
-    "processStep2Title": "Production",
-    "processStep2Desc": "High-capacity precision manufacturing with state-of-the-art machines.",
-    "processStep3Title": "Quality Control",
-    "processStep3Desc": "Quality guaranteed through ISO 9001, ISO 22000 and FSSC 22000 standards.",
-    "processStep4Title": "Delivery",
-    "processStep4Desc": "On-time delivery with our fast and secure logistics network.",
-    "processPhotoPlaceholder": "Photo Coming Soon"
+    "processStep1Title": "Selección de Materias Primas",
+    "processStep1Desc": "Seleccionamos cuidadosamente las materias primas de mayor calidad",
+    "processStep2Title": "Producción",
+    "processStep2Desc": "Producción precisa en nuestras instalaciones modernas",
+    "processStep3Title": "Control de Calidad",
+    "processStep3Desc": "Proceso de control de calidad en 4 etapas",
+    "processStep4Title": "Entrega",
+    "processStep4Desc": "Entrega segura y rápida",
+    "processPhotoPlaceholder": "Foto de la Planta de Producción"
   },
   "homeStrengths": [
     "Principal productor de envases cosméticos de Turquía",

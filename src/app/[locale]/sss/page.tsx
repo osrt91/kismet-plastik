@@ -122,8 +122,22 @@ export default function SSSPage() {
   const getCategoryCount = (cat: string) =>
     searchFiltered.filter((faq) => faq.category === cat).length;
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqData.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: { "@type": "Answer", text: item.answer },
+    })),
+  };
+
   return (
     <section className="bg-[#FAFAF7] dark:bg-[#0A1628]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       {/* Hero */}
       <div className="relative overflow-hidden bg-gradient-to-br from-[#0A1628] via-[#0f2240] to-[#0A1628] py-16 lg:py-20">
         <div className="absolute inset-0 opacity-[0.03]">

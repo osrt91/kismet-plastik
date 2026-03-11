@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 import Link from "@/components/ui/LocaleLink";
 import {
   Phone,
@@ -29,7 +30,8 @@ import { useLocale } from "@/contexts/LocaleContext";
 import { useTheme } from "@/contexts/ThemeContext";
 import { allLocales, localeNames } from "@/lib/i18n";
 import type { Locale } from "@/lib/i18n";
-import SearchModal from "@/components/ui/SearchModal";
+import dynamic from "next/dynamic";
+const SearchModal = dynamic(() => import("@/components/ui/SearchModal"), { ssr: false });
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -205,8 +207,7 @@ export default function Header() {
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2.5 lg:px-6">
           {/* Logo */}
           <Link href="/" className="flex items-center transition-transform duration-300 ease-out hover:scale-105">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/logo1.svg" alt="Kısmet Plastik" className="h-8 w-auto lg:h-10 dark:brightness-0 dark:invert" />
+            <Image src="/images/logo1.svg" alt="Kısmet Plastik" width={160} height={40} className="h-8 w-auto lg:h-10 dark:brightness-0 dark:invert" priority />
           </Link>
 
           {/* Desktop Nav — Mega Menu */}
@@ -387,7 +388,7 @@ export default function Header() {
               <Link href="/bayi-girisi">{nav.dealer}</Link>
             </Button>
             <Button variant="outline" size="sm" className="border-amber-500/30 text-amber-600 hover:bg-amber-50 hover:text-amber-700 dark:border-amber-500/30 dark:text-amber-400 dark:hover:bg-amber-900/20" asChild>
-              <Link href="/bayi-panel/odeme">{locale === "tr" ? "Bayi Odeme" : "Dealer Payment"}</Link>
+              <Link href="/bayi-panel/odeme">{nav.dealerPayment || (locale === "tr" ? "Bayi \u00D6deme" : "Dealer Payment")}</Link>
             </Button>
             <Button size="sm" className="bg-amber-500 text-white shadow-sm shadow-amber-500/20 transition-all duration-200 hover:bg-amber-600 hover:shadow-md hover:shadow-amber-500/25" asChild>
               <Link href="/teklif-al">{nav.quote}</Link>
@@ -410,8 +411,7 @@ export default function Header() {
           <SheetHeader className="border-b border-border px-5 py-4">
             <SheetTitle className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/images/logo2.svg" alt="Kısmet Plastik" className="h-9 w-9 dark:brightness-0 dark:invert" />
+                <Image src="/images/logo2.svg" alt="Kısmet Plastik" width={36} height={36} className="h-9 w-9 dark:brightness-0 dark:invert" />
                 <span className="text-sm font-bold text-foreground">Kısmet Plastik</span>
               </div>
               <div className="flex items-center gap-2">
@@ -495,7 +495,7 @@ export default function Header() {
               </div>
               <Button variant="outline" className="w-full border-amber-500/30 text-amber-600 hover:bg-amber-50" asChild>
                 <Link href="/bayi-panel/odeme" onClick={() => setMobileOpen(false)}>
-                  {locale === "tr" ? "Bayi Odeme" : "Dealer Payment"}
+                  {nav.dealerPayment || (locale === "tr" ? "Bayi \u00D6deme" : "Dealer Payment")}
                 </Link>
               </Button>
             </div>

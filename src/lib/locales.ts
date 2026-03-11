@@ -25,3 +25,22 @@ export const localeNames: Record<Locale, string> = {
 export const localeDirections: Partial<Record<Locale, "rtl">> = {
   ar: "rtl",
 };
+
+/** Map short locale code to full Intl locale string for formatting */
+const intlLocaleMap: Record<string, string> = {
+  tr: "tr-TR",
+  en: "en-US",
+  ar: "ar-SA",
+  ru: "ru-RU",
+  fr: "fr-FR",
+  de: "de-DE",
+  es: "es-ES",
+  pt: "pt-PT",
+  zh: "zh-CN",
+  ja: "ja-JP",
+  ko: "ko-KR",
+};
+
+export function toIntlLocale(locale: string): string {
+  return intlLocaleMap[locale] || "tr-TR";
+}

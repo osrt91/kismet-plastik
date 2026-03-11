@@ -78,7 +78,7 @@ export default function YouTubeEmbed({
         <div
           role="button"
           tabIndex={0}
-          aria-label={`${title} videosunu oynat`}
+          aria-label={`${title} - Play video`}
           onClick={handlePlay}
           onKeyDown={handleKeyDown}
           className="group absolute inset-0 flex cursor-pointer items-center justify-center"
@@ -93,6 +93,8 @@ export default function YouTubeEmbed({
               <img
                 src={thumbnailUrl}
                 alt={title}
+                width={1280}
+                height={720}
                 loading="lazy"
                 onLoad={() => setThumbnailLoaded(true)}
                 className={cn(

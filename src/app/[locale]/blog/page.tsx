@@ -12,11 +12,13 @@ import {
 } from "lucide-react";
 import AnimateOnScroll from "@/components/ui/AnimateOnScroll";
 import { blogPosts } from "@/data/blog";
+import { useLocale } from "@/contexts/LocaleContext";
+import { toIntlLocale } from "@/lib/locales";
 
 const allCategories = [...new Set(blogPosts.map((p) => p.category))];
 
-function formatDate(dateStr: string) {
-  return new Date(dateStr).toLocaleDateString("tr-TR", {
+function formatDate(dateStr: string, locale = "tr") {
+  return new Date(dateStr).toLocaleDateString(toIntlLocale(locale), {
     day: "numeric",
     month: "long",
     year: "numeric",
@@ -77,6 +79,7 @@ function getCatStyle(category: string) {
 }
 
 export default function BlogPage() {
+  const { locale } = useLocale();
   const [activeCategory, setActiveCategory] = useState<string>("Tümü");
 
   const filtered =
@@ -178,7 +181,7 @@ export default function BlogPage() {
                           </span>
                           <span className="flex items-center gap-1 text-neutral-400 dark:text-neutral-500">
                             <Calendar size={12} />
-                            {formatDate(post.date)}
+                            {formatDate(post.date, locale)}
                           </span>
                           <span className="flex items-center gap-1 text-neutral-400 dark:text-neutral-500">
                             <Clock size={12} />
@@ -243,7 +246,7 @@ export default function BlogPage() {
                           {post.category}
                         </span>
                         <span className="text-neutral-400 dark:text-neutral-500">
-                          {formatDate(post.date)}
+                          {formatDate(post.date, locale)}
                         </span>
                       </div>
 

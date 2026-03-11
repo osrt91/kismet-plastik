@@ -5,6 +5,7 @@ import Link from "@/components/ui/LocaleLink";
 import { ArrowRight, Package, GitCompareArrows } from "lucide-react";
 import { Product, CategorySlug } from "@/types/product";
 import { useLocale } from "@/contexts/LocaleContext";
+import { toIntlLocale } from "@/lib/locales";
 import StockBadge from "@/components/ui/StockBadge";
 import { useCompareStore } from "@/store/useCompareStore";
 
@@ -184,19 +185,20 @@ const ProductCard = memo(function ProductCard({ product }: { product: Product })
 
         <div className="flex items-center justify-between border-t border-neutral-100 pt-3 dark:border-neutral-700/50">
           <span className="text-xs text-neutral-400 dark:text-neutral-500">
-            {dict.components.minOrderText.replace("{count}", product.minOrder.toLocaleString("tr-TR"))}
+            {dict.components.minOrderText.replace("{count}", product.minOrder.toLocaleString(toIntlLocale(locale)))}
           </span>
           <div className="flex items-center gap-2">
             <button
               onClick={handleCompareToggle}
-              className={`flex items-center gap-1 rounded-md px-2 py-1 text-[10px] font-semibold transition-all duration-300 ${
+              className={`flex h-10 w-10 items-center justify-center rounded-lg text-xs font-semibold transition-all duration-300 ${
                 inCompare
                   ? "bg-amber-100 text-amber-700 shadow-sm shadow-amber-300/40 dark:bg-amber-900/40 dark:text-amber-400 dark:shadow-amber-500/20"
                   : "bg-neutral-100 text-neutral-500 hover:bg-amber-50 hover:text-amber-700 hover:shadow-sm hover:shadow-amber-300/30 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:bg-amber-900/30 dark:hover:text-amber-400"
               }`}
               title={locale === "tr" ? "Karşılaştır" : "Compare"}
+              aria-label={locale === "tr" ? "Karşılaştır" : "Compare"}
             >
-              <GitCompareArrows size={12} />
+              <GitCompareArrows size={16} />
             </button>
             <span className="flex items-center gap-1 text-sm font-semibold text-primary-700 transition-colors group-hover:text-accent-600 dark:text-primary-300 dark:group-hover:text-amber-400">
               {dict.components.detail}

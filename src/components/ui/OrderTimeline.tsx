@@ -2,6 +2,7 @@
 
 import { Check, Clock, Package, Truck, CircleCheck, XCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { toIntlLocale } from "@/lib/locales";
 import type { OrderStatus } from "@/types/database";
 
 interface StatusHistoryEntry {
@@ -60,9 +61,9 @@ const activeCircleColors: Record<string, string> = {
   delivered: "bg-green-500 border-green-600",
 };
 
-function formatDate(dateStr: string): string {
+function formatDate(dateStr: string, locale = "tr"): string {
   const d = new Date(dateStr);
-  return d.toLocaleDateString("tr-TR", {
+  return d.toLocaleDateString(toIntlLocale(locale), {
     day: "2-digit",
     month: "2-digit",
     year: "numeric",
@@ -131,7 +132,7 @@ export default function OrderTimeline({ history, currentStatus, locale = "tr" }:
                 </span>
                 {entry && (
                   <span className="mt-1 text-[10px] text-neutral-500 text-center">
-                    {formatDate(entry.created_at)}
+                    {formatDate(entry.created_at, locale)}
                   </span>
                 )}
                 {entry?.note && (
@@ -177,7 +178,7 @@ export default function OrderTimeline({ history, currentStatus, locale = "tr" }:
                     {t[stage.key]}
                   </p>
                   {entry && (
-                    <p className="text-xs text-neutral-500">{formatDate(entry.created_at)}</p>
+                    <p className="text-xs text-neutral-500">{formatDate(entry.created_at, locale)}</p>
                   )}
                   {entry?.note && (
                     <p className="text-xs text-neutral-400 mt-0.5">{entry.note}</p>
@@ -195,7 +196,7 @@ export default function OrderTimeline({ history, currentStatus, locale = "tr" }:
           <XCircle size={20} className="mt-0.5 shrink-0 text-red-600" />
           <div>
             <p className="text-sm font-semibold text-red-800">{t.cancelled}</p>
-            <p className="text-xs text-red-600">{formatDate(cancelledEntry.created_at)}</p>
+            <p className="text-xs text-red-600">{formatDate(cancelledEntry.created_at, locale)}</p>
             {cancelledEntry.note && (
               <p className="mt-1 text-sm text-red-700">{cancelledEntry.note}</p>
             )}

@@ -30,6 +30,13 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    if (!/[A-Z]/.test(password) || !/[0-9]/.test(password)) {
+      return NextResponse.json(
+        { success: false, error: "Şifre en az bir büyük harf ve bir rakam içermelidir." },
+        { status: 400 }
+      );
+    }
+
     const response = NextResponse.json({ success: true });
 
     const supabase = createServerClient(

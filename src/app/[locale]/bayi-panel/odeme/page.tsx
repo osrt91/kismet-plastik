@@ -25,36 +25,36 @@ interface ErsInvoice {
 
 const labels: Record<string, Record<string, string>> = {
   tr: {
-    title: "ERS Fatura Odeme",
-    subtitle: "Resmi faturalarinizi kredi karti ile online odeyebilirsiniz.",
-    paymentSuccess: "Odeme Basarili",
-    paymentSuccessDesc: "Odemeniz basariyla alindi.",
-    transactionNo: "Islem no",
-    backToPanel: "Panele Don",
-    paymentFailed: "Odeme Basarisiz",
-    paymentFailedDefault: "Odeme islenirken bir hata olustu.",
+    title: "ERS Fatura Ödeme",
+    subtitle: "Resmi faturalarınızı kredi kartı ile online ödeyebilirsiniz.",
+    paymentSuccess: "Ödeme Başarılı",
+    paymentSuccessDesc: "Ödemeniz başarıyla alındı.",
+    transactionNo: "İşlem no",
+    backToPanel: "Panele Dön",
+    paymentFailed: "Ödeme Başarısız",
+    paymentFailedDefault: "Ödeme işlenirken bir hata oluştu.",
     retry: "Tekrar Dene",
-    configWarningTitle: "Online odeme sistemi yapilandirma asamasindadir.",
+    configWarningTitle: "Online ödeme sistemi yapılandırma aşamasındadır.",
     configWarningDesc:
-      "Halkbank sanal POS entegrasyonu tamamlandiktan sonra bu sayfa aktif olacaktir.",
-    invoiceSelection: "Fatura Secimi",
-    noInvoices: "Odenmemis ERS faturaniz bulunmuyor.",
-    invoicesSelected: "fatura secili",
+      "Halkbank sanal POS entegrasyonu tamamlandıktan sonra bu sayfa aktif olacaktır.",
+    invoiceSelection: "Fatura Seçimi",
+    noInvoices: "Ödenmemiş ERS faturanız bulunmuyor.",
+    invoicesSelected: "fatura seçili",
     cardInfo: "Kart Bilgileri",
-    cardHolderName: "Kart Uzerindeki Isim",
+    cardHolderName: "Kart Üzerindeki İsim",
     cardHolderPlaceholder: "AD SOYAD",
-    cardNumber: "Kart Numarasi",
+    cardNumber: "Kart Numarası",
     cardNumberPlaceholder: "0000 0000 0000 0000",
     month: "Ay",
-    year: "Yil",
+    year: "Yıl",
     cvv: "CVV",
-    payAmount: "Ode",
-    selectInvoice: "Fatura Secin",
-    securePayment: "3D Secure ile guvenli odeme. Kart bilgileriniz sunucularimizda saklanmaz.",
-    errorSelectInvoice: "Lutfen en az bir fatura secin.",
-    errorInvalidCard: "Gecersiz kart numarasi.",
-    errorPaymentInit: "Odeme baslatilamadi.",
-    errorConnection: "Sunucuya baglanilamadi.",
+    payAmount: "Öde",
+    selectInvoice: "Fatura Seçin",
+    securePayment: "3D Secure ile güvenli ödeme. Kart bilgileriniz sunucularımızda saklanmaz.",
+    errorSelectInvoice: "Lütfen en az bir fatura seçin.",
+    errorInvalidCard: "Geçersiz kart numarası.",
+    errorPaymentInit: "Ödeme başlatılamadı.",
+    errorConnection: "Sunucuya bağlanılamadı.",
   },
   en: {
     title: "ERS Invoice Payment",
@@ -92,7 +92,7 @@ const labels: Record<string, Record<string, string>> = {
 
 export default function PaymentPage() {
   const { locale } = useLocale();
-  const t = labels[locale] || labels.tr;
+  const t = labels[locale] || labels.en || labels.tr;
 
   const searchParams = useSearchParams();
   const status = searchParams.get("status");

@@ -57,6 +57,8 @@ export async function GET(
       })
     );
 
+    const locale = request.nextUrl.searchParams.get("locale") || "tr";
+
     const html = generateInvoiceHTML({
       invoiceNumber: invoice.invoice_number,
       issuedAt: invoice.issued_at,
@@ -69,6 +71,7 @@ export async function GET(
       taxRate: invoice.tax_rate,
       taxAmount: invoice.tax_amount,
       totalAmount: invoice.total_amount,
+      locale,
     });
 
     return new NextResponse(html, {

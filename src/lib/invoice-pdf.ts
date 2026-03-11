@@ -3,6 +3,8 @@
  * Generates a printable HTML invoice that can be saved as PDF via browser print
  */
 
+import { toIntlLocale } from "@/lib/locales";
+
 export interface InvoiceLineItem {
   productName: string;
   quantity: number;
@@ -22,19 +24,20 @@ export interface InvoiceData {
   taxRate: number;
   taxAmount: number;
   totalAmount: number;
+  locale?: string;
 }
 
-function formatCurrency(amount: number): string {
-  return new Intl.NumberFormat("tr-TR", {
+function formatCurrency(amount: number, locale = "tr"): string {
+  return new Intl.NumberFormat(toIntlLocale(locale), {
     style: "currency",
     currency: "TRY",
     minimumFractionDigits: 2,
   }).format(amount);
 }
 
-function formatDate(dateStr: string): string {
+function formatDate(dateStr: string, locale = "tr"): string {
   const date = new Date(dateStr);
-  return new Intl.DateTimeFormat("tr-TR", {
+  return new Intl.DateTimeFormat(toIntlLocale(locale), {
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -51,21 +54,22 @@ function escapeHtml(text: string): string {
 }
 
 export function generateInvoiceHTML(invoice: InvoiceData): string {
+  const loc = invoice.locale || "tr";
   const itemRows = invoice.items
     .map(
       (item, index) => `
       <tr>
         <td style="padding: 10px 12px; border-bottom: 1px solid #e5e7eb; text-align: center;">${index + 1}</td>
         <td style="padding: 10px 12px; border-bottom: 1px solid #e5e7eb;">${escapeHtml(item.productName)}</td>
-        <td style="padding: 10px 12px; border-bottom: 1px solid #e5e7eb; text-align: center;">${item.quantity.toLocaleString("tr-TR")}</td>
-        <td style="padding: 10px 12px; border-bottom: 1px solid #e5e7eb; text-align: right;">${formatCurrency(item.unitPrice)}</td>
-        <td style="padding: 10px 12px; border-bottom: 1px solid #e5e7eb; text-align: right;">${formatCurrency(item.totalPrice)}</td>
+        <td style="padding: 10px 12px; border-bottom: 1px solid #e5e7eb; text-align: center;">${item.quantity.toLocaleString(toIntlLocale(loc))}</td>
+        <td style="padding: 10px 12px; border-bottom: 1px solid #e5e7eb; text-align: right;">${formatCurrency(item.unitPrice, loc)}</td>
+        <td style="padding: 10px 12px; border-bottom: 1px solid #e5e7eb; text-align: right;">${formatCurrency(item.totalPrice, loc)}</td>
       </tr>`
     )
     .join("\n");
 
   return `<!DOCTYPE html>
-<html lang="tr">
+<html lang="${loc}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -221,7 +225,7 @@ export function generateInvoiceHTML(invoice: InvoiceData): string {
       <div class="invoice-title">
         <h2>Fatura</h2>
         <p class="meta"><strong>Fatura No:</strong> ${escapeHtml(invoice.invoiceNumber)}</p>
-        <p class="meta"><strong>Tarih:</strong> ${formatDate(invoice.issuedAt)}</p>
+        <p class="meta"><strong>Tarih:</strong> ${formatDate(invoice.issuedAt, loc)}</p>
       </div>
     </div>
 
@@ -254,15 +258,15 @@ export function generateInvoiceHTML(invoice: InvoiceData): string {
       <div class="totals-table">
         <div class="row">
           <span>Ara Toplam:</span>
-          <span>${formatCurrency(invoice.subtotal)}</span>
+          <span>${formatCurrency(invoice.subtotal, loc)}</span>
         </div>
         <div class="row">
           <span>KDV (%${invoice.taxRate}):</span>
-          <span>${formatCurrency(invoice.taxAmount)}</span>
+          <span>${formatCurrency(invoice.taxAmount, loc)}</span>
         </div>
         <div class="row grand-total">
           <span>Genel Toplam:</span>
-          <span>${formatCurrency(invoice.totalAmount)}</span>
+          <span>${formatCurrency(invoice.totalAmount, loc)}</span>
         </div>
       </div>
     </div>

@@ -21,7 +21,8 @@
     "sampleRequest": "Demande d'échantillons",
     "allProducts": "Voir tous les produits",
     "glossary": "Glossaire de l'emballage",
-    "customMolding": "Moulage sur mesure"
+    "customMolding": "Moulage sur mesure",
+    "dealerPayment": "Paiement revendeur"
   },
   "home": {
     "badge": "Solutions B2B d'emballage cosmétique",
@@ -95,15 +96,15 @@
     "highCapacityDesc": "Nous répondons aux commandes de grande envergure avec une capacité de production mensuelle de plusieurs millions d'unités.",
     "support": "Support client 24h/24 7j/7",
     "supportDesc": "Notre équipe d'experts vous accompagne à chaque étape, avant et après la vente.",
-    "processStep1Title": "Raw Material Selection",
-    "processStep1Desc": "We carefully select the highest quality PET, HDPE, and PP raw materials.",
+    "processStep1Title": "Sélection des Matières Premières",
+    "processStep1Desc": "Nous sélectionnons soigneusement les matières premières de la plus haute qualité",
     "processStep2Title": "Production",
-    "processStep2Desc": "High-capacity precision manufacturing with state-of-the-art machines.",
-    "processStep3Title": "Quality Control",
-    "processStep3Desc": "Quality guaranteed through ISO 9001, ISO 22000 and FSSC 22000 standards.",
-    "processStep4Title": "Delivery",
-    "processStep4Desc": "On-time delivery with our fast and secure logistics network.",
-    "processPhotoPlaceholder": "Photo Coming Soon"
+    "processStep2Desc": "Production de précision dans nos installations modernes",
+    "processStep3Title": "Contrôle Qualité",
+    "processStep3Desc": "Processus de contrôle qualité en 4 étapes",
+    "processStep4Title": "Livraison",
+    "processStep4Desc": "Livraison sûre et rapide",
+    "processPhotoPlaceholder": "Photo de l'Usine de Production"
   },
   "homeStrengths": [
     "Premier producteur d'emballages cosmétiques en Turquie",

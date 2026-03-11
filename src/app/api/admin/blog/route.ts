@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getSupabaseAdmin, requireSupabase } from "@/lib/supabase-admin";
 import { checkAuth } from "@/lib/auth";
 import { sanitizeSearchInput } from "@/lib/auth";
+import { rateLimit } from "@/lib/rate-limit";
 
 const PAGE_SIZE = 12;
 
@@ -66,6 +67,12 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   const authError = checkAuth(request);
   if (authError) return authError;
+
+  const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+  const { ok: allowed } = rateLimit(`admin:blog:${ip}`, { limit: 60, windowMs: 60_000 });
+  if (!allowed) {
+    return NextResponse.json({ success: false, error: "Cok fazla istek" }, { status: 429 });
+  }
 
   const sbError = requireSupabase();
   if (sbError) return sbError;

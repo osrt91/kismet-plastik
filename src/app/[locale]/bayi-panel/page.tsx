@@ -29,29 +29,29 @@ interface DashboardStats {
 
 const labels: Record<string, Record<string, string>> = {
   tr: {
-    welcome: "Hos Geldiniz",
-    activeOrders: "Aktif Siparisler",
+    welcome: "Hoş Geldiniz",
+    activeOrders: "Aktif Siparişler",
     pendingQuotes: "Bekleyen Teklifler",
-    unpaidInvoices: "Odenmemis Faturalar",
-    last30Revenue: "Son 30 Gun Ciro",
-    quickActions: "Hizli Islemler",
-    newOrder: "Yeni Siparis Ver",
-    requestQuote: "Teklif Iste",
-    viewProducts: "Urunleri Incele",
-    recentOrders: "Son Siparisler",
-    noOrders: "Henuz siparis bulunmuyor.",
-    loading: "Yukleniyor...",
-    orderNo: "Siparis No",
+    unpaidInvoices: "Ödenmemiş Faturalar",
+    last30Revenue: "Son 30 Gün Ciro",
+    quickActions: "Hızlı İşlemler",
+    newOrder: "Yeni Sipariş Ver",
+    requestQuote: "Teklif İste",
+    viewProducts: "Ürünleri İncele",
+    recentOrders: "Son Siparişler",
+    noOrders: "Henüz sipariş bulunmuyor.",
+    loading: "Yükleniyor...",
+    orderNo: "Sipariş No",
     date: "Tarih",
     status: "Durum",
     amount: "Tutar",
-    viewAll: "Tumunu Gor",
+    viewAll: "Tümünü Gör",
     pending: "Beklemede",
-    confirmed: "Onaylandi",
-    production: "Uretimde",
+    confirmed: "Onaylandı",
+    production: "Üretimde",
     shipping: "Kargoda",
     delivered: "Teslim Edildi",
-    cancelled: "Iptal",
+    cancelled: "İptal",
   },
   en: {
     welcome: "Welcome",
@@ -99,7 +99,7 @@ function OrderStatusBadge({ status, t }: { status: string; t: Record<string, str
 
 export default function BayiPanelDashboard() {
   const { locale } = useLocale();
-  const t = labels[locale] || labels.tr;
+  const t = labels[locale] || labels.en || labels.tr;
 
   const [stats, setStats] = useState<DashboardStats>({
     activeOrders: 0,

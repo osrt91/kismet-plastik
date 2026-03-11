@@ -11,33 +11,33 @@ import type { Product } from "@/types/product";
 
 const labels: Record<string, Record<string, string>> = {
   tr: {
-    title: "Hizli Siparis",
-    subtitle: "Urun kodu veya adini girerek hizlica siparis olusturun",
-    productCode: "Urun Kodu",
-    productName: "Urun Adi",
+    title: "Hızlı Sipariş",
+    subtitle: "Ürün kodu veya adını girerek hızlıca sipariş oluşturun",
+    productCode: "Ürün Kodu",
+    productName: "Ürün Adı",
     quantity: "Miktar",
     unitPrice: "Birim Fiyat",
     total: "Toplam",
-    addRow: "Satir Ekle",
+    addRow: "Satır Ekle",
     subtotal: "Ara Toplam",
     vat: "KDV (%20)",
     grandTotal: "Genel Toplam",
-    createOrder: "Siparise Donustur",
-    requestQuote: "Teklif Iste",
-    excelPaste: "Excel'den Yapistir",
-    excelModalTitle: "Excel Verisi Yapistir",
-    excelModalDesc: "Her satira bir urun kodu ve miktar (Tab ile ayrilmis) yapistirin.",
+    createOrder: "Siparişe Dönüştür",
+    requestQuote: "Teklif İste",
+    excelPaste: "Excel'den Yapıştır",
+    excelModalTitle: "Excel Verisi Yapıştır",
+    excelModalDesc: "Her satıra bir ürün kodu ve miktar (Tab ile ayrılmış) yapıştırın.",
     excelPlaceholder: "pet-001\t100\npls-001\t200\nkpk-002\t500",
     excelApply: "Uygula",
-    excelCancel: "Iptal",
-    productsAdded: "urun eklendi",
-    productsNotFound: "urun kodu bulunamadi",
-    noProducts: "Lutfen en az bir urun ekleyin",
-    orderSuccess: "Siparis olusturuldu",
-    quoteSuccess: "Teklif talebi gonderildi",
-    removeRow: "Satiri kaldir",
+    excelCancel: "İptal",
+    productsAdded: "ürün eklendi",
+    productsNotFound: "ürün kodu bulunamadı",
+    noProducts: "Lütfen en az bir ürün ekleyin",
+    orderSuccess: "Sipariş oluşturuldu",
+    quoteSuccess: "Teklif talebi gönderildi",
+    removeRow: "Satırı kaldır",
     currency: "TL",
-    minOrder: "Min. siparis",
+    minOrder: "Min. sipariş",
   },
   en: {
     title: "Quick Order",
@@ -108,7 +108,7 @@ function getProductUnitPrice(product: Product): number {
 
 export default function QuickOrderForm() {
   const { locale } = useLocale();
-  const t = labels[locale] || labels.tr;
+  const t = labels[locale] || labels.en || labels.tr;
 
   const [rows, setRows] = useState<OrderRow[]>([
     createEmptyRow(),

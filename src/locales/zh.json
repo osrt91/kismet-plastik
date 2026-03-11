@@ -21,7 +21,8 @@
     "sampleRequest": "样品申请",
     "allProducts": "查看全部产品",
     "glossary": "包装术语表",
-    "customMolding": "定制模具"
+    "customMolding": "定制模具",
+    "dealerPayment": "经销商付款"
   },
   "home": {
     "badge": "B2B化妆品包装解决方案",
@@ -95,15 +96,15 @@
     "highCapacityDesc": "月产量达数百万件，满足大规模订单需求。",
     "support": "全天候客户支持",
     "supportDesc": "我们的专业团队在售前售后每个环节为您提供支持。",
-    "processStep1Title": "Raw Material Selection",
-    "processStep1Desc": "We carefully select the highest quality PET, HDPE, and PP raw materials.",
-    "processStep2Title": "Production",
-    "processStep2Desc": "High-capacity precision manufacturing with state-of-the-art machines.",
-    "processStep3Title": "Quality Control",
-    "processStep3Desc": "Quality guaranteed through ISO 9001, ISO 22000 and FSSC 22000 standards.",
-    "processStep4Title": "Delivery",
-    "processStep4Desc": "On-time delivery with our fast and secure logistics network.",
-    "processPhotoPlaceholder": "Photo Coming Soon"
+    "processStep1Title": "原材料选择",
+    "processStep1Desc": "精心挑选最优质的原材料",
+    "processStep2Title": "生产",
+    "processStep2Desc": "在现代化设施中精密生产",
+    "processStep3Title": "质量控制",
+    "processStep3Desc": "四阶段质量控制流程",
+    "processStep4Title": "交付",
+    "processStep4Desc": "安全快速的交付",
+    "processPhotoPlaceholder": "生产设施照片"
   },
   "homeStrengths": [
     "土耳其领先的化妆品包装制造商",

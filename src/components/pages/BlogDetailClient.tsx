@@ -49,8 +49,30 @@ export default function BlogDetailClient() {
     .concat(blogPosts.filter((p) => p.category !== post.category && p.slug !== slug))
     .slice(0, 3);
 
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: post.date,
+    author: { "@type": "Organization", name: "Kısmet Plastik" },
+    publisher: {
+      "@type": "Organization",
+      name: "Kısmet Plastik",
+      logo: { "@type": "ImageObject", url: "https://www.kismetplastik.com/images/logo.jpg" },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `https://www.kismetplastik.com/${locale}/blog/${post.slug}`,
+    },
+  };
+
   return (
     <section className="bg-[#FAFAF7] dark:bg-[#0A1628]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
       {/* Hero */}
       <div className="relative overflow-hidden bg-[#0A1628] py-20 lg:py-28">
         <div className="absolute inset-0 bg-gradient-to-br from-[#0A1628] via-primary-900 to-[#0A1628]" />

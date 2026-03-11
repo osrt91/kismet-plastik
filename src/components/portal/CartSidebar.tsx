@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useCallback } from "react";
 import { ShoppingCart, Trash2, Plus, Minus, Package } from "lucide-react";
 import {
   SheetContent,
@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/sheet";
 import { Badge } from "@/components/ui/badge";
 import { useLocale } from "@/contexts/LocaleContext";
+import { toIntlLocale } from "@/lib/locales";
 
 /* Re-export Sheet so consumers can import everything from one module */
 export { Sheet } from "@/components/ui/sheet";
@@ -20,16 +21,16 @@ export { Sheet } from "@/components/ui/sheet";
 const labels: Record<string, Record<string, string>> = {
   tr: {
     title: "Sepetim",
-    itemCount: "urun",
+    itemCount: "ürün",
     code: "Kod",
     subtotal: "Ara Toplam",
     vat: "KDV (%20)",
     grandTotal: "Genel Toplam",
-    checkout: "Siparis Ver",
-    requestQuote: "Teklif Iste",
-    emptyTitle: "Sepetiniz bos",
-    emptyDesc: "Urun eklemek icin katalogdan veya hizli siparis formundan urun secin.",
-    remove: "Kaldir",
+    checkout: "Sipariş Ver",
+    requestQuote: "Teklif İste",
+    emptyTitle: "Sepetiniz boş",
+    emptyDesc: "Ürün eklemek için katalogdan veya hızlı sipariş formundan ürün seçin.",
+    remove: "Kaldır",
     quantity: "Adet",
   },
   en: {
@@ -66,22 +67,15 @@ interface CartSidebarProps {
   onRequestQuote: () => void;
 }
 
-/* ── Currency formatter ──────────────────────────────────────────── */
-
-const formatCurrency = new Intl.NumberFormat("tr-TR", {
-  style: "currency",
-  currency: "TRY",
-});
-
 /* ── CartTrigger ─────────────────────────────────────────────────── */
 
-export function CartTrigger({ itemCount }: { itemCount: number }) {
+export function CartTrigger({ itemCount, locale = "tr" }: { itemCount: number; locale?: string }) {
   return (
     <SheetTrigger asChild>
       <button
         type="button"
         className="relative inline-flex items-center justify-center rounded-lg p-2 text-neutral-500 transition-colors hover:bg-neutral-100 hover:text-[#0A1628] dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-white"
-        aria-label="Sepetim"
+        aria-label={locale === "tr" ? "Sepetim" : "My Cart"}
       >
         <ShoppingCart size={20} />
         {itemCount > 0 && (
@@ -104,7 +98,16 @@ export default function CartSidebar({
   onRequestQuote,
 }: CartSidebarProps) {
   const { locale } = useLocale();
-  const t = labels[locale] || labels.tr;
+  const t = labels[locale] || labels.en || labels.tr;
+
+  const formatCurrency = useCallback(
+    (value: number) =>
+      new Intl.NumberFormat(toIntlLocale(locale), {
+        style: "currency",
+        currency: "TRY",
+      }).format(value),
+    [locale]
+  );
 
   /* ── Computed totals ─────────────────────────────────────────── */
 
@@ -216,10 +219,10 @@ export default function CartSidebar({
                     {/* Line total: qty x unit = total */}
                     <div className="text-right">
                       <p className="text-xs text-neutral-400">
-                        {item.miktar} x {formatCurrency.format(item.birimFiyat)}
+                        {item.miktar} x {formatCurrency(item.birimFiyat)}
                       </p>
                       <p className="font-mono text-sm font-semibold text-[#0A1628] dark:text-white">
-                        {formatCurrency.format(lineTotal)}
+                        {formatCurrency(lineTotal)}
                       </p>
                     </div>
                   </div>
@@ -238,13 +241,13 @@ export default function CartSidebar({
             <div className="flex items-center justify-between text-sm">
               <span className="text-neutral-500 dark:text-neutral-400">{t.subtotal}</span>
               <span className="font-mono text-[#0A1628] dark:text-white">
-                {formatCurrency.format(subtotal)}
+                {formatCurrency(subtotal)}
               </span>
             </div>
             <div className="flex items-center justify-between text-sm">
               <span className="text-neutral-500 dark:text-neutral-400">{t.vat}</span>
               <span className="font-mono text-[#0A1628] dark:text-white">
-                {formatCurrency.format(vatTotal)}
+                {formatCurrency(vatTotal)}
               </span>
             </div>
             <div className="border-t border-neutral-100 pt-2 dark:border-neutral-700">
@@ -253,7 +256,7 @@ export default function CartSidebar({
                   {t.grandTotal}
                 </span>
                 <span className="font-mono text-lg font-bold text-[#0A1628] dark:text-white">
-                  {formatCurrency.format(grandTotal)}
+                  {formatCurrency(grandTotal)}
                 </span>
               </div>
             </div>

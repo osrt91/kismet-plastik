@@ -6,7 +6,14 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/admin/", "/api/"],
+        disallow: [
+          "/admin/",
+          "/api/",
+          "/*/bayi-panel/",
+          "/*/bayi-kayit/",
+          "/*/on-siparis/",
+          "/*/karsilastir/",
+        ],
       },
     ],
     sitemap: "https://www.kismetplastik.com/sitemap.xml",

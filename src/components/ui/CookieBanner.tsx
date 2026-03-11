@@ -142,12 +142,12 @@ function CategoryRow({
   onChange?: (value: boolean) => void;
 }) {
   return (
-    <div className="flex items-start justify-between gap-4 rounded-xl border border-neutral-200/60 bg-white/50 p-4 transition-colors hover:bg-white/80">
+    <div className="flex items-start justify-between gap-4 rounded-xl border border-neutral-200/60 bg-white/50 p-4 transition-colors hover:bg-white/80 dark:border-neutral-700/60 dark:bg-neutral-800/50 dark:hover:bg-neutral-800/80">
       <div className="flex items-start gap-3">
         <div className="mt-0.5 shrink-0 text-[#F59E0B]">{icon}</div>
         <div>
-          <p className="text-sm font-semibold text-[#0A1628]">{title}</p>
-          <p className="mt-0.5 text-xs leading-relaxed text-neutral-500">
+          <p className="text-sm font-semibold text-[#0A1628] dark:text-neutral-100">{title}</p>
+          <p className="mt-0.5 text-xs leading-relaxed text-neutral-500 dark:text-neutral-400">
             {description}
           </p>
         </div>
@@ -272,12 +272,7 @@ export default function CookieBanner() {
       aria-label={t.ariaLabel}
     >
       <div
-        className="mx-auto max-w-2xl overflow-hidden rounded-2xl border border-neutral-200/50 shadow-2xl"
-        style={{
-          background: "rgba(255, 255, 255, 0.85)",
-          backdropFilter: "blur(16px)",
-          WebkitBackdropFilter: "blur(16px)",
-        }}
+        className="mx-auto max-w-2xl overflow-hidden rounded-2xl border border-neutral-200/50 bg-white/85 shadow-2xl backdrop-blur-xl dark:border-neutral-700/50 dark:bg-neutral-900/90"
       >
         {/* ---- Main Banner ---- */}
         <div className="relative p-5 sm:p-6">
@@ -285,7 +280,7 @@ export default function CookieBanner() {
           <button
             onClick={handleClose}
             aria-label={t.close}
-            className="absolute right-3 top-3 rounded-lg p-1.5 text-neutral-400 transition-colors hover:bg-neutral-100 hover:text-neutral-600"
+            className="absolute right-3 top-3 rounded-lg p-1.5 text-neutral-400 transition-colors hover:bg-neutral-100 hover:text-neutral-600 dark:hover:bg-neutral-700 dark:hover:text-neutral-300"
           >
             <X size={18} />
           </button>
@@ -296,10 +291,10 @@ export default function CookieBanner() {
               <Cookie size={20} className="text-[#F59E0B]" />
             </div>
             <div>
-              <p className="text-sm font-bold text-[#0A1628]">
+              <p className="text-sm font-bold text-[#0A1628] dark:text-neutral-100">
                 {t.title}
               </p>
-              <p className="mt-1.5 text-sm leading-relaxed text-neutral-600">
+              <p className="mt-1.5 text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">
                 {t.description}
               </p>
               <Link
@@ -315,13 +310,13 @@ export default function CookieBanner() {
           <div className="mt-5 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-end">
             <button
               onClick={handleDeclineAll}
-              className="order-3 rounded-xl border border-neutral-200 px-5 py-2.5 text-sm font-medium text-neutral-600 transition-all hover:bg-neutral-50 hover:border-neutral-300 sm:order-1"
+              className="order-3 rounded-xl border border-neutral-200 px-5 py-2.5 text-sm font-medium text-neutral-600 transition-all hover:bg-neutral-50 hover:border-neutral-300 dark:border-neutral-600 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:hover:border-neutral-500 sm:order-1"
             >
               {t.decline}
             </button>
             <button
               onClick={() => setShowSettings((prev) => !prev)}
-              className="order-2 flex items-center justify-center gap-1.5 rounded-xl border border-[#F59E0B]/30 bg-[#F59E0B]/5 px-5 py-2.5 text-sm font-medium text-[#0A1628] transition-all hover:bg-[#F59E0B]/10 hover:border-[#F59E0B]/50"
+              className="order-2 flex items-center justify-center gap-1.5 rounded-xl border border-[#F59E0B]/30 bg-[#F59E0B]/5 px-5 py-2.5 text-sm font-medium text-[#0A1628] transition-all hover:bg-[#F59E0B]/10 hover:border-[#F59E0B]/50 dark:text-neutral-200 dark:bg-[#F59E0B]/10 dark:hover:bg-[#F59E0B]/20"
             >
               {t.manage}
               <ChevronDown
@@ -346,7 +341,7 @@ export default function CookieBanner() {
           `}
         >
           <div className="overflow-hidden">
-            <div className="border-t border-neutral-200/60 bg-neutral-50/50 p-5 sm:p-6">
+            <div className="border-t border-neutral-200/60 bg-neutral-50/50 p-5 dark:border-neutral-700/60 dark:bg-neutral-800/50 sm:p-6">
               <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-neutral-400">
                 {t.categoryHeading}
               </p>

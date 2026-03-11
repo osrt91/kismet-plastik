@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSupabaseAdmin, requireSupabase } from "@/lib/supabase-admin";
-import { checkAuth } from "@/lib/auth";
+import { checkAuth, timingSafeCompare } from "@/lib/auth";
 import { syncStockToSupabase, syncCariToSupabase } from "@/lib/dia-services";
 
 type SyncType = "stock" | "cari" | "all";
@@ -19,7 +19,7 @@ function verifyCronAuth(request: NextRequest): boolean {
     ? authHeader.slice(7)
     : authHeader;
 
-  return token === cronSecret;
+  return timingSafeCompare(token, cronSecret);
 }
 
 export async function POST(request: NextRequest) {

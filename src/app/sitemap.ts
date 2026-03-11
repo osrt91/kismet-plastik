@@ -17,7 +17,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/blog", changeFrequency: "weekly" as const, priority: 0.6 },
     { path: "/kariyer", changeFrequency: "monthly" as const, priority: 0.4 },
     { path: "/katalog", changeFrequency: "monthly" as const, priority: 0.5 },
-    { path: "/bayi-girisi", changeFrequency: "yearly" as const, priority: 0.3 },
     { path: "/surdurulebilirlik", changeFrequency: "monthly" as const, priority: 0.6 },
     { path: "/galeri", changeFrequency: "monthly" as const, priority: 0.5 },
     { path: "/kvkk", changeFrequency: "yearly" as const, priority: 0.3 },
@@ -32,8 +31,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/sertifikalar", changeFrequency: "monthly" as const, priority: 0.6 },
     { path: "/kaynaklar", changeFrequency: "monthly" as const, priority: 0.6 },
     { path: "/fabrika", changeFrequency: "monthly" as const, priority: 0.5 },
-    { path: "/on-siparis", changeFrequency: "monthly" as const, priority: 0.5 },
-    { path: "/karsilastir", changeFrequency: "monthly" as const, priority: 0.3 },
   ];
 
   const staticPages = staticPaths.flatMap(({ path, changeFrequency, priority }) =>

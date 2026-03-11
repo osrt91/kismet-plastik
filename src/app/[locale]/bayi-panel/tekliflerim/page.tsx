@@ -26,43 +26,43 @@ const PAGE_SIZE = 20;
 const labels: Record<string, Record<string, string>> = {
   tr: {
     title: "Tekliflerim",
-    searchPlaceholder: "Teklif no veya firma adi ara...",
-    allStatuses: "Tum Durumlar",
+    searchPlaceholder: "Teklif no veya firma adı ara...",
+    allStatuses: "Tüm Durumlar",
     quoteNo: "Teklif No",
     date: "Tarih",
-    productCount: "Urun Sayisi",
+    productCount: "Ürün Sayısı",
     status: "Durum",
     total: "Toplam",
-    action: "Islem",
+    action: "İşlem",
     detail: "Detay",
-    newQuote: "Yeni Teklif Iste",
-    empty: "Henuz teklif talebiniz bulunmuyor.",
-    emptyDesc: "Teklif istediginizde burada goruntulenecektir.",
-    loading: "Yukleniyor...",
-    prev: "Onceki",
+    newQuote: "Yeni Teklif İste",
+    empty: "Henüz teklif talebiniz bulunmuyor.",
+    emptyDesc: "Teklif istediğinizde burada görüntülenecektir.",
+    loading: "Yükleniyor...",
+    prev: "Önceki",
     next: "Sonraki",
     page: "Sayfa",
     of: "/",
-    items: "urun",
+    items: "ürün",
     pending: "Beklemede",
-    reviewing: "Inceleniyor",
-    quoted: "Fiyatlandirildi",
-    accepted: "Onaylandi",
+    reviewing: "İnceleniyor",
+    quoted: "Fiyatlandırıldı",
+    accepted: "Onaylandı",
     rejected: "Reddedildi",
-    error: "Teklifler yuklenirken bir hata olustu.",
-    validUntil: "Gecerlilik",
-    response: "Yanit",
-    noResponse: "Henuz yanitlanmadi",
-    requestedProducts: "Talep Edilen Urunler",
-    product: "Urun",
+    error: "Teklifler yüklenirken bir hata oluştu.",
+    validUntil: "Geçerlilik",
+    response: "Yanıt",
+    noResponse: "Henüz yanıtlanmadı",
+    requestedProducts: "Talep Edilen Ürünler",
+    product: "Ürün",
     qty: "Adet",
     unitPrice: "Birim Fiyat",
     lineTotal: "Tutar",
     awaiting: "Fiyat bekleniyor",
-    convertToOrder: "Onayla ve Siparise Donustur",
-    converting: "Donusturuluyor...",
-    convertSuccess: "Siparis basariyla olusturuldu",
-    convertError: "Siparis olusturulurken hata olustu",
+    convertToOrder: "Onayla ve Siparişe Dönüştür",
+    converting: "Dönüştürülüyor...",
+    convertSuccess: "Sipariş başarıyla oluşturuldu",
+    convertError: "Sipariş oluşturulurken hata oluştu",
   },
   en: {
     title: "My Quotes",
@@ -117,7 +117,7 @@ const statusBadgeColors: Record<string, string> = {
 };
 
 function QuoteStatusBadge({ status, locale = "tr" }: { status: string; locale?: string }) {
-  const t = labels[locale] || labels.tr;
+  const t = labels[locale] || labels.en || labels.tr;
   const color = statusBadgeColors[status] || "bg-neutral-100 text-neutral-800 border-neutral-300";
   return (
     <span
@@ -133,7 +133,7 @@ function QuoteStatusBadge({ status, locale = "tr" }: { status: string; locale?: 
 
 export default function TekliflerimPage() {
   const { locale } = useLocale();
-  const t = labels[locale] || labels.tr;
+  const t = labels[locale] || labels.en || labels.tr;
 
   const [quotes, setQuotes] = useState<QuoteWithItems[]>([]);
   const [loading, setLoading] = useState(true);
@@ -166,7 +166,7 @@ export default function TekliflerimPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           items,
-          aciklama: `Teklif #${quote.id.slice(0, 8).toUpperCase()} onaylanarak siparise donusturuldu`,
+          aciklama: `Teklif #${quote.id.slice(0, 8).toUpperCase()} onaylanarak siparişe dönüştürüldü`,
         }),
       });
 

@@ -21,7 +21,8 @@
     "sampleRequest": "Musteranfrage",
     "allProducts": "Alle Produkte anzeigen",
     "glossary": "Verpackungsglossar",
-    "customMolding": "Individuelle Formgebung"
+    "customMolding": "Individuelle Formgebung",
+    "dealerPayment": "Händler-Zahlung"
   },
   "home": {
     "badge": "B2B Kosmetikverpackungslösungen",
@@ -95,15 +96,15 @@
     "highCapacityDesc": "Wir bewältigen Großaufträge mit einer monatlichen Produktionskapazität von mehreren Millionen Einheiten.",
     "support": "24/7 Kundenbetreuung",
     "supportDesc": "Unser Expertenteam steht Ihnen in jeder Phase zur Seite — vor und nach dem Kauf.",
-    "processStep1Title": "Raw Material Selection",
-    "processStep1Desc": "We carefully select the highest quality PET, HDPE, and PP raw materials.",
-    "processStep2Title": "Production",
-    "processStep2Desc": "High-capacity precision manufacturing with state-of-the-art machines.",
-    "processStep3Title": "Quality Control",
-    "processStep3Desc": "Quality guaranteed through ISO 9001, ISO 22000 and FSSC 22000 standards.",
-    "processStep4Title": "Delivery",
-    "processStep4Desc": "On-time delivery with our fast and secure logistics network.",
-    "processPhotoPlaceholder": "Photo Coming Soon"
+    "processStep1Title": "Rohstoffauswahl",
+    "processStep1Desc": "Sorgfältige Auswahl hochwertigster Rohstoffe",
+    "processStep2Title": "Produktion",
+    "processStep2Desc": "Präzisionsfertigung in unseren modernen Anlagen",
+    "processStep3Title": "Qualitätskontrolle",
+    "processStep3Desc": "4-stufiger Qualitätskontrollprozess",
+    "processStep4Title": "Lieferung",
+    "processStep4Desc": "Sichere und schnelle Lieferung",
+    "processPhotoPlaceholder": "Foto der Produktionsanlage"
   },
   "homeStrengths": [
     "Führender Kosmetikverpackungshersteller der Türkei",

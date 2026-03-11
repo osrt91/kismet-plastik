@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useLocale } from "@/contexts/LocaleContext";
+import { toIntlLocale } from "@/lib/locales";
 
 interface PriceDisplayProps {
   price?: number | null;
@@ -15,6 +17,7 @@ export default function PriceDisplay({
   className = "",
   showLoginPrompt = true,
 }: PriceDisplayProps) {
+  const { locale } = useLocale();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -51,7 +54,7 @@ export default function PriceDisplay({
     return <span className={`font-mono text-sm text-neutral-400 ${className}`}>&mdash;</span>;
   }
 
-  const formatted = new Intl.NumberFormat("tr-TR", {
+  const formatted = new Intl.NumberFormat(toIntlLocale(locale), {
     style: "currency",
     currency,
     minimumFractionDigits: 2,

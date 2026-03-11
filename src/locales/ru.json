@@ -21,7 +21,8 @@
     "sampleRequest": "Запрос образцов",
     "allProducts": "Смотреть все продукты",
     "glossary": "Словарь упаковки",
-    "customMolding": "Индивидуальная формовка"
+    "customMolding": "Индивидуальная формовка",
+    "dealerPayment": "Оплата дилера"
   },
   "home": {
     "badge": "B2B решения для косметической упаковки",
@@ -95,15 +96,15 @@
     "highCapacityDesc": "Мы выполняем крупные заказы с ежемесячной производственной мощностью в миллионы единиц.",
     "support": "Поддержка 24/7",
     "supportDesc": "Наша команда экспертов рядом на каждом этапе — до и после продажи.",
-    "processStep1Title": "Raw Material Selection",
-    "processStep1Desc": "We carefully select the highest quality PET, HDPE, and PP raw materials.",
-    "processStep2Title": "Production",
-    "processStep2Desc": "High-capacity precision manufacturing with state-of-the-art machines.",
-    "processStep3Title": "Quality Control",
-    "processStep3Desc": "Quality guaranteed through ISO 9001, ISO 22000 and FSSC 22000 standards.",
-    "processStep4Title": "Delivery",
-    "processStep4Desc": "On-time delivery with our fast and secure logistics network.",
-    "processPhotoPlaceholder": "Photo Coming Soon"
+    "processStep1Title": "Выбор сырья",
+    "processStep1Desc": "Тщательный отбор сырья высочайшего качества",
+    "processStep2Title": "Производство",
+    "processStep2Desc": "Точное производство на наших современных предприятиях",
+    "processStep3Title": "Контроль качества",
+    "processStep3Desc": "4-этапный процесс контроля качества",
+    "processStep4Title": "Доставка",
+    "processStep4Desc": "Безопасная и быстрая доставка",
+    "processPhotoPlaceholder": "Фото производственного объекта"
   },
   "homeStrengths": [
     "Ведущий производитель косметической упаковки в Турции",

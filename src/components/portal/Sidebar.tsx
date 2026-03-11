@@ -38,20 +38,20 @@ const menuItems = [
 const labels: Record<string, Record<string, string>> = {
   tr: {
     dashboard: "Dashboard",
-    products: "Urunler",
-    quickOrder: "Hizli Siparis",
+    products: "Ürünler",
+    quickOrder: "Hızlı Sipariş",
     cart: "Sepetim",
-    orders: "Siparislerim",
+    orders: "Siparişlerim",
     quotes: "Tekliflerim",
-    invoices: "Faturalarim",
-    payment: "Odeme",
+    invoices: "Faturalarım",
+    payment: "Ödeme",
     profile: "Profilim",
     support: "Destek",
-    logout: "Cikis Yap",
+    logout: "Çıkış Yap",
     panel: "Bayi Paneli",
     collapse: "Daralt",
-    expand: "Genislet",
-    comingSoon: "Yakinda",
+    expand: "Genişlet",
+    comingSoon: "Yakında",
   },
   en: {
     dashboard: "Dashboard",
@@ -80,7 +80,7 @@ interface SidebarProps {
 export default function Sidebar({ mobileOpen, onMobileClose }: SidebarProps) {
   const { locale } = useLocale();
   const pathname = usePathname();
-  const t = labels[locale] || labels.tr;
+  const t = labels[locale] || labels.en || labels.tr;
   const [collapsed, setCollapsed] = useState(false);
 
   useEffect(() => {
@@ -152,7 +152,9 @@ export default function Sidebar({ mobileOpen, onMobileClose }: SidebarProps) {
                 return (
                   <div
                     key={item.key}
-                    className={`group relative flex min-h-10 items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-neutral-600 cursor-not-allowed ${
+                    role="menuitem"
+                    aria-disabled="true"
+                    className={`group relative flex min-h-10 items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-neutral-600 cursor-not-allowed opacity-60 ${
                       collapsed ? "justify-center" : ""
                     }`}
                     title={collapsed ? `${t[item.key]} (${t.comingSoon})` : undefined}

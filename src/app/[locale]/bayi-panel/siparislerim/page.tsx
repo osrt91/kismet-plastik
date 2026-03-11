@@ -15,32 +15,32 @@ const PAGE_SIZE = 20;
 
 const labels: Record<string, Record<string, string>> = {
   tr: {
-    title: "Siparislerim",
-    searchPlaceholder: "Siparis no veya urun adi ara...",
-    allStatuses: "Tum Durumlar",
-    orderNo: "Siparis No",
+    title: "Siparişlerim",
+    searchPlaceholder: "Sipariş no veya ürün adı ara...",
+    allStatuses: "Tüm Durumlar",
+    orderNo: "Sipariş No",
     date: "Tarih",
-    productCount: "Urun Sayisi",
+    productCount: "Ürün Sayısı",
     status: "Durum",
     total: "Toplam",
-    action: "Islem",
+    action: "İşlem",
     detail: "Detay",
-    reorder: "Tekrar Siparis Ver",
-    empty: "Henuz siparisiniz bulunmuyor.",
-    emptyDesc: "Siparis verdiginizde burada goruntulenecektir.",
-    loading: "Yukleniyor...",
-    prev: "Onceki",
+    reorder: "Tekrar Sipariş Ver",
+    empty: "Henüz siparişiniz bulunmuyor.",
+    emptyDesc: "Sipariş verdiğinizde burada görüntülenecektir.",
+    loading: "Yükleniyor...",
+    prev: "Önceki",
     next: "Sonraki",
     page: "Sayfa",
     of: "/",
-    items: "urun",
+    items: "ürün",
     pending: "Beklemede",
-    confirmed: "Onaylandi",
-    production: "Uretimde",
+    confirmed: "Onaylandı",
+    production: "Üretimde",
     shipping: "Kargoda",
     delivered: "Teslim Edildi",
-    cancelled: "Iptal",
-    error: "Siparisler yuklenirken bir hata olustu.",
+    cancelled: "İptal",
+    error: "Siparişler yüklenirken bir hata oluştu.",
   },
   en: {
     title: "My Orders",
@@ -76,7 +76,7 @@ const statusOptions: OrderStatus[] = ["pending", "confirmed", "production", "shi
 
 export default function SiparislerimPage() {
   const { locale } = useLocale();
-  const t = labels[locale] || labels.tr;
+  const t = labels[locale] || labels.en || labels.tr;
 
   const [orders, setOrders] = useState<OrderWithItems[]>([]);
   const [loading, setLoading] = useState(true);
@@ -262,7 +262,7 @@ export default function SiparislerimPage() {
               </thead>
               <tbody className="divide-y divide-neutral-100">
                 {orders.map((order) => (
-                  <tr key={order.id} className="transition-colors hover:bg-neutral-50/50">
+                  <tr key={order.id} className="transition-colors hover:bg-neutral-50/50 dark:hover:bg-neutral-700/50">
                     <td className="px-4 py-3.5">
                       <span className="font-mono text-sm font-semibold text-[#0A1628]">
                         #{order.order_number}

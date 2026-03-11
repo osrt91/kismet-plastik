@@ -21,7 +21,8 @@
     "sampleRequest": "طلب عينة",
     "allProducts": "عرض جميع المنتجات",
     "glossary": "مسرد التغليف",
-    "customMolding": "القوالب المخصصة"
+    "customMolding": "القوالب المخصصة",
+    "dealerPayment": "دفع الوكيل"
   },
   "home": {
     "badge": "حلول تغليف مستحضرات التجميل B2B",
@@ -95,15 +96,15 @@
     "highCapacityDesc": "نلبي الطلبات الكبيرة بطاقة إنتاجية شهرية بالملايين.",
     "support": "دعم العملاء على مدار الساعة",
     "supportDesc": "فريقنا المتخصص معكم في كل مرحلة، قبل وبعد البيع.",
-    "processStep1Title": "Raw Material Selection",
-    "processStep1Desc": "We carefully select the highest quality PET, HDPE, and PP raw materials.",
-    "processStep2Title": "Production",
-    "processStep2Desc": "High-capacity precision manufacturing with state-of-the-art machines.",
-    "processStep3Title": "Quality Control",
-    "processStep3Desc": "Quality guaranteed through ISO 9001, ISO 22000 and FSSC 22000 standards.",
-    "processStep4Title": "Delivery",
-    "processStep4Desc": "On-time delivery with our fast and secure logistics network.",
-    "processPhotoPlaceholder": "Photo Coming Soon"
+    "processStep1Title": "اختيار المواد الخام",
+    "processStep1Desc": "نختار أجود المواد الخام بعناية فائقة",
+    "processStep2Title": "الإنتاج",
+    "processStep2Desc": "إنتاج دقيق في منشآتنا الحديثة",
+    "processStep3Title": "مراقبة الجودة",
+    "processStep3Desc": "عملية مراقبة جودة من 4 مراحل",
+    "processStep4Title": "التسليم",
+    "processStep4Desc": "تسليم آمن وسريع",
+    "processPhotoPlaceholder": "صورة منشأة الإنتاج"
   },
   "homeStrengths": [
     "المنتج الرائد لتغليف مستحضرات التجميل في تركيا",

@@ -16,6 +16,7 @@ interface ImageLightboxProps {
   onClose: () => void;
   onNext: () => void;
   onPrev: () => void;
+  locale?: string;
 }
 
 const overlayVariants = {
@@ -44,13 +45,20 @@ const imageVariants = {
   }),
 };
 
+const lightboxLabels: Record<string, { close: string; prev: string; next: string }> = {
+  tr: { close: "Kapat", prev: "Onceki", next: "Sonraki" },
+  en: { close: "Close", prev: "Previous", next: "Next" },
+};
+
 export default function ImageLightbox({
   images,
   currentIndex,
   onClose,
   onNext,
   onPrev,
+  locale = "tr",
 }: ImageLightboxProps) {
+  const labels = lightboxLabels[locale] || lightboxLabels.tr;
   const [direction, setDirection] = useState(0);
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
@@ -139,7 +147,7 @@ export default function ImageLightbox({
         <button
           onClick={onClose}
           className="absolute right-4 top-4 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white/80 transition-all hover:bg-white/20 hover:text-white"
-          aria-label="Kapat"
+          aria-label={labels.close}
         >
           <X size={22} />
         </button>
@@ -154,7 +162,7 @@ export default function ImageLightbox({
           <button
             onClick={handlePrev}
             className="absolute left-3 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white/80 transition-all hover:bg-white/20 hover:text-white sm:left-6"
-            aria-label="Onceki"
+            aria-label={labels.prev}
           >
             <ChevronLeft size={24} />
           </button>
@@ -165,7 +173,7 @@ export default function ImageLightbox({
           <button
             onClick={handleNext}
             className="absolute right-3 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white/80 transition-all hover:bg-white/20 hover:text-white sm:right-6"
-            aria-label="Sonraki"
+            aria-label={labels.next}
           >
             <ChevronRight size={24} />
           </button>

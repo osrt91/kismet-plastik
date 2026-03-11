@@ -71,6 +71,19 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ success: false, error: "Urun listesi bos" }, { status: 400 });
     }
 
+    // Validate each item
+    for (const item of items) {
+      if (!item.stokKodu || typeof item.stokKodu !== "string") {
+        return NextResponse.json({ success: false, error: "Gecersiz urun kodu" }, { status: 400 });
+      }
+      if (typeof item.miktar !== "number" || item.miktar < 1 || !Number.isInteger(item.miktar)) {
+        return NextResponse.json({ success: false, error: "Miktar pozitif tam sayi olmalidir" }, { status: 400 });
+      }
+      if (typeof item.birimFiyat !== "number" || item.birimFiyat < 0) {
+        return NextResponse.json({ success: false, error: "Gecersiz birim fiyat" }, { status: 400 });
+      }
+    }
+
     const { data: mapping } = await supabase
       .from("dealer_cari_mappings")
       .select("dia_cari_kodu, can_direct_order, is_approved")

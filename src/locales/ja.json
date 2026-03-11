@@ -21,7 +21,8 @@
     "sampleRequest": "サンプル請求",
     "allProducts": "全製品を見る",
     "glossary": "パッケージ用語集",
-    "customMolding": "カスタム金型"
+    "customMolding": "カスタム金型",
+    "dealerPayment": "代理店決済"
   },
   "home": {
     "badge": "B2B化粧品パッケージソリューション",
@@ -95,15 +96,15 @@
     "highCapacityDesc": "月間数百万個の生産能力で、大規模な受注に対応します。",
     "support": "24時間カスタマーサポート",
     "supportDesc": "専門チームが販売前から販売後まで、あらゆる段階でサポートいたします。",
-    "processStep1Title": "Raw Material Selection",
-    "processStep1Desc": "We carefully select the highest quality PET, HDPE, and PP raw materials.",
-    "processStep2Title": "Production",
-    "processStep2Desc": "High-capacity precision manufacturing with state-of-the-art machines.",
-    "processStep3Title": "Quality Control",
-    "processStep3Desc": "Quality guaranteed through ISO 9001, ISO 22000 and FSSC 22000 standards.",
-    "processStep4Title": "Delivery",
-    "processStep4Desc": "On-time delivery with our fast and secure logistics network.",
-    "processPhotoPlaceholder": "Photo Coming Soon"
+    "processStep1Title": "原材料の選定",
+    "processStep1Desc": "最高品質の原材料を厳選",
+    "processStep2Title": "生産",
+    "processStep2Desc": "最新設備での精密生産",
+    "processStep3Title": "品質管理",
+    "processStep3Desc": "4段階の品質管理プロセス",
+    "processStep4Title": "納品",
+    "processStep4Desc": "安全で迅速な納品",
+    "processPhotoPlaceholder": "生産施設の写真"
   },
   "homeStrengths": [
     "トルコを代表する化粧品パッケージメーカー",

@@ -74,7 +74,7 @@ const labels: Record<string, Record<string, string>> = {
 export default function SiparisDetayPage() {
   const params = useParams();
   const { locale } = useLocale();
-  const t = labels[locale] || labels.tr;
+  const t = labels[locale] || labels.en || labels.tr;
   const orderId = params?.id as string;
 
   const [order, setOrder] = useState<OrderDetail | null>(null);
@@ -301,7 +301,7 @@ export default function SiparisDetayPage() {
             </thead>
             <tbody className="divide-y divide-neutral-100 dark:divide-neutral-700">
               {order.order_items.map((item) => (
-                <tr key={item.id} className="transition-colors hover:bg-neutral-50/50">
+                <tr key={item.id} className="transition-colors hover:bg-neutral-50/50 dark:hover:bg-neutral-700/50">
                   <td className="px-6 py-3.5">
                     <p className="text-sm font-medium text-neutral-900 dark:text-white">{item.product_name}</p>
                     {item.notes && (

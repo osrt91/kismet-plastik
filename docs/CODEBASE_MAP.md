@@ -148,8 +148,7 @@ kismetplastik-new/
 ├── twa/                         # Android TWA config
 ├── next.config.ts               # Security headers, image optimization, caching
 ├── tsconfig.json                # Strict mode, ES2022, @/* alias
-├── components.json              # shadcn/ui (new-york style)
-└── vercel.json                  # Deployment config (fra1 region)
+└── components.json              # shadcn/ui (new-york style)
 ```
 
 ## Module Guide

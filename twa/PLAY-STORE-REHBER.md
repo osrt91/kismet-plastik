@@ -9,7 +9,7 @@ Bu rehber, Kısmet Plastik PWA'yı Google Play Store'a yüklemek için adım ad�
 1. **Node.js 18+** (zaten yüklü)
 2. **Google Play Console hesabı** (25$ tek seferlik kayıt)
 3. **Bubblewrap CLI** (zaten yüklü: `npm i -g @bubblewrap/cli`)
-4. **Site canlı olmalı**: `https://kismetplastik.vercel.app` erişilebilir
+4. **Site canlı olmalı**: `https://www.kismetplastik.com` erişilebilir
 
 ---
 
@@ -19,7 +19,7 @@ Terminal'de bu klasöre (`twa/`) gelin ve çalıştırın:
 
 ```bash
 cd twa
-bubblewrap init --manifest https://kismetplastik.vercel.app/manifest.json
+bubblewrap init --manifest https://www.kismetplastik.com/manifest.json
 ```
 
 Bubblewrap şu soruları soracak:
@@ -74,7 +74,7 @@ Adım 2'deki SHA256 fingerprint'i yapıştırın:
 
 Sonra siteyi tekrar deploy edin:
 ```bash
-cd .. && vercel --prod
+cd .. && npm run build
 ```
 
 ---
@@ -155,7 +155,7 @@ Uygulama güncellemesi için:
 
 ### Adres çubuğu görünüyor
 - `assetlinks.json` doğru SHA256 fingerprint'i içermiyor
-- Doğrulama: `https://kismetplastik.vercel.app/.well-known/assetlinks.json`
+- Doğrulama: `https://www.kismetplastik.com/.well-known/assetlinks.json`
 - Google'ın doğrulama aracı: https://developers.google.com/digital-asset-links/tools/generator
 
 ### Build hatası

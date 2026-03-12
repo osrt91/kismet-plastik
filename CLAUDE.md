@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-Kısmet Plastik is a **B2B cosmetic packaging** company website and dealer portal built with **Next.js 16** (App Router). The site is bilingual (Turkish primary, English secondary), deployed on **Vercel** (region: `fra1`), and also packaged as an Android TWA for the Google Play Store.
+Kısmet Plastik is a **B2B cosmetic packaging** company website and dealer portal built with **Next.js 16** (App Router). The site is bilingual (Turkish primary, English secondary), self-hosted on a **Hostinger VPS** (Ubuntu 24.04) with **self-hosted Supabase**, and also packaged as an Android TWA for the Google Play Store.
 
 **Production URL:** `https://www.kismetplastik.com`
 
@@ -29,7 +29,7 @@ For detailed architecture, module guide, data flow diagrams, and navigation guid
 | 3D | Three.js / React Three Fiber + Drei |
 | Animations | Framer Motion, CSS scroll-driven animations |
 | Icons | Lucide React, Phosphor Icons, React Icons |
-| Deployment | Vercel + Android TWA (Bubblewrap) |
+| Deployment | Hostinger VPS (PM2 + Docker + Traefik) + Android TWA (Bubblewrap) |
 
 ## Quick Commands
 
@@ -90,7 +90,6 @@ There are no test scripts configured. Linting is the only verification step.
 │   │   └── product.ts           # Product/category/filter types
 │   └── proxy.ts             # Next.js 16 middleware (locale routing + admin guard)
 ├── twa/                     # Android TWA config and deployment guide
-├── vercel.json              # Vercel deployment config
 └── components.json          # shadcn/ui configuration
 ```
 

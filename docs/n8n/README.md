@@ -4,7 +4,7 @@ This document describes how to integrate the Kismet Plastik B2B platform with [n
 
 ## Environment Variables
 
-Add the following to your `.env.local` (or Vercel environment settings):
+Add the following to your `.env.local`:
 
 | Variable | Required | Description |
 |----------|----------|-------------|

@@ -72,7 +72,7 @@ export default function Categories() {
             <span className="mb-3 inline-block font-mono text-xs font-bold uppercase tracking-[0.2em] text-[#F59E0B]">
               {h.categoriesOverline}
             </span>
-            <h2 className="font-display mb-4 text-3xl font-extrabold text-[#0A1628] dark:text-white sm:text-4xl lg:text-5xl">
+            <h2 className="font-display mb-4 text-2xl font-bold text-[#0A1628] dark:text-white sm:text-3xl lg:text-4xl">
               {h.categoriesTitle}
             </h2>
             <div className="mb-4 flex items-center gap-2">
@@ -125,11 +125,11 @@ export default function Categories() {
                 <Link
                   key={categorySlugs[i]}
                   href={cat.href}
-                  className="group relative block min-w-[280px] flex-shrink-0 overflow-hidden rounded-2xl border border-[#0A1628]/8 bg-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg dark:border-white/8 dark:bg-[#0f1d32] dark:hover:border-[#F59E0B]/20 sm:min-w-[300px]"
+                  className="card-shine group relative block min-w-[280px] flex-shrink-0 overflow-hidden rounded-2xl border border-[#0A1628]/8 bg-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_20px_60px_-15px_rgba(10,22,40,0.15)] dark:border-white/8 dark:bg-[#0f1d32] dark:hover:border-[#F59E0B]/20 dark:hover:shadow-[0_20px_60px_-15px_rgba(245,158,11,0.1)] sm:min-w-[300px]"
                   style={{ scrollSnapAlign: "start" }}
                 >
                   {/* Image area - large with placeholder */}
-                  <div className="relative flex aspect-[5/4] items-center justify-center overflow-hidden bg-gradient-to-br from-neutral-50 to-neutral-100 dark:from-[#1a2744] dark:to-[#0f1d32]">
+                  <div className="relative flex aspect-[5/4] items-center justify-center overflow-hidden bg-gradient-to-br from-amber-50/50 to-neutral-50 dark:from-[#1a2744]/80 dark:to-[#0f1d32]">
                     <Package
                       size={56}
                       strokeWidth={1.2}
@@ -165,7 +165,7 @@ export default function Categories() {
                   </div>
 
                   {/* Hover accent line */}
-                  <div className="absolute inset-x-0 bottom-0 h-[3px] origin-left scale-x-0 bg-[#F59E0B] transition-transform duration-500 ease-out group-hover:scale-x-100" />
+                  <div className="absolute inset-x-0 bottom-0 h-[4px] origin-left scale-x-0 bg-[#F59E0B] transition-transform duration-500 ease-out group-hover:scale-x-100" />
                 </Link>
               ))}
             </div>

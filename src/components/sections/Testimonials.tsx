@@ -33,7 +33,7 @@ export default function Testimonials() {
             <span className="font-body mb-3 inline-block text-sm font-bold uppercase tracking-widest text-[#F59E0B]">
               {overline}
             </span>
-            <h2 className="font-display mb-4 text-3xl font-extrabold text-[#0A1628] dark:text-white sm:text-4xl">
+            <h2 className="font-display mb-4 text-2xl font-bold text-[#0A1628] dark:text-white sm:text-3xl">
               {title}
             </h2>
           </div>
@@ -43,11 +43,11 @@ export default function Testimonials() {
         <div className="mb-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {testimonials.map((t, i) => (
             <AnimateOnScroll key={t.company} animation="fade-up" delay={i * 100}>
-              <article className="group relative h-full overflow-hidden rounded-2xl border border-border bg-card/70 p-8 shadow-sm shadow-[#0A1628]/5 backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:border-[#0A1628]/20 hover:shadow-xl hover:shadow-[#0A1628]/10 dark:border-white/10 dark:bg-white/5 dark:shadow-none dark:backdrop-blur-lg dark:hover:border-[#F59E0B]/30 dark:hover:shadow-lg dark:hover:shadow-[#F59E0B]/5">
+              <article className="group relative h-full overflow-hidden rounded-2xl border border-border bg-card/70 p-8 shadow-sm shadow-[#0A1628]/5 backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:border-[#0A1628]/20 hover:shadow-xl hover:shadow-[#0A1628]/10 dark:border-white/[0.08] dark:bg-white/[0.04] dark:shadow-none dark:backdrop-blur-xl dark:hover:border-[#F59E0B]/30 dark:hover:shadow-lg dark:hover:shadow-[#F59E0B]/5">
                 <div className="absolute left-0 right-0 top-0 h-1 bg-gradient-to-r from-[#F59E0B]/60 via-[#F59E0B] to-[#F59E0B]/60 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                 <div className="relative z-10">
                   <Quote
-                    className="mb-4 text-[#F59E0B]/30 transition-colors duration-300 group-hover:text-[#F59E0B]/50 dark:text-[#F59E0B]/20"
+                    className="mb-4 text-[#F59E0B]/30 transition-colors duration-300 group-hover:text-[#F59E0B]/50 dark:text-[#F59E0B]/25 dark:group-hover:text-[#F59E0B]/40"
                     size={48}
                     strokeWidth={1.5}
                     fill="currentColor"
@@ -56,7 +56,7 @@ export default function Testimonials() {
                     {Array.from({ length: 5 }).map((_, j) => (
                       <Star
                         key={j}
-                        className="fill-[#F59E0B] text-[#F59E0B] drop-shadow-[0_0_2px_rgba(245,158,11,0.3)]"
+                        className="fill-[#F59E0B] text-[#F59E0B] drop-shadow-[0_0_4px_rgba(245,158,11,0.4)]"
                         size={16}
                       />
                     ))}
@@ -65,7 +65,7 @@ export default function Testimonials() {
                     &ldquo;{t.text}&rdquo;
                   </p>
                   <div className="flex items-center gap-4 border-t border-[#0A1628]/5 pt-5 dark:border-white/10">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#0A1628] to-[#0A1628]/80 text-white shadow-md shadow-[#0A1628]/20 dark:from-[#F59E0B]/20 dark:to-[#F59E0B]/10 dark:text-[#F59E0B] dark:shadow-none">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#0A1628] to-[#0A1628]/80 text-white shadow-md shadow-[#0A1628]/20 dark:from-[#F59E0B]/20 dark:to-[#F59E0B]/10 dark:text-[#F59E0B] dark:shadow-none dark:ring-2 dark:ring-[#F59E0B]/20">
                       <span className="font-display text-base font-bold">{t.name.charAt(0)}</span>
                     </div>
                     <div className="min-w-0">
@@ -84,7 +84,7 @@ export default function Testimonials() {
         <AnimateOnScroll animation="fade-up">
           <div className="text-center">
             <div className="mb-6 flex justify-center">
-              <span className="font-body inline-flex items-center gap-2 rounded-full border border-[#F59E0B]/30 bg-[#F59E0B]/10 px-5 py-2 text-sm font-semibold text-[#F59E0B] dark:border-[#F59E0B]/20 dark:bg-[#F59E0B]/5">
+              <span className="font-body inline-flex items-center gap-2 rounded-full border border-[#F59E0B]/30 bg-[#F59E0B]/10 px-5 py-2 text-sm font-semibold text-[#F59E0B] shadow-sm shadow-amber-500/20 dark:border-[#F59E0B]/20 dark:bg-[#F59E0B]/5">
                 {badge}
               </span>
             </div>
@@ -92,7 +92,7 @@ export default function Testimonials() {
               {referenceCompanies.map((name) => (
                 <span
                   key={name}
-                  className="font-body shrink-0 rounded-full border border-border bg-card/60 px-5 py-2.5 text-sm font-medium text-foreground/70 backdrop-blur-sm transition-all duration-200 hover:border-[#F59E0B]/40 hover:bg-[#F59E0B]/10 hover:text-foreground dark:border-white/10 dark:bg-white/5 dark:text-neutral-300 dark:hover:border-[#F59E0B]/30 dark:hover:bg-[#F59E0B]/10 dark:hover:text-[#F59E0B]"
+                  className="font-body shrink-0 rounded-full border border-border bg-card/60 px-5 py-2.5 text-sm font-medium text-foreground/70 backdrop-blur-sm transition-all duration-200 hover:border-[#F59E0B]/40 hover:bg-[#F59E0B]/10 hover:text-foreground hover:shadow-[0_0_15px_rgba(245,158,11,0.15)] dark:border-white/10 dark:bg-white/5 dark:text-neutral-300 dark:hover:border-[#F59E0B]/30 dark:hover:bg-[#F59E0B]/10 dark:hover:text-[#F59E0B]"
                 >
                   {name}
                 </span>

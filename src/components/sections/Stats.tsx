@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useInView } from "framer-motion";
 import { useLocale } from "@/contexts/LocaleContext";
 import { Trophy, Package, Users, Factory } from "lucide-react";
 
@@ -42,11 +43,13 @@ function AnimatedNumber({
     return () => cancelAnimationFrame(frame);
   }, [inView, target]);
 
+  const isAnimating = inView && count < target;
+
   return (
     <span
-      className={`inline-block transition-transform duration-300 ${
+      className={`inline-block transition-all duration-300 ${
         inView && count === target ? "scale-100" : inView ? "scale-105" : "scale-90"
-      }`}
+      } ${isAnimating ? "[text-shadow:0_0_20px_rgba(245,158,11,0.6),0_0_40px_rgba(245,158,11,0.3)]" : ""}`}
     >
       {count}
       {suffix}
@@ -59,23 +62,7 @@ export default function Stats() {
   const h = dict.home;
   const stats = statValues.map((s, i) => ({ ...s, label: h[statKeys[i]] }));
   const ref = useRef<HTMLDivElement>(null);
-  const [inView, setInView] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setInView(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.3 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
+  const inView = useInView(ref, { once: true, amount: 0.3 });
 
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-[#0A1628] via-[#0E1D35] to-[#0A1628] py-20 lg:py-28">
@@ -106,12 +93,12 @@ export default function Stats() {
           <div className="mb-3 flex items-center gap-3">
             <span className="h-px w-8 bg-gradient-to-r from-transparent to-[#F59E0B]/70" />
             <span className="font-body text-xs font-semibold uppercase tracking-[0.2em] text-[#F59E0B]">
-              {"Rakamlarla Biz"}
+              {h.statsOverline}
             </span>
             <span className="h-px w-8 bg-gradient-to-l from-transparent to-[#F59E0B]/70" />
           </div>
-          <h2 className="font-display text-2xl font-bold text-white sm:text-3xl lg:text-4xl">
-            {"Güvenilir Üretim Gücü"}
+          <h2 className="font-display text-xl font-bold text-white sm:text-2xl lg:text-3xl">
+            {h.statsTitle}
           </h2>
           <div className="mt-4 h-1 w-16 rounded-full bg-gradient-to-r from-[#F59E0B] to-[#F59E0B]/30" />
         </div>
@@ -130,7 +117,7 @@ export default function Stats() {
                 )}
 
                 <div
-                  className={`group relative flex w-full flex-col items-center overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.03] px-4 py-8 text-center backdrop-blur-sm transition-all duration-700 hover:border-[#F59E0B]/20 hover:bg-white/[0.06] hover:shadow-[0_0_30px_-5px_rgba(245,158,11,0.15)] sm:px-6 sm:py-10 ${
+                  className={`group relative flex w-full flex-col items-center overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.03] px-4 py-8 text-center backdrop-blur-sm transition-all duration-700 hover:border-[#F59E0B]/20 hover:bg-white/[0.06] hover:shadow-[0_0_40px_-5px_rgba(245,158,11,0.2)] sm:px-6 sm:py-10 ${
                     inView
                       ? "translate-y-0 opacity-100"
                       : "translate-y-8 opacity-0"
@@ -141,12 +128,12 @@ export default function Stats() {
                   <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" style={{ background: "radial-gradient(ellipse at 50% 0%, rgba(245,158,11,0.08) 0%, transparent 70%)" }} />
 
                   {/* Icon */}
-                  <div className="relative mb-5 flex h-14 w-14 items-center justify-center rounded-2xl border border-[#F59E0B]/20 bg-[#F59E0B]/10 text-[#F59E0B] shadow-[0_0_20px_-5px_rgba(245,158,11,0.2)] transition-all duration-300 group-hover:border-[#F59E0B]/30 group-hover:bg-[#F59E0B]/15 group-hover:shadow-[0_0_25px_-3px_rgba(245,158,11,0.3)]">
+                  <div className="relative mb-5 flex h-14 w-14 items-center justify-center rounded-2xl border border-[#F59E0B]/20 bg-[#F59E0B]/10 text-[#F59E0B] shadow-[0_0_20px_-5px_rgba(245,158,11,0.2)] transition-all duration-300 group-hover:border-[#F59E0B]/30 group-hover:bg-[#F59E0B]/15 group-hover:shadow-[0_0_30px_rgba(245,158,11,0.4)]">
                     <Icon size={26} strokeWidth={1.5} />
                   </div>
 
                   {/* Number */}
-                  <div className="relative mb-3 font-mono text-3xl font-extrabold text-white sm:text-4xl lg:text-5xl">
+                  <div className="relative mb-3 font-mono text-2xl font-bold text-white sm:text-3xl lg:text-4xl">
                     <AnimatedNumber
                       target={stat.value}
                       suffix={stat.suffix}

@@ -34,7 +34,7 @@ export default function About() {
               {/* Amber side accent bar - visible on desktop */}
               <div className="absolute -left-3 top-8 bottom-8 hidden w-1 rounded-full bg-gradient-to-b from-[#F59E0B] via-[#F59E0B]/50 to-transparent lg:block" />
 
-              <div className="group relative aspect-[4/3] overflow-hidden rounded-2xl bg-gradient-to-br from-[#0A1628]/5 to-[#0A1628]/10 shadow-lg shadow-[#0A1628]/5 ring-1 ring-[#0A1628]/5 transition-all duration-500 hover:shadow-xl hover:shadow-[#F59E0B]/10 dark:from-[#F59E0B]/5 dark:to-[#0A1628]/40 dark:ring-white/10 sm:rounded-3xl">
+              <div className="group relative aspect-[4/3] overflow-hidden rounded-2xl bg-gradient-to-br from-[#0A1628]/8 to-[#F59E0B]/5 shadow-lg shadow-[#0A1628]/5 ring-1 ring-[#0A1628]/5 transition-all duration-500 hover:shadow-xl hover:shadow-[#F59E0B]/10 dark:from-[#F59E0B]/5 dark:to-[#0A1628]/40 dark:ring-white/10 sm:rounded-3xl">
                 <div className="absolute inset-0 flex items-center justify-center transition-transform duration-700 group-hover:scale-105">
                   <div className="text-center">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -55,11 +55,11 @@ export default function About() {
 
               {/* Floating Badge with pulse-glow */}
               <div
-                className="absolute -bottom-6 -right-4 rounded-2xl bg-[#F59E0B] px-6 py-4 shadow-xl shadow-[#F59E0B]/20 ring-1 ring-[#F59E0B]/20 transition-transform duration-300 hover:scale-105 sm:right-4"
+                className="absolute -bottom-6 -right-4 rounded-2xl bg-[#F59E0B] px-6 py-4 shadow-[0_8px_40px_rgba(245,158,11,0.35)] ring-1 ring-[#F59E0B]/20 transition-transform duration-300 hover:scale-105 sm:right-4"
                 style={{ animation: "pulse-glow 2.5s ease-in-out infinite" }}
               >
                 <div className="font-mono text-3xl font-extrabold text-[#0A1628]">
-                  55+
+                  60+
                 </div>
                 <div className="font-body text-sm font-semibold text-[#0A1628]/70">
                   {h.cardExperienceLabel}
@@ -75,7 +75,7 @@ export default function About() {
                 <span className="h-1.5 w-1.5 rounded-full bg-[#F59E0B]" />
                 {h.aboutOverline}
               </span>
-              <h2 className="font-display mb-6 text-3xl font-extrabold leading-tight text-[#0A1628] dark:text-white sm:text-4xl lg:text-[2.75rem]">
+              <h2 className="font-display mb-6 text-2xl font-bold leading-tight text-[#0A1628] dark:text-white sm:text-3xl lg:text-[2.25rem]">
                 {h.aboutTitle}{" "}
                 <span className="relative text-[#F59E0B]">
                   {h.aboutTitleAccent}
@@ -94,7 +94,7 @@ export default function About() {
                 {strengths.map((item) => (
                   <li
                     key={item}
-                    className="flex items-start gap-3 rounded-xl border border-[#0A1628]/5 bg-white/80 px-4 py-3.5 shadow-sm transition-all duration-200 hover:border-[#F59E0B]/30 hover:bg-[#F59E0B]/5 hover:shadow-md dark:border-white/10 dark:bg-white/5 dark:hover:border-[#F59E0B]/30 dark:hover:bg-[#F59E0B]/10"
+                    className="flex items-start gap-3 rounded-xl border border-[#0A1628]/5 bg-white/80 px-4 py-3.5 shadow-sm transition-all duration-200 hover:border-[#F59E0B]/30 hover:bg-[#F59E0B]/5 hover:shadow-md hover:scale-[1.02] dark:border-white/10 dark:bg-white/5 dark:hover:border-[#F59E0B]/30 dark:hover:bg-[#F59E0B]/10"
                   >
                     <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#F59E0B] text-[#0A1628] shadow-sm shadow-[#F59E0B]/30">
                       <Check size={12} strokeWidth={3} />
@@ -108,7 +108,7 @@ export default function About() {
 
               <Link
                 href="/hakkimizda"
-                className="group inline-flex items-center gap-2.5 rounded-xl bg-[#0A1628] px-8 py-4 text-sm font-bold text-white shadow-lg shadow-[#0A1628]/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0A1628]/90 hover:shadow-xl hover:shadow-[#0A1628]/30 active:scale-[0.98] dark:bg-[#F59E0B] dark:text-[#0A1628] dark:shadow-[#F59E0B]/20 dark:hover:bg-[#F59E0B]/90"
+                className="group inline-flex items-center gap-2.5 rounded-xl bg-[#0A1628] px-8 py-4 text-sm font-bold text-white shadow-lg shadow-[#0A1628]/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0A1628]/90 hover:shadow-xl hover:shadow-[#0A1628]/30 active:scale-[0.98] dark:bg-[#F59E0B] dark:text-[#0A1628] dark:shadow-[0_0_25px_rgba(245,158,11,0.3)] dark:hover:bg-[#F59E0B]/90 dark:hover:shadow-[0_0_40px_rgba(245,158,11,0.45)]"
               >
                 {h.aboutMore}
                 <ArrowRight

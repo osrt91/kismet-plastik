@@ -38,19 +38,19 @@ export default function CTA() {
       </div>
 
       {/* Decorative gradient orbs */}
-      <div className="absolute -left-32 top-1/4 h-80 w-80 rounded-full bg-[#F59E0B]/[0.06] blur-[100px]" />
-      <div className="absolute -right-32 bottom-1/4 h-80 w-80 rounded-full bg-[#F59E0B]/[0.04] blur-[120px]" />
+      <div className="absolute -left-32 top-1/4 h-96 w-96 rounded-full bg-[#F59E0B]/[0.08] blur-[100px]" />
+      <div className="absolute -right-32 bottom-1/4 h-96 w-96 rounded-full bg-[#F59E0B]/[0.06] blur-[120px]" />
 
       <div className="relative mx-auto max-w-5xl px-6 text-center lg:px-8">
         <AnimateOnScroll animation="fade-up">
           <h2
-            className="font-display mb-6 text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl xl:text-[3.5rem] leading-tight"
+            className="font-display mb-6 text-2xl font-bold tracking-tight text-white sm:text-3xl lg:text-4xl leading-tight"
             style={{ textShadow: "0 2px 20px rgba(0,0,0,0.4), 0 0 40px rgba(245,158,11,0.08)" }}
           >
             {h.ctaTitle}{" "}
             <span
               className="text-[#F59E0B]"
-              style={{ textShadow: "0 0 30px rgba(245,158,11,0.3)" }}
+              style={{ textShadow: "0 0 30px rgba(245,158,11,0.4), 0 0 60px rgba(245,158,11,0.2)" }}
             >
               {h.ctaTitleAccent}
             </span>{" "}
@@ -68,7 +68,7 @@ export default function CTA() {
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-5">
             <Button
               size="lg"
-              className="group relative rounded-xl bg-[#F59E0B] text-[#0A1628] px-10 py-5 text-base font-bold shadow-[0_0_20px_rgba(245,158,11,0.3)] transition-all duration-300 hover:bg-[#FBBF24] hover:shadow-[0_0_35px_rgba(245,158,11,0.5)] hover:scale-[1.03] active:scale-[0.98] min-h-[52px] min-w-[200px]"
+              className="group relative animate-glow-pulse rounded-xl bg-[#F59E0B] text-[#0A1628] px-10 py-5 text-base font-bold shadow-[0_0_40px_rgba(245,158,11,0.4)] transition-all duration-300 hover:bg-[#FBBF24] hover:shadow-[0_0_60px_rgba(245,158,11,0.6)] hover:scale-[1.03] active:scale-[0.98] min-h-[52px] min-w-[200px]"
               asChild
             >
               <Link href="/teklif-al">
@@ -106,7 +106,7 @@ export default function CTA() {
             {trustBadges.map(({ label, icon: Icon }) => (
               <div
                 key={label}
-                className="flex items-center gap-2.5 rounded-full border border-white/[0.08] bg-white/[0.04] px-5 py-2.5 backdrop-blur-sm transition-all duration-300 hover:border-[#F59E0B]/20 hover:bg-white/[0.07] hover:scale-105"
+                className="card-shine flex items-center gap-2.5 rounded-full border border-white/[0.12] bg-white/[0.04] px-5 py-2.5 backdrop-blur-sm transition-all duration-300 hover:border-[#F59E0B]/30 hover:bg-white/[0.07] hover:scale-105"
               >
                 <Icon size={16} className="text-[#F59E0B]" />
                 <span className="font-mono text-xs font-semibold tracking-wide text-white/55">{label}</span>

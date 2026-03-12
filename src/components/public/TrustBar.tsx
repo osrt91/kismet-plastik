@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
 import { useLocale } from "@/contexts/LocaleContext";
 
 interface StatItem {
@@ -22,7 +23,6 @@ function useCountUp(target: number, duration: number, isVisible: boolean) {
     function tick(now: number) {
       const elapsed = now - startTime;
       const progress = Math.min(elapsed / duration, 1);
-      // ease-out cubic
       const eased = 1 - Math.pow(1 - progress, 3);
       setCount(Math.round(eased * target));
       if (progress < 1) {
@@ -36,19 +36,24 @@ function useCountUp(target: number, duration: number, isVisible: boolean) {
   return count;
 }
 
-function StatBlock({ item, isVisible }: { item: StatItem; isVisible: boolean }) {
+function StatBlock({ item, isVisible, index }: { item: StatItem; isVisible: boolean; index: number }) {
   const count = useCountUp(item.value, 2000, isVisible);
 
   return (
-    <div className="flex flex-col items-center gap-1 py-2">
-      <span className="font-mono text-3xl font-bold text-[var(--primary-900)] dark:text-white">
+    <motion.div
+      initial={{ opacity: 0, y: 15 }}
+      animate={isVisible ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.5, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+      className="flex flex-col items-center gap-1.5 py-3"
+    >
+      <span className="font-mono text-3xl font-bold text-navy-900 dark:text-amber-400 sm:text-4xl">
         {count}
         {item.suffix}
       </span>
-      <span className="font-body text-sm text-neutral-600 dark:text-neutral-400">
+      <span className="font-body text-xs font-medium uppercase tracking-wider text-navy-900/50 dark:text-white/40 sm:text-sm">
         {item.label}
       </span>
-    </div>
+    </motion.div>
   );
 }
 
@@ -56,27 +61,7 @@ export default function TrustBar() {
   const { dict } = useLocale();
   const t = dict.trustBar;
   const ref = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-
-  const handleIntersection = useCallback(
-    (entries: IntersectionObserverEntry[]) => {
-      if (entries[0].isIntersecting) {
-        setIsVisible(true);
-      }
-    },
-    []
-  );
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(handleIntersection, {
-      threshold: 0.3,
-    });
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [handleIntersection]);
+  const inView = useInView(ref, { once: true, amount: 0.3 });
 
   const stats: StatItem[] = [
     { value: 57, suffix: "", label: t.experience },
@@ -88,12 +73,15 @@ export default function TrustBar() {
   return (
     <section
       ref={ref}
-      className="border-y border-neutral-200 bg-[#FAFAF7] py-6 dark:border-neutral-800 dark:bg-neutral-900"
+      className="relative border-y border-navy-900/10 bg-cream-50 py-8 dark:border-amber-500/10 dark:bg-navy-900/80 lg:py-10"
     >
+      {/* Subtle amber gradient line at top */}
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-amber-500/30 to-transparent" />
+
       <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 gap-6 md:grid-cols-4 md:gap-8">
-          {stats.map((item) => (
-            <StatBlock key={item.label} item={item} isVisible={isVisible} />
+          {stats.map((item, i) => (
+            <StatBlock key={item.label} item={item} isVisible={inView} index={i} />
           ))}
         </div>
       </div>

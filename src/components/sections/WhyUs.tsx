@@ -25,7 +25,7 @@ export default function WhyUs() {
             <span className="mb-3 inline-block rounded-full bg-amber-500/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-amber-600 dark:bg-amber-500/20 dark:text-amber-400">
               {h.whyUsOverline}
             </span>
-            <h2 className="font-display mb-4 text-3xl font-extrabold text-[#0A1628] dark:text-white sm:text-4xl lg:text-5xl">
+            <h2 className="font-display mb-4 text-2xl font-bold text-[#0A1628] dark:text-white sm:text-3xl lg:text-4xl">
               {h.whyUsTitle}
             </h2>
             <p className="font-body text-base leading-relaxed text-[#0A1628]/60 dark:text-white/50 lg:text-lg">
@@ -39,10 +39,10 @@ export default function WhyUs() {
           <div className="relative">
             {/* Horizontal connector line behind everything */}
             <div
-              className="pointer-events-none absolute left-0 right-0 top-[52px] z-0 h-[2px]"
+              className="pointer-events-none absolute left-0 right-0 top-[68px] z-0 h-[2px]"
               aria-hidden="true"
             >
-              <div className="mx-auto h-full max-w-[calc(100%-120px)] bg-gradient-to-r from-[#F59E0B]/0 via-[#F59E0B]/40 to-[#F59E0B]/0 dark:via-[#F59E0B]/25" />
+              <div className="mx-auto h-full max-w-[calc(100%-120px)] bg-gradient-to-r from-amber-500/20 via-amber-500/50 to-amber-500/20 dark:from-amber-500/10 dark:via-amber-500/35 dark:to-amber-500/10" />
             </div>
 
             {/* Steps row */}
@@ -53,11 +53,11 @@ export default function WhyUs() {
                   animation="fade-up"
                   delay={i * 180}
                 >
-                  <div className="group relative flex flex-col items-center">
+                  <div className="group relative flex flex-col items-center rounded-2xl p-4 transition-all duration-300 hover:ring-1 hover:ring-amber-500/20">
                     {/* Arrow connector between steps (not on last) */}
                     {i < steps.length - 1 && (
                       <div
-                        className="absolute right-0 top-[40px] z-20 translate-x-1/2"
+                        className="absolute right-0 top-[56px] z-20 translate-x-1/2"
                         aria-hidden="true"
                       >
                         <ChevronRight
@@ -73,7 +73,7 @@ export default function WhyUs() {
                       {/* Outer ring */}
                       <div className="absolute inset-0 rounded-full border-2 border-[#0A1628]/10 transition-colors duration-300 group-hover:border-[#F59E0B]/40 dark:border-white/10 dark:group-hover:border-[#F59E0B]/40" />
                       {/* Inner filled circle */}
-                      <div className="flex h-[76px] w-[76px] items-center justify-center rounded-full bg-[#0A1628] shadow-lg shadow-[#0A1628]/15 transition-transform duration-300 group-hover:scale-105 dark:bg-[#F59E0B]">
+                      <div className="flex h-[76px] w-[76px] items-center justify-center rounded-full bg-[#0A1628] shadow-lg shadow-[#0A1628]/15 transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_0_30px_rgba(245,158,11,0.3)] dark:bg-[#F59E0B] dark:shadow-[0_0_20px_rgba(245,158,11,0.2)]">
                         <span className="font-display text-2xl font-bold text-white dark:text-[#0A1628]">
                           {i + 1}
                         </span>
@@ -91,7 +91,7 @@ export default function WhyUs() {
                     </p>
 
                     {/* Photo placeholder */}
-                    <div className="flex aspect-[4/3] w-full items-center justify-center overflow-hidden rounded-xl border border-[#0A1628]/5 bg-[#0A1628]/[0.03] transition-colors duration-300 group-hover:border-[#F59E0B]/20 group-hover:bg-[#0A1628]/[0.05] dark:border-white/5 dark:bg-white/[0.03] dark:group-hover:border-[#F59E0B]/15 dark:group-hover:bg-white/[0.05]">
+                    <div className="flex aspect-[4/3] w-full items-center justify-center overflow-hidden rounded-xl border border-[#0A1628]/5 bg-[#0A1628]/[0.03] transition-colors duration-300 group-hover:border-[#F59E0B]/20 group-hover:bg-[#0A1628]/[0.05] dark:border-white/8 dark:bg-white/[0.04] dark:backdrop-blur-sm dark:group-hover:border-[#F59E0B]/20 dark:group-hover:bg-white/[0.06]">
                       <div className="flex flex-col items-center gap-2">
                         <Camera
                           size={28}

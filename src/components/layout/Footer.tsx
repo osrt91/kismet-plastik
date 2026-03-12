@@ -81,7 +81,7 @@ export default function Footer() {
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/20" />
 
       {/* Decorative top border */}
-      <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-[var(--accent-500,#F59E0B)] to-transparent" />
+      <div className="h-[3px] w-full bg-gradient-to-r from-transparent via-amber-500 to-transparent" />
 
       {/* Main Footer */}
       <div className="relative mx-auto max-w-7xl px-4 pb-10 pt-14 lg:px-6">
@@ -94,7 +94,7 @@ export default function Footer() {
                 alt="Kısmet Plastik"
                 width={40}
                 height={40}
-                className="h-10 w-10 rounded-lg bg-white/10 p-1 brightness-0 invert"
+                className="h-10 w-10 rounded-lg bg-white/10 p-1 brightness-0 invert transition-shadow duration-300 hover:shadow-[0_0_20px_rgba(245,158,11,0.2)]"
               />
               <span className="text-lg font-bold tracking-tight">
                 Kısmet Plastik
@@ -236,7 +236,7 @@ export default function Footer() {
                 />
                 <button
                   type="submit"
-                  className="flex w-full items-center justify-center gap-2 rounded-lg bg-accent px-4 py-2.5 text-xs font-bold text-accent-foreground transition-all duration-200 hover:bg-accent/90 hover:shadow-[0_0_20px_rgba(245,158,11,0.3)]"
+                  className="flex w-full items-center justify-center gap-2 rounded-lg bg-accent px-4 py-2.5 text-xs font-bold text-accent-foreground shadow-[0_0_15px_rgba(245,158,11,0.2)] transition-all duration-200 hover:bg-accent/90 hover:shadow-[0_0_25px_rgba(245,158,11,0.4)]"
                 >
                   <Send size={12} />
                   {f.newsletterButton}
@@ -250,7 +250,7 @@ export default function Footer() {
                 <a
                   key={social.name}
                   href={social.href}
-                  className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/[0.05] text-white/40 transition-all duration-200 hover:scale-110 hover:bg-[var(--accent-500,#F59E0B)]/20 hover:text-[var(--accent-500,#F59E0B)] hover:shadow-[0_0_12px_rgba(245,158,11,0.25)]"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/[0.05] text-white/40 transition-all duration-200 hover:scale-110 hover:bg-amber-500/20 hover:text-amber-500 hover:shadow-[0_0_18px_rgba(245,158,11,0.35)]"
                   aria-label={social.name}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -268,7 +268,7 @@ export default function Footer() {
         {/* Gradient divider */}
         <div className="h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent" />
         <div className="relative mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-5 sm:flex-row lg:px-6">
-          <span className="text-[11px] text-white/30">
+          <span className="text-[11px] text-white/40">
             &copy; {new Date().getFullYear()} {f.copyright}
           </span>
           <button

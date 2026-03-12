@@ -143,7 +143,7 @@ export default function Header() {
   return (
     <>
       {/* Top Bar */}
-      <div className="hidden border-b border-border/50 bg-primary text-primary-foreground lg:block">
+      <div className="hidden border-b border-border/50 bg-navy-950/95 backdrop-blur-sm text-primary-foreground lg:block">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-1.5 text-[13px]">
           <div className="flex items-center gap-5">
             <a href="tel:+902125498703" className="inline-flex items-center gap-1.5 opacity-80 transition-opacity hover:opacity-100">
@@ -201,13 +201,13 @@ export default function Header() {
       </div>
 
       {/* Main Header */}
-      <header className={clsx("sticky top-0 z-50 w-full transition-all duration-500 ease-in-out", scrolled ? "border-b border-amber-500/20 bg-background/80 shadow-[0_1px_12px_rgba(245,158,11,0.08)] backdrop-blur-xl" : "border-b border-transparent bg-background")}>
+      <header className={clsx("sticky top-0 z-50 w-full transition-all duration-500 ease-in-out", scrolled ? "border-b border-amber-500/25 bg-background/70 shadow-[0_4px_30px_rgba(10,22,40,0.08)] backdrop-blur-2xl" : "border-b border-transparent bg-background")}>
         {/* Subtle amber gradient line at top */}
         <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-amber-500/70 to-transparent" />
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2.5 lg:px-6">
           {/* Logo */}
           <Link href="/" className="flex items-center transition-transform duration-300 ease-out hover:scale-105">
-            <Image src="/images/logo1.svg" alt="Kısmet Plastik" width={160} height={40} className="h-8 w-auto lg:h-10 dark:brightness-0 dark:invert" priority />
+            <Image src="/images/logo1.svg" alt="Kısmet Plastik" width={160} height={40} className="h-8 w-auto lg:h-10 transition-[filter] duration-300 hover:drop-shadow-[0_0_8px_rgba(245,158,11,0.3)] dark:brightness-0 dark:invert" priority />
           </Link>
 
           {/* Desktop Nav — Mega Menu */}
@@ -217,7 +217,7 @@ export default function Header() {
                 <NavigationMenuLink asChild className={clsx(navigationMenuTriggerStyle(), "relative transition-colors duration-200 hover:bg-amber-500/10 hover:text-foreground")}>
                   <Link href="/">
                     {nav.home}
-                    {isActive("/") && <span className="absolute bottom-1 left-1/2 h-0.5 w-5 -translate-x-1/2 rounded-full bg-amber-500" />}
+                    {isActive("/") && <span className="absolute bottom-1 left-1/2 h-[3px] w-5 -translate-x-1/2 rounded-full bg-amber-500" />}
                   </Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
@@ -226,10 +226,10 @@ export default function Header() {
               <NavigationMenuItem>
                 <NavigationMenuTrigger className={clsx("relative transition-colors duration-200 hover:bg-amber-500/10 hover:text-foreground", isActive("/urunler") && "text-foreground")}>
                   {nav.products}
-                  {isActive("/urunler") && <span className="absolute bottom-1 left-1/2 h-0.5 w-5 -translate-x-1/2 rounded-full bg-amber-500" />}
+                  {isActive("/urunler") && <span className="absolute bottom-1 left-1/2 h-[3px] w-5 -translate-x-1/2 rounded-full bg-amber-500" />}
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <div className="grid w-[520px] grid-cols-[1fr_180px] gap-0 rounded-xl border border-border/60 bg-background p-0 shadow-xl shadow-black/[0.08]">
+                  <div className="grid w-[520px] grid-cols-[1fr_180px] gap-0 rounded-xl border border-border/40 bg-background/95 backdrop-blur-xl p-0 shadow-2xl shadow-black/[0.12]">
                     <ul className="grid gap-0.5 p-3">
                       {productChildren.map((child) => {
                         const Icon = child.icon;
@@ -279,10 +279,10 @@ export default function Header() {
               <NavigationMenuItem>
                 <NavigationMenuTrigger className={clsx("relative transition-colors duration-200 hover:bg-amber-500/10 hover:text-foreground", isActive("/hakkimizda") && "text-foreground")}>
                   {comp.corporate}
-                  {(isActive("/hakkimizda") || isActive("/kalite") || isActive("/uretim") || isActive("/vizyon-misyon") || isActive("/arge") || isActive("/surdurulebilirlik") || isActive("/galeri") || isActive("/referanslar")) && <span className="absolute bottom-1 left-1/2 h-0.5 w-5 -translate-x-1/2 rounded-full bg-amber-500" />}
+                  {(isActive("/hakkimizda") || isActive("/kalite") || isActive("/uretim") || isActive("/vizyon-misyon") || isActive("/arge") || isActive("/surdurulebilirlik") || isActive("/galeri") || isActive("/referanslar")) && <span className="absolute bottom-1 left-1/2 h-[3px] w-5 -translate-x-1/2 rounded-full bg-amber-500" />}
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <div className="w-[420px] rounded-xl border border-border/60 bg-background p-3 shadow-xl shadow-black/[0.08]">
+                  <div className="w-[420px] rounded-xl border border-border/40 bg-background/95 backdrop-blur-xl p-3 shadow-2xl shadow-black/[0.12]">
                     <div className="mb-2 px-3">
                       <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60">{comp.megaCorporateDesc}</p>
                     </div>
@@ -312,10 +312,10 @@ export default function Header() {
               <NavigationMenuItem>
                 <NavigationMenuTrigger className={clsx("relative transition-colors duration-200 hover:bg-amber-500/10 hover:text-foreground", isActive("/sektorler") && "text-foreground")}>
                   {nav.sectors}
-                  {isActive("/sektorler") && <span className="absolute bottom-1 left-1/2 h-0.5 w-5 -translate-x-1/2 rounded-full bg-amber-500" />}
+                  {isActive("/sektorler") && <span className="absolute bottom-1 left-1/2 h-[3px] w-5 -translate-x-1/2 rounded-full bg-amber-500" />}
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <div className="w-[480px] rounded-xl border border-border/60 bg-background p-3 shadow-xl shadow-black/[0.08]">
+                  <div className="w-[480px] rounded-xl border border-border/40 bg-background/95 backdrop-blur-xl p-3 shadow-2xl shadow-black/[0.12]">
                     <div className="mb-2 px-3">
                       <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60">{comp.megaSectorsDesc}</p>
                     </div>
@@ -342,10 +342,10 @@ export default function Header() {
               <NavigationMenuItem>
                 <NavigationMenuTrigger className={clsx("relative transition-colors duration-200 hover:bg-amber-500/10 hover:text-foreground", (isActive("/blog") || isActive("/fuarlar") || isActive("/ambalaj-sozlugu")) && "text-foreground")}>
                   {nav.media}
-                  {(isActive("/blog") || isActive("/fuarlar") || isActive("/ambalaj-sozlugu")) && <span className="absolute bottom-1 left-1/2 h-0.5 w-5 -translate-x-1/2 rounded-full bg-amber-500" />}
+                  {(isActive("/blog") || isActive("/fuarlar") || isActive("/ambalaj-sozlugu")) && <span className="absolute bottom-1 left-1/2 h-[3px] w-5 -translate-x-1/2 rounded-full bg-amber-500" />}
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <div className="w-[280px] rounded-xl border border-border/60 bg-background p-3 shadow-xl shadow-black/[0.08]">
+                  <div className="w-[280px] rounded-xl border border-border/40 bg-background/95 backdrop-blur-xl p-3 shadow-2xl shadow-black/[0.12]">
                     <ul className="grid gap-0.5">
                       {mediaChildren.map((child) => {
                         const Icon = child.icon;
@@ -372,7 +372,7 @@ export default function Header() {
                 <NavigationMenuLink asChild className={clsx(navigationMenuTriggerStyle(), "relative transition-colors duration-200 hover:bg-amber-500/10 hover:text-foreground")}>
                   <Link href="/iletisim">
                     {nav.contact}
-                    {isActive("/iletisim") && <span className="absolute bottom-1 left-1/2 h-0.5 w-5 -translate-x-1/2 rounded-full bg-amber-500" />}
+                    {isActive("/iletisim") && <span className="absolute bottom-1 left-1/2 h-[3px] w-5 -translate-x-1/2 rounded-full bg-amber-500" />}
                   </Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
@@ -381,7 +381,7 @@ export default function Header() {
 
           {/* Desktop CTA */}
           <div className="hidden items-center gap-2 lg:flex">
-            <Button variant="ghost" size="icon" onClick={() => setSearchOpen(true)} aria-label={comp.searchLabel}>
+            <Button variant="ghost" size="icon" className="hover:bg-amber-500/10 hover:text-amber-500 transition-colors duration-200" onClick={() => setSearchOpen(true)} aria-label={comp.searchLabel}>
               <Search size={18} strokeWidth={1.8} />
             </Button>
             <Button variant="outline" size="sm" asChild>
@@ -390,7 +390,7 @@ export default function Header() {
             <Button variant="outline" size="sm" className="border-amber-500/30 text-amber-600 hover:bg-amber-50 hover:text-amber-700 dark:border-amber-500/30 dark:text-amber-400 dark:hover:bg-amber-900/20" asChild>
               <Link href="/bayi-panel/odeme">{nav.dealerPayment || (locale === "tr" ? "Bayi \u00D6deme" : "Dealer Payment")}</Link>
             </Button>
-            <Button size="sm" className="bg-amber-500 text-white shadow-sm shadow-amber-500/20 transition-all duration-200 hover:bg-amber-600 hover:shadow-md hover:shadow-amber-500/25" asChild>
+            <Button size="sm" className="bg-amber-500 text-white shadow-[0_0_20px_rgba(245,158,11,0.3)] transition-all duration-200 hover:bg-amber-600 hover:shadow-[0_0_35px_rgba(245,158,11,0.45)]" asChild>
               <Link href="/teklif-al">{nav.quote}</Link>
             </Button>
           </div>
@@ -407,7 +407,7 @@ export default function Header() {
 
       {/* Mobile Menu */}
       <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
-        <SheetContent side="right" className="w-[90%] max-w-sm overflow-y-auto p-0 [&>div]:duration-500 [&>div]:ease-out">
+        <SheetContent side="right" className="w-[90%] max-w-sm overflow-y-auto border-l border-border/30 bg-background/95 backdrop-blur-2xl p-0 [&>div]:duration-500 [&>div]:ease-out">
           <SheetHeader className="border-b border-border px-5 py-4">
             <SheetTitle className="flex items-center justify-between">
               <div className="flex items-center gap-2">

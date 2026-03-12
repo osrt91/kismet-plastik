@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState, lazy, Suspense } from "react";
+import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import { useParams } from "next/navigation";
 import Link from "@/components/ui/LocaleLink";
 import {
@@ -24,7 +25,7 @@ import StockBadge from "@/components/ui/StockBadge";
 import { toIntlLocale } from "@/lib/locales";
 import { getProductTranslation, getCategoryTranslation, getSpecTranslation } from "@/lib/product-i18n";
 
-const Product3DViewer = lazy(() => import("@/components/ui/Product3DViewer"));
+const Product3DViewer = dynamic(() => import("@/components/ui/Product3DViewer"), { ssr: false });
 
 export default function ProductDetailClient() {
   const { locale, dict } = useLocale();
@@ -140,18 +141,7 @@ export default function ProductDetailClient() {
               {viewMode === "2d" ? (
                 <ProductViewer product={product} onColorChange={setSelectedColor} />
               ) : (
-                <Suspense
-                  fallback={
-                    <div className="flex min-h-[420px] items-center justify-center rounded-2xl border border-neutral-200/60 bg-gradient-to-br from-[#FAFAF7] via-white to-neutral-50 shadow-lg dark:border-neutral-700 dark:from-[#0A1628] dark:via-[#111827] dark:to-[#0A1628]">
-                      <div className="flex flex-col items-center gap-2">
-                        <div className="h-8 w-8 animate-spin rounded-full border-4 border-[#F59E0B]/20 border-t-[#F59E0B]" />
-                        <span className="text-xs text-neutral-400">3D...</span>
-                      </div>
-                    </div>
-                  }
-                >
-                  <Product3DViewer product={product} selectedColor={selectedColor || product.colors[0]} />
-                </Suspense>
+                <Product3DViewer product={product} selectedColor={selectedColor || product.colors[0]} />
               )}
             </div>
           </AnimateOnScroll>

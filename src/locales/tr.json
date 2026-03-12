@@ -205,6 +205,8 @@
       "Hammadde": "Hammadde",
       "Malzeme": "Malzeme",
       "Yükseklik": "Yükseklik",
+      "Genişlik": "Genişlik",
+      "Derinlik": "Derinlik",
       "Çap": "Çap",
       "Model": "Model",
       "Tip": "Tip",
@@ -216,10 +218,13 @@
       "Mod": "Mod",
       "Delik": "Delik",
       "Kapasite": "Kapasite",
+      "Kapak Uyumu": "Kapak Uyumu",
       "Renk Seçenekleri": "Renk Seçenekleri",
       "Kaplama": "Kaplama",
       "Boyun Tipi": "Boyun Tipi",
-      "Boyun Çapı": "Boyun Çapı"
+      "Boyun Çapı": "Boyun Çapı",
+      "Ağız Tipi": "Ağız Tipi",
+      "Çıkış Oranı": "Çıkış Oranı"
     },
     "colors": {
       "Şeffaf": "Şeffaf",

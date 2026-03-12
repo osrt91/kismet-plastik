@@ -5,8 +5,8 @@ const STATIC_ASSETS = [
   "/en",
   "/manifest.json",
   "/images/logo.jpg",
-  "/fonts/MyriadPro-Regular.otf",
-  "/fonts/MyriadPro-Semibold.ttf",
+  "/fonts/MyriadPro-Regular.woff2",
+  "/fonts/MyriadPro-Semibold.woff2",
   "/fonts/MyriadPro-Black.otf",
 ];
 

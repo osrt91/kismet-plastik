@@ -51,16 +51,7 @@ export async function POST(request: NextRequest) {
 
     const resource = resources.find((r) => r.id === body.resourceId)!;
 
-    // Log lead to console (Supabase insert as future enhancement)
-    console.log("[Resource Download] Lead captured:", {
-      name: body.name.trim(),
-      email: body.email.trim(),
-      company: body.company?.trim() || null,
-      resourceId: body.resourceId,
-      resourceTitle: resource.title,
-      ip,
-      timestamp: new Date().toISOString(),
-    });
+    // TODO: Insert lead into Supabase when migration is applied
 
     return NextResponse.json({
       success: true,

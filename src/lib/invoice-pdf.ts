@@ -81,7 +81,7 @@ export function generateInvoiceHTML(invoice: InvoiceData): string {
       @page { margin: 15mm; size: A4; }
     }
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Instrument Sans', 'Myriad Pro', sans-serif;
       color: #1a1a1a;
       line-height: 1.5;
       background: #fff;
@@ -96,13 +96,13 @@ export function generateInvoiceHTML(invoice: InvoiceData): string {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      border-bottom: 3px solid #002060;
+      border-bottom: 3px solid #0A1628;
       padding-bottom: 20px;
       margin-bottom: 30px;
     }
     .company-info h1 {
       font-size: 24px;
-      color: #002060;
+      color: #0A1628;
       margin: 0 0 4px 0;
     }
     .company-info p {
@@ -115,7 +115,7 @@ export function generateInvoiceHTML(invoice: InvoiceData): string {
     }
     .invoice-title h2 {
       font-size: 28px;
-      color: #002060;
+      color: #0A1628;
       margin: 0 0 8px 0;
       text-transform: uppercase;
       letter-spacing: 2px;
@@ -140,7 +140,7 @@ export function generateInvoiceHTML(invoice: InvoiceData): string {
       font-size: 12px;
       text-transform: uppercase;
       letter-spacing: 1px;
-      color: #002060;
+      color: #0A1628;
       margin: 0 0 8px 0;
       padding-bottom: 6px;
       border-bottom: 1px solid #e5e7eb;
@@ -155,7 +155,7 @@ export function generateInvoiceHTML(invoice: InvoiceData): string {
       margin-bottom: 30px;
     }
     thead th {
-      background: #002060;
+      background: #0A1628;
       color: #fff;
       padding: 10px 12px;
       font-size: 13px;
@@ -182,12 +182,12 @@ export function generateInvoiceHTML(invoice: InvoiceData): string {
       font-size: 14px;
     }
     .totals-table .row.grand-total {
-      border-top: 2px solid #002060;
+      border-top: 2px solid #0A1628;
       margin-top: 4px;
       padding-top: 10px;
       font-size: 18px;
       font-weight: bold;
-      color: #002060;
+      color: #0A1628;
     }
     .footer {
       text-align: center;
@@ -200,7 +200,7 @@ export function generateInvoiceHTML(invoice: InvoiceData): string {
       display: block;
       margin: 20px auto;
       padding: 12px 32px;
-      background: #002060;
+      background: #0A1628;
       color: #fff;
       border: none;
       border-radius: 6px;

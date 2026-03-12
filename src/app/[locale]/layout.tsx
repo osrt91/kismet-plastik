@@ -28,6 +28,9 @@ const jetbrainsMono = JetBrains_Mono({
   weight: ["400", "500", "600", "700"],
 });
 
+const MotionConfigProvider = dynamic(
+  () => import("framer-motion").then((mod) => ({ default: mod.MotionConfig })),
+);
 const WhatsAppButton = dynamic(() => import("@/components/ui/WhatsAppButton"));
 const ScrollToTop = dynamic(() => import("@/components/ui/ScrollToTop"));
 const CookieBanner = dynamic(() => import("@/components/ui/CookieBanner"));
@@ -197,21 +200,23 @@ export default async function LocaleLayout({ children, params }: Props) {
           {locale === "tr" ? "İçeriğe atla" : "Skip to content"}
         </a>
         <div className="scroll-progress-bar" />
-        <ThemeProvider>
-          <LocaleProvider>
-            <Header />
-            <main id="main-content" tabIndex={-1}>
-              {children}
-            </main>
-            <Footer />
-            <WhatsAppButton />
-            {/* <AIChatbot /> */}
-            <ScrollToTop />
-            <InstallPrompt />
-            <CookieBanner />
-            <Toaster position="top-right" richColors />
-          </LocaleProvider>
-        </ThemeProvider>
+        <MotionConfigProvider reducedMotion="user">
+          <ThemeProvider>
+            <LocaleProvider>
+              <Header />
+              <main id="main-content" tabIndex={-1}>
+                {children}
+              </main>
+              <Footer />
+              <WhatsAppButton />
+              {/* <AIChatbot /> */}
+              <ScrollToTop />
+              <InstallPrompt />
+              <CookieBanner />
+              <Toaster position="top-right" richColors />
+            </LocaleProvider>
+          </ThemeProvider>
+        </MotionConfigProvider>
       </body>
     </html>
   );

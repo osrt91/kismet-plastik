@@ -971,13 +971,29 @@
     "specs": {
       "Hacim": "Volume",
       "Ağırlık": "Weight",
+      "Ağız": "Mouth",
+      "Ağız Çapı": "Mouth Diameter",
+      "Hammadde": "Raw Material",
       "Malzeme": "Material",
       "Boyun Çapı": "Neck Diameter",
       "Yükseklik": "Height",
       "Genişlik": "Width",
       "Derinlik": "Depth",
+      "Çap": "Diameter",
+      "Model": "Model",
+      "Tip": "Type",
+      "Uyumluluk": "Compatibility",
+      "Sprey Tipi": "Spray Type",
+      "Dozaj": "Dosage",
+      "Boru Uzunluğu": "Tube Length",
+      "Mesh": "Mesh",
+      "Mod": "Mode",
+      "Delik": "Hole",
+      "Kapasite": "Capacity",
       "Kapak Uyumu": "Cap Compatibility",
       "Renk Seçenekleri": "Color Options",
+      "Kaplama": "Coating",
+      "Boyun Tipi": "Neck Type",
       "Ağız Tipi": "Mouth Type",
       "Çıkış Oranı": "Output Rate"
     },
@@ -998,7 +1014,9 @@
       "Turuncu": "Orange",
       "Lacivert": "Navy",
       "Gri": "Gray",
-      "Naturel": "Natural"
+      "Naturel": "Natural",
+      "Kahverengi": "Brown",
+      "Altın Yaldız": "Gold Gilt"
     }
   }
 }

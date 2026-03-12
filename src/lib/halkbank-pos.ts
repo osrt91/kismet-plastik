@@ -171,7 +171,7 @@ export function verifyCallback(
 
     // Check 3D authentication status
     // mdStatus: 1 = full auth, 2 = card not enrolled (half secure), 3 = auth failed, etc.
-    const validMdStatus = ["1", "2", "3", "4"];
+    const validMdStatus = ["1", "2"];
     if (!validMdStatus.includes(mdStatus)) {
       return {
         success: false,

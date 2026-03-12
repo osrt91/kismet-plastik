@@ -1,13 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createHash } from "crypto";
+import { createHash, timingSafeEqual } from "crypto";
 
 export function timingSafeCompare(a: string, b: string): boolean {
-  if (a.length !== b.length) return false;
-  let result = 0;
-  for (let i = 0; i < a.length; i++) {
-    result |= a.charCodeAt(i) ^ b.charCodeAt(i);
-  }
-  return result === 0;
+  const bufA = Buffer.from(a);
+  const bufB = Buffer.from(b);
+  if (bufA.length !== bufB.length) return false;
+  return timingSafeEqual(bufA, bufB);
 }
 
 /**

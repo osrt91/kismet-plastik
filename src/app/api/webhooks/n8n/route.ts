@@ -19,30 +19,9 @@ const SUPPORTED_EVENTS = [
 
 type WebhookEvent = (typeof SUPPORTED_EVENTS)[number];
 
-function handleEvent(event: WebhookEvent, data: Record<string, unknown>, timestamp: string): void {
-  switch (event) {
-    case 'new_order':
-      console.log('[Webhook] New order received:', { data, timestamp });
-      break;
-    case 'new_quote':
-      console.log('[Webhook] New quote request received:', { data, timestamp });
-      break;
-    case 'new_contact':
-      console.log('[Webhook] New contact form submission:', { data, timestamp });
-      break;
-    case 'new_sample_request':
-      console.log('[Webhook] New sample request received:', { data, timestamp });
-      break;
-    case 'new_pre_order':
-      console.log('[Webhook] New pre-order received:', { data, timestamp });
-      break;
-    case 'stock_alert':
-      console.log('[Webhook] Stock alert triggered:', { data, timestamp });
-      break;
-    case 'new_lead':
-      console.log('[Webhook] New lead captured:', { data, timestamp });
-      break;
-  }
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function handleEvent(_event: WebhookEvent, _data: Record<string, unknown>, _timestamp: string): void {
+  // TODO: Implement event handling (e.g., database insert, notification dispatch)
 }
 
 export async function POST(request: NextRequest) {

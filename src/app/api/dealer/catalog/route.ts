@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { supabaseServer } from "@/lib/supabase/server";
 import { getProductPricesForCatalog } from "@/lib/dia-services";
 import { cached, cacheKey, TTL } from "@/lib/dia-cache";
+import { sanitizeSearchInput } from "@/lib/auth";
 
 export async function GET(request: NextRequest) {
   try {
@@ -14,7 +15,8 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const page = parseInt(searchParams.get("page") ?? "1", 10);
     const limit = Math.min(parseInt(searchParams.get("limit") ?? "50", 10), 100);
-    const search = searchParams.get("search") ?? "";
+    const rawSearch = searchParams.get("search") ?? "";
+    const search = sanitizeSearchInput(rawSearch);
 
     const catalog = await cached(
       cacheKey.priceCatalog(page, limit) + (search ? `:${search}` : ""),

@@ -1,10 +1,10 @@
 "use client";
 
-import { FaFlask, FaSprayCan, FaHandSparkles, FaPumpSoap, FaHotel, FaGears } from "react-icons/fa6";
+import { FlaskConical, SprayCan, Sparkles, Droplets, Hotel, Settings2 } from "lucide-react";
 import AnimateOnScroll from "@/components/ui/AnimateOnScroll";
 import { useLocale } from "@/contexts/LocaleContext";
 
-const sectorIcons = [FaFlask, FaSprayCan, FaHandSparkles, FaPumpSoap, FaHotel, FaGears];
+const sectorIcons = [FlaskConical, SprayCan, Sparkles, Droplets, Hotel, Settings2];
 
 export default function Sectors() {
   const { dict } = useLocale();

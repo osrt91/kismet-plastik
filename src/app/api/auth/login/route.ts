@@ -57,6 +57,7 @@ export async function POST(request: NextRequest) {
       .single();
 
     if (profile && !profile.is_approved && profile.role === "dealer") {
+      await supabase.auth.signOut();
       return NextResponse.json(
         { success: false, error: "Bayilik başvurunuz henüz onaylanmadı." },
         { status: 403 }

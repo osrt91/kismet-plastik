@@ -44,33 +44,19 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const data = parsed.data;
-
-    // Log the pre-order (Supabase insert as future enhancement)
-    console.log("[Pre-Order] New pre-order received:", {
-      name: data.name,
-      company: data.company,
-      email: data.email,
-      phone: data.phone,
-      productName: data.productName,
-      quantity: data.quantity,
-      preferredDate: data.preferredDate || null,
-      notes: data.notes || null,
-      status: "pending",
-      createdAt: new Date().toISOString(),
-    });
+    const _data = parsed.data; // eslint-disable-line @typescript-eslint/no-unused-vars
 
     // TODO: Insert into Supabase pre_orders table when migration is applied
     // const supabase = getSupabase();
     // const { error: insertError } = await supabase.from("pre_orders").insert({
-    //   name: data.name,
-    //   company: data.company,
-    //   email: data.email,
-    //   phone: data.phone,
-    //   product_name: data.productName,
-    //   quantity: data.quantity,
-    //   preferred_date: data.preferredDate || null,
-    //   notes: data.notes || null,
+    //   name: _data.name,
+    //   company: _data.company,
+    //   email: _data.email,
+    //   phone: _data.phone,
+    //   product_name: _data.productName,
+    //   quantity: _data.quantity,
+    //   preferred_date: _data.preferredDate || null,
+    //   notes: _data.notes || null,
     //   status: "pending",
     // });
 

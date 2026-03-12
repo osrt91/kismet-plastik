@@ -45,9 +45,9 @@ const categoryColors: Record<string, { badge: string; accent: string; gradient: 
     gradient: "from-emerald-50 to-emerald-100/50",
   },
   Kalite: {
-    badge: "bg-violet-100 text-violet-700",
-    accent: "text-violet-500",
-    gradient: "from-violet-50 to-violet-100/50",
+    badge: "bg-amber-100 text-amber-700",
+    accent: "text-amber-500",
+    gradient: "from-amber-50 to-amber-100/50",
   },
 };
 

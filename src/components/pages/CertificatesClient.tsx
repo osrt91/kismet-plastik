@@ -16,7 +16,6 @@ import Link from "@/components/ui/LocaleLink";
 import AnimateOnScroll from "@/components/ui/AnimateOnScroll";
 import { useLocale } from "@/contexts/LocaleContext";
 import { getLocalizedFieldSync } from "@/lib/content";
-import { certificates as fallbackCertificates } from "@/data/certificates";
 import { cn } from "@/lib/utils";
 import type { DbCertificate } from "@/types/database";
 
@@ -59,17 +58,9 @@ export default function CertificatesClient({ certificates }: CertificatesClientP
         validUntil: cert.valid_until,
       }));
     }
-    // Fallback to static data
-    return fallbackCertificates.map((cert) => ({
-      id: cert.id,
-      name: isTr ? cert.name : cert.nameEn,
-      description: isTr ? cert.description : cert.descriptionEn,
-      icon: cert.icon,
-      pdfUrl: cert.pdfUrl,
-      issuer: cert.issuer,
-      validUntil: cert.validUntil,
-    }));
-  }, [certificates, locale, isTr]);
+    // No DB data available
+    return [];
+  }, [certificates, locale]);
 
   const jsonLd = {
     "@context": "https://schema.org",

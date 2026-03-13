@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { useMemo } from "react";
 import { useLocale } from "@/contexts/LocaleContext";
-import { references as staticReferences } from "@/data/references";
 import { cn } from "@/lib/utils";
 import type { DbReference } from "@/types/database";
 
@@ -189,14 +188,8 @@ export default function ReferenceLogos({
         website: ref.website ?? undefined,
       }));
     }
-    // Fallback to static data
-    return staticReferences.map((ref) => ({
-      id: ref.id,
-      name: ref.name,
-      logo: ref.logo,
-      sector: locale === "en" ? ref.sectorEn : ref.sector,
-      website: ref.website,
-    }));
+    // No DB data available
+    return [];
   }, [references, locale]);
 
   return (

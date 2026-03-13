@@ -14,7 +14,6 @@ import {
 } from "lucide-react";
 import { useLocale } from "@/contexts/LocaleContext";
 import { getLocalizedFieldSync } from "@/lib/content";
-import { resources as fallbackResources } from "@/data/resources";
 import { cn } from "@/lib/utils";
 import type { DbResource } from "@/types/database";
 
@@ -111,16 +110,9 @@ export default function ResourcesClient({ resources }: ResourcesClientProps) {
         pageCount: r.page_count,
       }));
     }
-    // Fallback to static data
-    return fallbackResources.map((r) => ({
-      id: r.id,
-      title: isTr ? r.title : r.titleEn,
-      description: isTr ? r.description : r.descriptionEn,
-      category: isTr ? r.category : r.categoryEn,
-      fileUrl: r.fileUrl,
-      pageCount: r.pageCount,
-    }));
-  }, [resources, locale, isTr]);
+    // No DB data available
+    return [];
+  }, [resources, locale]);
 
   const [modalResource, setModalResource] = useState<NormalizedResource | null>(null);
   const [form, setForm] = useState<LeadForm>({ name: "", email: "", company: "" });

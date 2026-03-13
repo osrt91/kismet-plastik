@@ -6,7 +6,6 @@ import Link from "@/components/ui/LocaleLink";
 import AnimateOnScroll from "@/components/ui/AnimateOnScroll";
 import { useLocale } from "@/contexts/LocaleContext";
 import { getLocalizedFieldSync } from "@/lib/content";
-import { tradeShows as fallbackTradeShows } from "@/data/trade-shows";
 import { downloadICalEvent } from "@/lib/ical";
 import type { DbTradeShow } from "@/types/database";
 
@@ -44,18 +43,8 @@ export default function TradeShowsClient({ tradeShows }: TradeShowsClientProps) 
         status: show.status,
       }));
     }
-    // Fallback to static data
-    return fallbackTradeShows.map((show) => ({
-      id: show.id,
-      name: locale === "en" ? show.nameEn : show.name,
-      description: locale === "en" ? show.descriptionEn : show.description,
-      location: locale === "en" ? show.locationEn : show.location,
-      startDate: show.startDate,
-      endDate: show.endDate,
-      booth: show.booth ?? null,
-      website: show.website ?? null,
-      status: show.status,
-    }));
+    // No DB data available
+    return [];
   }, [tradeShows, locale]);
 
   const upcoming = normalizedShows.filter((ts) => ts.status === "upcoming");

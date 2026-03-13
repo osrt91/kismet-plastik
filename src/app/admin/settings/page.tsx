@@ -8,6 +8,7 @@ import {
   BarChart3,
   Palette,
   Settings,
+  TrendingUp,
   ChevronDown,
   ChevronUp,
   Save,
@@ -52,6 +53,7 @@ const SETTING_GROUPS: SettingGroup[] = [
       { key: "company_email", label: "E-posta", placeholder: "bilgi@kismetplastik.com", type: "email" },
       { key: "company_tax_number", label: "Vergi Numarası", placeholder: "0000000000" },
       { key: "company_tax_office", label: "Vergi Dairesi", placeholder: "Beylikdüzü VD" },
+      { key: "company_address_en", label: "Adres (İngilizce)", placeholder: "English address", type: "textarea" },
     ],
   },
   {
@@ -73,6 +75,21 @@ const SETTING_GROUPS: SettingGroup[] = [
     fields: [
       { key: "whatsapp_number", label: "WhatsApp Numarası", placeholder: "+90 500 000 00 00", type: "tel" },
       { key: "whatsapp_hours", label: "WhatsApp Çalışma Saatleri", placeholder: "09:00 - 18:00" },
+      { key: "working_hours", label: "Çalışma Saatleri (TR)", placeholder: "Pzt-Cum 09:00 - 18:00" },
+      { key: "working_hours_en", label: "Çalışma Saatleri (EN)", placeholder: "Mon-Fri 09:00 - 18:00" },
+      { key: "google_maps_url", label: "Google Maps Embed URL", placeholder: "https://maps.google.com/...", type: "url" },
+    ],
+  },
+  {
+    id: "stats",
+    label: "İstatistikler",
+    icon: TrendingUp,
+    fields: [
+      { key: "stats_experience_years", label: "Tecrübe Yılı", placeholder: "57" },
+      { key: "stats_products", label: "Ürün Sayısı", placeholder: "500" },
+      { key: "stats_capacity", label: "Üretim Kapasitesi", placeholder: "50M" },
+      { key: "stats_customers", label: "Müşteri Sayısı", placeholder: "1000" },
+      { key: "experience_badge", label: "Badge Metni", placeholder: "57+" },
     ],
   },
   {

@@ -29,6 +29,7 @@ import {
   Bell,
   BarChart3,
   Database,
+  BookOpen,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -57,6 +58,7 @@ const navGroups: NavGroup[] = [
       { name: "Blog", href: "/admin/blog", icon: Newspaper },
       { name: "Galeri", href: "/admin/gallery", icon: ImageIcon },
       { name: "İçerik", href: "/admin/content", icon: FileText },
+      { name: "Sayfa İçerikleri", href: "/admin/pages", icon: FileText },
     ],
   },
   {
@@ -83,6 +85,7 @@ const navGroups: NavGroup[] = [
       { name: "Fuarlar", href: "/admin/tradeshows", icon: MapPin },
       { name: "Referanslar", href: "/admin/references", icon: Building },
       { name: "Tarihçe", href: "/admin/milestones", icon: Milestone },
+      { name: "Sözlük", href: "/admin/glossary", icon: BookOpen },
     ],
   },
   {

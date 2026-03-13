@@ -12,10 +12,18 @@ export async function GET(request: NextRequest) {
   try {
     const supabase = getSupabaseAdmin();
 
-    const { data, error } = await supabase
+    const url = new URL(request.url);
+    const page = url.searchParams.get("page");
+
+    let query = supabase
       .from("content_sections")
-      .select("*")
-      .order("display_order", { ascending: true });
+      .select("*");
+
+    if (page) {
+      query = query.like("section_key", `${page}_%`);
+    }
+
+    const { data, error } = await query.order("display_order", { ascending: true });
 
     if (error) {
       console.error("[Admin Content Sections GET]", error);
@@ -111,6 +119,51 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ success: true, data }, { status: 201 });
   } catch (err) {
     console.error("[Admin Content Sections POST]", err);
+    return NextResponse.json({ success: false, error: "Sunucu hatası" }, { status: 500 });
+  }
+}
+
+export async function PUT(request: NextRequest) {
+  const authError = checkAuth(request);
+  if (authError) return authError;
+
+  const sbError = requireSupabase();
+  if (sbError) return sbError;
+
+  let body: { sections: Array<Record<string, unknown>> };
+  try {
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ success: false, error: "Geçersiz JSON" }, { status: 400 });
+  }
+
+  if (!Array.isArray(body.sections)) {
+    return NextResponse.json({ success: false, error: "sections dizisi gerekli" }, { status: 400 });
+  }
+
+  try {
+    const supabase = getSupabaseAdmin();
+    const results = [];
+
+    for (const section of body.sections) {
+      const { id, ...updateFields } = section;
+      updateFields.updated_at = new Date().toISOString();
+
+      if (id) {
+        const { data, error } = await supabase
+          .from("content_sections")
+          .update(updateFields)
+          .eq("id", id)
+          .select()
+          .single();
+        if (error) throw error;
+        results.push(data);
+      }
+    }
+
+    return NextResponse.json({ success: true, data: results });
+  } catch (err) {
+    console.error("[Admin Content Sections PUT]", err);
     return NextResponse.json({ success: false, error: "Sunucu hatası" }, { status: 500 });
   }
 }

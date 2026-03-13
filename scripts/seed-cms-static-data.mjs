@@ -4,7 +4,8 @@
  *
  * Usage:  node scripts/seed-cms-static-data.mjs
  */
-import 'dotenv/config';
+import dotenv from 'dotenv';
+dotenv.config({ path: '.env.local' });
 import { createClient } from '@supabase/supabase-js';
 
 const supabase = createClient(

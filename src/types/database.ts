@@ -173,6 +173,16 @@ export interface Database {
         Insert: Omit<DbInvoice, "id" | "created_at" | "updated_at">;
         Update: Partial<Omit<DbInvoice, "id">>;
       };
+      glossary_terms: {
+        Row: GlossaryTerm;
+        Insert: Omit<GlossaryTerm, "id" | "created_at" | "updated_at">;
+        Update: Partial<Omit<GlossaryTerm, "id">>;
+      };
+      translations: {
+        Row: Translation;
+        Insert: Omit<Translation, "id" | "created_at" | "updated_at">;
+        Update: Partial<Omit<Translation, "id">>;
+      };
     };
     Views: Record<string, never>;
     Functions: Record<string, never>;
@@ -677,6 +687,33 @@ export interface DbInvoice {
   storage_path: string | null;
   status: InvoiceStatus;
   issued_at: string;
+  created_at: string;
+  updated_at: string;
+}
+
+// ==================== CMS CONTENT ====================
+
+export interface GlossaryTerm {
+  id: string;
+  term_tr: string;
+  term_en: string;
+  definition_tr: string;
+  definition_en: string;
+  letter: string;
+  display_order: number;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Translation {
+  id: string;
+  source_table: string;
+  source_id: string;
+  field_name: string;
+  locale: string;
+  translated_text: string;
+  is_manual: boolean;
   created_at: string;
   updated_at: string;
 }

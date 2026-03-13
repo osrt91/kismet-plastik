@@ -1,17 +1,65 @@
 "use client";
 
+import { useMemo } from "react";
 import { Calendar, MapPin, ExternalLink, Download } from "lucide-react";
 import Link from "@/components/ui/LocaleLink";
 import AnimateOnScroll from "@/components/ui/AnimateOnScroll";
 import { useLocale } from "@/contexts/LocaleContext";
-import { tradeShows, type TradeShow } from "@/data/trade-shows";
+import { getLocalizedFieldSync } from "@/lib/content";
+import { tradeShows as fallbackTradeShows } from "@/data/trade-shows";
 import { downloadICalEvent } from "@/lib/ical";
+import type { DbTradeShow } from "@/types/database";
 
-export default function TradeShowsClient() {
+interface NormalizedTradeShow {
+  id: string;
+  name: string;
+  description: string;
+  location: string;
+  startDate: string;
+  endDate: string;
+  booth: string | null;
+  website: string | null;
+  status: string;
+}
+
+interface TradeShowsClientProps {
+  tradeShows?: DbTradeShow[];
+}
+
+export default function TradeShowsClient({ tradeShows }: TradeShowsClientProps) {
   const { locale } = useLocale();
 
-  const upcoming = tradeShows.filter((ts) => ts.status === "upcoming");
-  const past = tradeShows.filter((ts) => ts.status === "past");
+  /* Normalize trade shows: DB items take priority, fallback to static data */
+  const normalizedShows: NormalizedTradeShow[] = useMemo(() => {
+    if (tradeShows && tradeShows.length > 0) {
+      return tradeShows.map((show) => ({
+        id: show.id,
+        name: getLocalizedFieldSync(show, "name", locale),
+        description: getLocalizedFieldSync(show, "description", locale),
+        location: getLocalizedFieldSync(show, "location", locale),
+        startDate: show.start_date,
+        endDate: show.end_date,
+        booth: show.booth,
+        website: show.website,
+        status: show.status,
+      }));
+    }
+    // Fallback to static data
+    return fallbackTradeShows.map((show) => ({
+      id: show.id,
+      name: locale === "en" ? show.nameEn : show.name,
+      description: locale === "en" ? show.descriptionEn : show.description,
+      location: locale === "en" ? show.locationEn : show.location,
+      startDate: show.startDate,
+      endDate: show.endDate,
+      booth: show.booth ?? null,
+      website: show.website ?? null,
+      status: show.status,
+    }));
+  }, [tradeShows, locale]);
+
+  const upcoming = normalizedShows.filter((ts) => ts.status === "upcoming");
+  const past = normalizedShows.filter((ts) => ts.status === "past");
 
   const formatDateRange = (startDate: string, endDate: string) => {
     const start = new Date(startDate);
@@ -41,22 +89,15 @@ export default function TradeShowsClient() {
     })}`;
   };
 
-  const handleDownloadIcal = (show: TradeShow) => {
+  const handleDownloadIcal = (show: NormalizedTradeShow) => {
     downloadICalEvent({
-      title: locale === "en" ? show.nameEn : show.name,
-      description: locale === "en" ? show.descriptionEn : show.description,
-      location: locale === "en" ? show.locationEn : show.location,
+      title: show.name,
+      description: show.description,
+      location: show.location,
       startDate: show.startDate,
       endDate: show.endDate,
     });
   };
-
-  const getName = (show: TradeShow) =>
-    locale === "en" ? show.nameEn : show.name;
-  const getDescription = (show: TradeShow) =>
-    locale === "en" ? show.descriptionEn : show.description;
-  const getLocation = (show: TradeShow) =>
-    locale === "en" ? show.locationEn : show.location;
 
   return (
     <section className="bg-[#FAFAF7]">
@@ -118,7 +159,7 @@ export default function TradeShowsClient() {
                     </span>
 
                     <h3 className="mb-3 text-xl font-bold text-[#0A1628] sm:text-2xl">
-                      {getName(show)}
+                      {show.name}
                     </h3>
 
                     <div className="mb-4 space-y-2">
@@ -128,12 +169,12 @@ export default function TradeShowsClient() {
                       </div>
                       <div className="flex items-center gap-2 text-sm text-neutral-600">
                         <MapPin size={16} className="shrink-0 text-[#F59E0B]" />
-                        <span>{getLocation(show)}</span>
+                        <span>{show.location}</span>
                       </div>
                     </div>
 
                     <p className="mb-5 text-sm leading-relaxed text-neutral-500">
-                      {getDescription(show)}
+                      {show.description}
                     </p>
 
                     {show.booth && (
@@ -213,7 +254,7 @@ export default function TradeShowsClient() {
                     </span>
 
                     <h3 className="mb-3 text-lg font-bold text-[#0A1628]/80 sm:text-xl">
-                      {getName(show)}
+                      {show.name}
                     </h3>
 
                     <div className="mb-4 space-y-2">
@@ -223,12 +264,12 @@ export default function TradeShowsClient() {
                       </div>
                       <div className="flex items-center gap-2 text-sm text-neutral-500">
                         <MapPin size={16} className="shrink-0 text-neutral-400" />
-                        <span>{getLocation(show)}</span>
+                        <span>{show.location}</span>
                       </div>
                     </div>
 
                     <p className="mb-4 text-sm leading-relaxed text-neutral-400">
-                      {getDescription(show)}
+                      {show.description}
                     </p>
 
                     {show.booth && (

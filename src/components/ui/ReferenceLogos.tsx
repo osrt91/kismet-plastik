@@ -1,13 +1,24 @@
 "use client";
 
 import Image from "next/image";
+import { useMemo } from "react";
 import { useLocale } from "@/contexts/LocaleContext";
-import { references } from "@/data/references";
+import { references as staticReferences } from "@/data/references";
 import { cn } from "@/lib/utils";
+import type { DbReference } from "@/types/database";
 
 interface ReferenceLogosProps {
   variant: "compact" | "full";
   className?: string;
+  references?: DbReference[];
+}
+
+interface NormalizedReference {
+  id: string;
+  name: string;
+  logo: string;
+  sector: string;
+  website?: string;
 }
 
 function getInitials(name: string): string {
@@ -23,21 +34,16 @@ function LogoCard({
   name,
   logo,
   sector,
-  sectorEn,
   website,
   variant,
-  locale,
 }: {
   name: string;
   logo: string;
   sector: string;
-  sectorEn: string;
   website?: string;
   variant: "compact" | "full";
-  locale: string;
 }) {
   const initials = getInitials(name);
-  const sectorLabel = locale === "en" ? sectorEn : sector;
 
   const content = (
     <div
@@ -89,7 +95,7 @@ function LogoCard({
       {/* Sector badge (full variant only) */}
       {variant === "full" && (
         <span className="mt-auto text-xs font-medium text-neutral-500 transition-colors group-hover:text-accent-600 dark:text-neutral-400 dark:group-hover:text-accent-400">
-          {sectorLabel}
+          {sector}
         </span>
       )}
 
@@ -121,9 +127,9 @@ function LogoCard({
   return content;
 }
 
-function CompactVariant({ locale }: { locale: string }) {
+function CompactVariant({ refs }: { refs: NormalizedReference[] }) {
   // Duplicate references for seamless marquee loop
-  const doubled = [...references, ...references];
+  const doubled = [...refs, ...refs];
 
   return (
     <div className="relative overflow-hidden">
@@ -139,10 +145,8 @@ function CompactVariant({ locale }: { locale: string }) {
             name={ref.name}
             logo={ref.logo}
             sector={ref.sector}
-            sectorEn={ref.sectorEn}
             website={ref.website}
             variant="compact"
-            locale={locale}
           />
         ))}
       </div>
@@ -150,19 +154,17 @@ function CompactVariant({ locale }: { locale: string }) {
   );
 }
 
-function FullVariant({ locale }: { locale: string }) {
+function FullVariant({ refs }: { refs: NormalizedReference[] }) {
   return (
     <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:gap-6">
-      {references.map((ref) => (
+      {refs.map((ref) => (
         <LogoCard
           key={ref.id}
           name={ref.name}
           logo={ref.logo}
           sector={ref.sector}
-          sectorEn={ref.sectorEn}
           website={ref.website}
           variant="full"
-          locale={locale}
         />
       ))}
     </div>
@@ -172,15 +174,37 @@ function FullVariant({ locale }: { locale: string }) {
 export default function ReferenceLogos({
   variant,
   className,
+  references,
 }: ReferenceLogosProps) {
   const { locale } = useLocale();
+
+  /* Normalize: DB references take priority, fallback to static data */
+  const normalizedRefs: NormalizedReference[] = useMemo(() => {
+    if (references && references.length > 0) {
+      return references.map((ref) => ({
+        id: ref.id,
+        name: ref.name,
+        logo: ref.logo_url,
+        sector: locale === "en" ? ref.sector_en : ref.sector_tr,
+        website: ref.website ?? undefined,
+      }));
+    }
+    // Fallback to static data
+    return staticReferences.map((ref) => ({
+      id: ref.id,
+      name: ref.name,
+      logo: ref.logo,
+      sector: locale === "en" ? ref.sectorEn : ref.sector,
+      website: ref.website,
+    }));
+  }, [references, locale]);
 
   return (
     <div className={cn(className)}>
       {variant === "compact" ? (
-        <CompactVariant locale={locale} />
+        <CompactVariant refs={normalizedRefs} />
       ) : (
-        <FullVariant locale={locale} />
+        <FullVariant refs={normalizedRefs} />
       )}
     </div>
   );

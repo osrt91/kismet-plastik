@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from "react";
 import {
   Shield,
   ShieldCheck,
@@ -14,8 +15,10 @@ import {
 import Link from "@/components/ui/LocaleLink";
 import AnimateOnScroll from "@/components/ui/AnimateOnScroll";
 import { useLocale } from "@/contexts/LocaleContext";
-import { certificates } from "@/data/certificates";
+import { getLocalizedFieldSync } from "@/lib/content";
+import { certificates as fallbackCertificates } from "@/data/certificates";
 import { cn } from "@/lib/utils";
+import type { DbCertificate } from "@/types/database";
 
 const iconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
   Shield,
@@ -35,18 +38,47 @@ const cardColors = [
   "bg-[#0A1628]/5 text-[#0A1628]",
 ];
 
-export default function CertificatesClient() {
+interface CertificatesClientProps {
+  certificates?: DbCertificate[];
+}
+
+export default function CertificatesClient({ certificates }: CertificatesClientProps) {
   const { locale } = useLocale();
   const isTr = locale === "tr";
+
+  /* Normalize certificates: DB items take priority, fallback to static data */
+  const normalizedCerts = useMemo(() => {
+    if (certificates && certificates.length > 0) {
+      return certificates.map((cert) => ({
+        id: cert.id,
+        name: getLocalizedFieldSync(cert, "name", locale),
+        description: getLocalizedFieldSync(cert, "description", locale),
+        icon: cert.icon,
+        pdfUrl: cert.pdf_url,
+        issuer: cert.issuer,
+        validUntil: cert.valid_until,
+      }));
+    }
+    // Fallback to static data
+    return fallbackCertificates.map((cert) => ({
+      id: cert.id,
+      name: isTr ? cert.name : cert.nameEn,
+      description: isTr ? cert.description : cert.descriptionEn,
+      icon: cert.icon,
+      pdfUrl: cert.pdfUrl,
+      issuer: cert.issuer,
+      validUntil: cert.validUntil,
+    }));
+  }, [certificates, locale, isTr]);
 
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "Kısmet Plastik",
     url: "https://www.kismetplastik.com",
-    hasCredential: certificates.map((cert) => ({
+    hasCredential: normalizedCerts.map((cert) => ({
       "@type": "EducationalOccupationalCredential",
-      name: isTr ? cert.name : cert.nameEn,
+      name: cert.name,
       credentialCategory: "certification",
       recognizedBy: {
         "@type": "Organization",
@@ -142,7 +174,7 @@ export default function CertificatesClient() {
         </AnimateOnScroll>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {certificates.map((cert, i) => {
+          {normalizedCerts.map((cert, i) => {
             const IconComponent = iconMap[cert.icon] || Shield;
             const colorClass = cardColors[i % cardColors.length];
 
@@ -178,7 +210,7 @@ export default function CertificatesClient() {
 
                   {/* Certificate name */}
                   <h3 className="mb-2 text-lg font-bold text-[#0A1628]">
-                    {isTr ? cert.name : cert.nameEn}
+                    {cert.name}
                   </h3>
 
                   {/* Issuer */}
@@ -188,7 +220,7 @@ export default function CertificatesClient() {
 
                   {/* Description */}
                   <p className="mb-2 flex-1 text-sm leading-relaxed text-neutral-500">
-                    {isTr ? cert.description : cert.descriptionEn}
+                    {cert.description}
                   </p>
 
                   {/* Valid until */}

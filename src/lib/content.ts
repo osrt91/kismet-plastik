@@ -50,7 +50,8 @@ export async function getPageContent(
  * Use this in "use client" components.
  */
 export function getLocalizedFieldSync(
-  item: Record<string, unknown> | DbContentSection | null | undefined,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  item: Record<string, unknown> | DbContentSection | any | null | undefined,
   field: string,
   locale: string
 ): string {

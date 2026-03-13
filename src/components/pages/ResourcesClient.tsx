@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import Link from "@/components/ui/LocaleLink";
 import {
   FileText,
@@ -13,9 +13,19 @@ import {
   Loader2,
 } from "lucide-react";
 import { useLocale } from "@/contexts/LocaleContext";
-import { resources } from "@/data/resources";
+import { getLocalizedFieldSync } from "@/lib/content";
+import { resources as fallbackResources } from "@/data/resources";
 import { cn } from "@/lib/utils";
-import type { Resource } from "@/data/resources";
+import type { DbResource } from "@/types/database";
+
+interface NormalizedResource {
+  id: string;
+  title: string;
+  description: string;
+  category: string;
+  fileUrl: string;
+  pageCount: number;
+}
 
 interface LeadForm {
   name: string;
@@ -34,7 +44,17 @@ const categoryColors: Record<string, { badge: string; accent: string; gradient: 
     accent: "text-amber-500",
     gradient: "from-amber-50 to-amber-100/50",
   },
-  "Teknik Dokuman": {
+  Guide: {
+    badge: "bg-amber-100 text-amber-700",
+    accent: "text-amber-500",
+    gradient: "from-amber-50 to-amber-100/50",
+  },
+  "Teknik Doküman": {
+    badge: "bg-sky-100 text-sky-700",
+    accent: "text-sky-500",
+    gradient: "from-sky-50 to-sky-100/50",
+  },
+  "Technical Document": {
     badge: "bg-sky-100 text-sky-700",
     accent: "text-sky-500",
     gradient: "from-sky-50 to-sky-100/50",
@@ -44,7 +64,17 @@ const categoryColors: Record<string, { badge: string; accent: string; gradient: 
     accent: "text-emerald-500",
     gradient: "from-emerald-50 to-emerald-100/50",
   },
+  Report: {
+    badge: "bg-emerald-100 text-emerald-700",
+    accent: "text-emerald-500",
+    gradient: "from-emerald-50 to-emerald-100/50",
+  },
   Kalite: {
+    badge: "bg-amber-100 text-amber-700",
+    accent: "text-amber-500",
+    gradient: "from-amber-50 to-amber-100/50",
+  },
+  Quality: {
     badge: "bg-amber-100 text-amber-700",
     accent: "text-amber-500",
     gradient: "from-amber-50 to-amber-100/50",
@@ -61,11 +91,38 @@ function getCategoryColor(category: string) {
   return categoryColors[category] || defaultCategoryColor;
 }
 
-export default function ResourcesClient() {
+interface ResourcesClientProps {
+  resources?: DbResource[];
+}
+
+export default function ResourcesClient({ resources }: ResourcesClientProps) {
   const { locale } = useLocale();
   const isTr = locale === "tr";
 
-  const [modalResource, setModalResource] = useState<Resource | null>(null);
+  /* Normalize resources: DB items take priority, fallback to static data */
+  const normalizedResources: NormalizedResource[] = useMemo(() => {
+    if (resources && resources.length > 0) {
+      return resources.map((r) => ({
+        id: r.id,
+        title: getLocalizedFieldSync(r, "title", locale),
+        description: getLocalizedFieldSync(r, "description", locale),
+        category: getLocalizedFieldSync(r, "category", locale),
+        fileUrl: r.file_url,
+        pageCount: r.page_count,
+      }));
+    }
+    // Fallback to static data
+    return fallbackResources.map((r) => ({
+      id: r.id,
+      title: isTr ? r.title : r.titleEn,
+      description: isTr ? r.description : r.descriptionEn,
+      category: isTr ? r.category : r.categoryEn,
+      fileUrl: r.fileUrl,
+      pageCount: r.pageCount,
+    }));
+  }, [resources, locale, isTr]);
+
+  const [modalResource, setModalResource] = useState<NormalizedResource | null>(null);
   const [form, setForm] = useState<LeadForm>({ name: "", email: "", company: "" });
   const [errors, setErrors] = useState<FormErrors>({});
   const [submitting, setSubmitting] = useState(false);
@@ -75,7 +132,7 @@ export default function ResourcesClient() {
     downloadUrl?: string;
   } | null>(null);
 
-  function openModal(resource: Resource) {
+  function openModal(resource: NormalizedResource) {
     setModalResource(resource);
     setForm({ name: "", email: "", company: "" });
     setErrors({});
@@ -185,11 +242,8 @@ export default function ResourcesClient() {
       {/* Resource Cards Grid */}
       <div className="mx-auto max-w-7xl px-4 py-12 lg:px-6 lg:py-20">
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {resources.map((resource) => {
+          {normalizedResources.map((resource) => {
             const color = getCategoryColor(resource.category);
-            const title = isTr ? resource.title : resource.titleEn;
-            const description = isTr ? resource.description : resource.descriptionEn;
-            const category = isTr ? resource.category : resource.categoryEn;
 
             return (
               <article
@@ -226,7 +280,7 @@ export default function ResourcesClient() {
                         color.badge
                       )}
                     >
-                      {category}
+                      {resource.category}
                     </span>
                     <span className="flex items-center gap-1 text-xs text-neutral-400">
                       <BookOpen size={12} />
@@ -235,11 +289,11 @@ export default function ResourcesClient() {
                   </div>
 
                   <h2 className="mb-2 text-lg font-bold text-[#0A1628] transition-colors group-hover:text-[#F59E0B]">
-                    {title}
+                    {resource.title}
                   </h2>
 
                   <p className="mb-6 flex-1 text-sm leading-relaxed text-neutral-500">
-                    {description}
+                    {resource.description}
                   </p>
 
                   <button
@@ -247,7 +301,7 @@ export default function ResourcesClient() {
                     className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#0A1628] px-5 py-3 text-sm font-semibold text-white transition-all duration-200 hover:bg-[#0A1628]/90 hover:shadow-md active:scale-[0.98]"
                   >
                     <Download size={16} />
-                    {isTr ? "Ucretsiz Indir" : "Download Free"}
+                    {isTr ? "Ücretsiz İndir" : "Download Free"}
                   </button>
                 </div>
               </article>
@@ -275,12 +329,10 @@ export default function ResourcesClient() {
                 <X size={20} />
               </button>
               <h3 className="pr-8 text-lg font-bold text-white">
-                {isTr ? "Kaynak Indir" : "Download Resource"}
+                {isTr ? "Kaynak İndir" : "Download Resource"}
               </h3>
               <p className="mt-1 text-sm text-white/60">
-                {isTr
-                  ? modalResource.title
-                  : modalResource.titleEn}
+                {modalResource.title}
               </p>
             </div>
 
@@ -296,7 +348,7 @@ export default function ResourcesClient() {
                   </p>
                   <p className="mb-6 text-sm text-neutral-500">
                     {isTr
-                      ? "Asagidaki butona tiklayarak dosyanizi indirebilirsiniz."
+                      ? "Aşağıdaki butona tıklayarak dosyanızı indirebilirsiniz."
                       : "Click the button below to download your file."}
                   </p>
                   <a
@@ -305,7 +357,7 @@ export default function ResourcesClient() {
                     className="inline-flex items-center gap-2 rounded-xl bg-[#F59E0B] px-6 py-3 text-sm font-semibold text-[#0A1628] transition-all hover:bg-[#F59E0B]/90 hover:shadow-md"
                   >
                     <Download size={16} />
-                    {isTr ? "PDF Indir" : "Download PDF"}
+                    {isTr ? "PDF İndir" : "Download PDF"}
                   </a>
                 </div>
               ) : (
@@ -333,7 +385,7 @@ export default function ResourcesClient() {
                         setForm((prev) => ({ ...prev, name: e.target.value }));
                         if (errors.name) setErrors((prev) => ({ ...prev, name: undefined }));
                       }}
-                      placeholder={isTr ? "Adiniz Soyadiniz" : "Your full name"}
+                      placeholder={isTr ? "Adınız Soyadınız" : "Your full name"}
                       className={cn(
                         "w-full rounded-xl border bg-[#FAFAF7] px-4 py-3 text-sm text-[#0A1628] outline-none transition-colors placeholder:text-neutral-400 focus:ring-2",
                         errors.name
@@ -390,7 +442,7 @@ export default function ResourcesClient() {
                       onChange={(e) =>
                         setForm((prev) => ({ ...prev, company: e.target.value }))
                       }
-                      placeholder={isTr ? "Firma adiniz (opsiyonel)" : "Your company name (optional)"}
+                      placeholder={isTr ? "Firma adınız (opsiyonel)" : "Your company name (optional)"}
                       className="w-full rounded-xl border border-neutral-200 bg-[#FAFAF7] px-4 py-3 text-sm text-[#0A1628] outline-none transition-colors placeholder:text-neutral-400 focus:border-[#F59E0B] focus:ring-2 focus:ring-[#F59E0B]/20"
                     />
                   </div>
@@ -413,14 +465,14 @@ export default function ResourcesClient() {
                     ) : (
                       <>
                         <Download size={16} />
-                        {isTr ? "Gonder ve Indir" : "Submit & Download"}
+                        {isTr ? "Gönder ve İndir" : "Submit & Download"}
                       </>
                     )}
                   </button>
 
                   <p className="mt-3 text-center text-xs text-neutral-400">
                     {isTr
-                      ? "Bilgileriniz gizli tutulacaktir. Spam gondermeyiz."
+                      ? "Bilgileriniz gizli tutulacaktır. Spam göndermeyiz."
                       : "Your information will be kept confidential. We do not send spam."}
                   </p>
                 </form>
